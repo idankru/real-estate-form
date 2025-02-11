@@ -106,35 +106,8 @@
             <label>גודל הדירה:</label>
             <input type="number" name="size" required>
 
-            <label>גודל מרפסת:</label>
-            <input type="number" name="balconySize">
-
-            <label>כיווני אוויר:</label>
-            <input type="text" name="directions">
-
-            <label>מספר חדרי רחצה:</label>
-            <input type="number" name="bathrooms">
-
-            <label>מספר חדרי שירותים:</label>
-            <input type="number" name="toilets">
-
-            <label>חימום מים:</label>
-            <input type="text" name="waterHeating">
-
-            <label>חניות:</label>
-            <input type="text" name="parking">
-
-            <label>מחסן:</label>
-            <input type="text" name="storage">
-
-            <label>מועדון דיירים:</label>
-            <input type="text" name="residentsClub">
-
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
-
-            <label>העלה תמונות:</label>
-            <input type="file" name="images" multiple accept="image/*">
 
             <label>הוסף קישור:</label>
             <input type="url" name="link">
@@ -148,30 +121,25 @@
             event.preventDefault();
 
             var formData = new FormData(this);
-            var formDataObject = {};
+            var objectData = {};
+            formData.forEach((value, key) => objectData[key] = value);
 
-            formData.forEach(function(value, key) {
-                formDataObject[key] = value;
-            });
-
-            // שליחה כ-POST
-            fetch('https://script.google.com/macros/s/AKfycbyd4hfkM6QYC41cMs5i4qEGOYWZiOTz2ctY8Z830wEv_WZPXKXSUo_Y0KPWjgrHntNMKQ/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyd4hfkM6QYC41cMs5i4qEGOYWZiOTz2ctY8Z830wEv_WZPXKXSUo_Y0KPWjgrHntNMKQ/exec', { 
                 method: 'POST',
-                body: JSON.stringify(formDataObject), // שליחה כ-JSON
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                body: JSON.stringify(objectData),
+                headers: { 'Content-Type': 'application/json' }
             })
-            .then(response => {
-                if (response.ok) {
-                    alert('הנתונים הוגשו בהצלחה!');
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert('✅ הנתונים הוגשו בהצלחה!');
                 } else {
-                    alert('אירעה שגיאה בהגשה');
+                    alert('❌ שגיאה בשליחה: ' + data.message);
                 }
             })
             .catch(error => {
-                console.error('שגיאה בהגשה:', error);
-                alert('אירעה שגיאה, נסה שוב מאוחר יותר');
+                console.error('שגיאה:', error);
+                alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
             });
         });
     </script>
