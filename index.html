@@ -127,17 +127,11 @@
             fetch('https://script.google.com/macros/s/AKfycbyrvSbBFUG1yW0D8xr_dytLSHVX1VZQanlO6yj8eHcxZoJn3pHjdnNSHmVxU_nWtpk9KQ/exec', { 
                 method: 'POST',
                 body: JSON.stringify(objectData),
-                headers: { 'Content-Type': 'application/json' },
-                mode: 'no-cors'  // הוסף את פרמטר זה
+                headers: { 'Content-Type': 'application/json' }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+            .then(response => response.json())  // ווידוא שהתגובה היא JSON
             .then(data => {
-                if (data.result === "success") {
+                if (data.status === "success") { // ודא שהסטטוס הוא success
                     alert('✅ הנתונים הוגשו בהצלחה!');
                 } else {
                     alert('❌ שגיאה בשליחה: ' + data.message);
