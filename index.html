@@ -126,8 +126,9 @@
 
             fetch('https://script.google.com/macros/s/AKfycbwdGClZPGEfCxDCqHPKz9Y0kF39tKuBX1QgmhijDCLXbz0V0k7IuLY5EibXcJ8lBJGz/exec', { 
                 method: 'POST',
-                body: JSON.stringify(objectData),
-                headers: { 'Content-Type': 'application/json' }
+    body: JSON.stringify(objectData),
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors'  // הוסף את פרמטר זה
             })
             .then(response => response.json())
             .then(data => {
