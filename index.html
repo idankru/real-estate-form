@@ -148,17 +148,28 @@
             event.preventDefault();
 
             var formData = new FormData(this);
+            var formDataObject = {};
 
-            fetch('AKfycbxMv3Q_h74A7uGSC-xjTJO3jqxncN2iCkDLKUljsdxU', {  // החלף בכתובת ה-URL של ה-Web App שלך
+            formData.forEach(function(value, key) {
+                formDataObject[key] = value;
+            });
+
+            // שליחה כ-POST
+            fetch('https://script.google.com/macros/s/AKfycbzZpztQyZD3D_BcSu4lVbUu_P5/exec', {
                 method: 'POST',
-                body: formData
-            }).then(response => {
-                if(response.ok) {
+                body: JSON.stringify(formDataObject), // שליחה כ-JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
                     alert('הנתונים הוגשו בהצלחה!');
                 } else {
                     alert('אירעה שגיאה בהגשה');
                 }
-            }).catch(error => {
+            })
+            .catch(error => {
                 console.error('שגיאה בהגשה:', error);
                 alert('אירעה שגיאה, נסה שוב מאוחר יותר');
             });
