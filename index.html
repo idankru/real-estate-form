@@ -61,7 +61,7 @@
             <label>שכונה:</label>
             <input type="text" name="neighborhood" required>
 
-            <label>רחוב ומספר בית:</label>
+            <label>רחוב ומספר:</label>
             <input type="text" name="street" required>
 
             <label>קומה ודירה:</label>
@@ -106,9 +106,6 @@
             <label>גודל הדירה:</label>
             <input type="number" name="size" required>
 
-            <label>גודל מרפסת:</label>
-            <input type="number" nameporch="size" required>
-
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
 
@@ -128,7 +125,7 @@
             formData.forEach((value, key) => objectData[key] = value);
 
             // יצירת מזהה ייחודי אוטומטי
-            const uniqueID = "property_" + new Date().getTime();
+            const uniqueID = "property_" + new Date().getTime();  // יצירת מזהה ייחודי על בסיס זמן נוכחי
             objectData.id = uniqueID;  // הוספת ה-ID החדש לאובייקט הנתונים
 
             fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
@@ -145,7 +142,7 @@
             .then(data => {
                 if (data.status === "success") {
                     alert('✅ הנתונים הוגשו בהצלחה!');
-                    // יצירת קישור אוטומטי לדירה
+                    // יצירת קישור אוטומטי לדירה עם ה-ID
                     const propertyLink = `https://idankru.github.io/property.html?id=${uniqueID}`;
                     alert(`🔗 הקישור לדירה: ${propertyLink}`);
                 } else {
