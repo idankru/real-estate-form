@@ -67,14 +67,44 @@
             <label>קומה ודירה:</label>
             <input type="text" name="floor" required>
 
-            <label>מחיר:</label>
+            <label>שנת בניה:</label>
+            <input type="number" name="yearBuilt" required>
+
+            <label>תשלום ועד בית:</label>
+            <input type="number" name="vaadBayit" required>
+
+            <label>ארנונה לחודשיים:</label>
+            <input type="number" name="arnona" required>
+
+            <label>מספר דירות בקומה:</label>
+            <input type="number" name="apartmentsPerFloor" required>
+
+            <label>מספר דירות בבניין:</label>
+            <input type="number" name="apartmentsInBuilding" required>
+
+            <label>מחיר שיווק:</label>
             <input type="number" name="price" required>
 
-            <label>גודל הדירה:</label>
-            <input type="number" name="size" required>
+            <label>רשום בטאבו:</label>
+            <select name="tabu">
+                <option value="כן">כן</option>
+                <option value="לא">לא</option>
+            </select>
+
+            <label>רשום על שם המוכר:</label>
+            <select name="sellerRegistered">
+                <option value="כן">כן</option>
+                <option value="לא">לא</option>
+            </select>
+
+            <label>סוג הנכס:</label>
+            <input type="text" name="propertyType" required>
 
             <label>מספר חדרים:</label>
             <input type="number" name="rooms" required>
+
+            <label>גודל הדירה:</label>
+            <input type="number" name="size" required>
 
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
@@ -94,24 +124,19 @@
             var objectData = {};
             formData.forEach((value, key) => objectData[key] = value);
 
-            var SHEETDB_API_URL = "https://sheetdb.io/api/v1/x66b7o2fa8f7k";
-
-            fetch(SHEETDB_API_URL, { 
+            fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
                 method: 'POST',
-                body: JSON.stringify({ data: objectData }),
+                body: JSON.stringify({ data: objectData }),  // הוספת `data`
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(response => response.json())
             .then(data => {
-                if (data.created) {
-                    alert('✅ הנתונים הוגשו בהצלחה!');
-                    document.getElementById('realEstateForm').reset();
-                } else {
-                    alert('❌ שגיאה בשליחה');
-                }
+                console.log('✅ Success:', data);
+                alert('✅ הנתונים הוזנו בהצלחה!');
+                document.getElementById('realEstateForm').reset(); // איפוס הטופס אחרי שליחה
             })
             .catch(error => {
-                console.error('שגיאה:', error);
+                console.error('❌ שגיאה:', error);
                 alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
             });
         });
