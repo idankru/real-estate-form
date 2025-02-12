@@ -128,12 +128,16 @@
             const uniqueID = "property_" + new Date().getTime();  // יצירת מזהה ייחודי על בסיס זמן נוכחי
             objectData.id = uniqueID;  // הוספת ה-ID החדש לאובייקט הנתונים
 
+            // הדפסת הנתונים לפני השליחה כדי לוודא שהכל נכון
+            console.log('נתונים לשליחה:', objectData);
+
             fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
                 method: 'POST',
                 body: JSON.stringify(objectData),
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(response => {
+                console.log(response);  // הדפסת תשובת ה-API
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
