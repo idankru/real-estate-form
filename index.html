@@ -117,47 +117,41 @@
     </div>
 
     <script>
-        document.getElementById('realEstateForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+document.getElementById('realEstateForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            var formData = new FormData(this);
-            var objectData = {};
-            formData.forEach((value, key) => objectData[key] = value);
+    var formData = new FormData(this);
+    var objectData = {};
+    formData.forEach((value, key) => objectData[key] = value);
 
-            // יצירת מזהה ייחודי אוטומטי
-            const uniqueID = "property_" + new Date().getTime();  // יצירת מזהה ייחודי על בסיס זמן נוכחי
-            objectData.id = uniqueID;  // הוספת ה-ID החדש לאובייקט הנתונים
+    // יצירת מזהה ייחודי אוטומטי
+    const uniqueID = "property_" + new Date().getTime();  
+    objectData["id"] = uniqueID;  // הוספת ה-ID החדש
 
-            // הדפסת הנתונים לפני השליחה כדי לוודא שהכל נכון
-            console.log('נתונים לשליחה:', objectData);
+    // הדפסת הנתונים לפני השליחה
+    console.log('📌 נתונים לשליחה:', objectData);
 
-            fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
-                method: 'POST',
-                body: JSON.stringify(objectData),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => {
-                console.log('תשובת ה-API:', response);  // הדפסת תשובת ה-API
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('נתוני התשובה:', data);  // הדפסת הנתונים המתקבלים מה-API
-                if (data.status === "success") {
-                    alert('✅ הנתונים הוגשו בהצלחה!');
-                    const propertyLink = `https://idankru.github.io/property.html?id=${uniqueID}`;
-                    alert(`🔗 הקישור לדירה: ${propertyLink}`);
-                } else {
-                    alert('❌ שגיאה בשליחה: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('שגיאה:', error);
-                alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
-            });
-        });
+    fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
+        method: 'POST',
+        body: JSON.stringify({ data: objectData }),  // שינוי! עטפתי את הנתונים בתוך אובייקט בשם "data"
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('✅ תשובת API:', data);  
+        if (data.created) {
+            alert('✅ הנתונים נשמרו בהצלחה!');
+            const propertyLink = `https://idankru.github.io/property.html?id=${uniqueID}`;
+            alert(`🔗 קישור לדירה: ${propertyLink}`);
+        } else {
+            alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
+        }
+    })
+    .catch(error => {
+        console.error('⚠️ שגיאה:', error);
+        alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
+    });
+});
     </script>
 </body>
 </html>
