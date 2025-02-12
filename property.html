@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פרטי הדירה</title>
+    <title>פרטי דירה</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
             direction: rtl;
             text-align: right;
-            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
         .container {
-            max-width: 700px;
+            max-width: 500px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -24,68 +24,63 @@
             text-align: center;
             color: #8B4513;
         }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
+        .info {
+            margin-bottom: 10px;
+            font-size: 18px;
         }
-        p {
-            font-size: 1.1em;
+        strong {
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>פרטי הדירה</h2>
-        <div id="propertyDetails">
-            <!-- הנתונים של הדירה יוכנסו כאן -->
-        </div>
+        <h2>פרטי דירה</h2>
+        <div id="propertyDetails">🔄 טוען נתונים...</div>
     </div>
 
     <script>
-        // פונקציה לשליפת פרטי הדירה על פי מזהה
-        function getPropertyData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const propertyId = urlParams.get('id');
+        // קבלת ה-ID מה-URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const propertyID = urlParams.get('id');
 
-            console.log('מזהה הדירה שנשלח ב-URL:', propertyId); // הדפסת ה-ID שהתקבל
-
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    const property = data[0];
-                    const propertyDetails = document.getElementById('propertyDetails');
-                    propertyDetails.innerHTML = `
-                        <p><strong>עיר:</strong> ${property.city}</p>
-                        <p><strong>שכונה:</strong> ${property.neighborhood}</p>
-                        <p><strong>רחוב ומספר:</strong> ${property.street}</p>
-                        <p><strong>קומה ודירה:</strong> ${property.floor}</p>
-                        <p><strong>שנת בניה:</strong> ${property.yearBuilt}</p>
-                        <p><strong>תשלום ועד בית:</strong> ${property.vaadBayit}</p>
-                        <p><strong>ארנונה לחודשיים:</strong> ${property.arnona}</p>
-                        <p><strong>מספר דירות בקומה:</strong> ${property.apartmentsPerFloor}</p>
-                        <p><strong>מספר דירות בבניין:</strong> ${property.apartmentsInBuilding}</p>
-                        <p><strong>מחיר שיווק:</strong> ${property.price}</p>
-                        <p><strong>רשום בטאבו:</strong> ${property.tabu}</p>
-                        <p><strong>רשום על שם המוכר:</strong> ${property.sellerRegistered}</p>
-                        <p><strong>סוג הנכס:</strong> ${property.propertyType}</p>
-                        <p><strong>מספר חדרים:</strong> ${property.rooms}</p>
-                        <p><strong>גודל הדירה:</strong> ${property.size}</p>
-                        <p><strong>מפרט קצר:</strong> ${property.description}</p>
-                        <p><strong>קישור:</strong> <a href="${property.link}" target="_blank">לפרטים נוספים</a></p>
-                    `;
-                } else {
-                    document.getElementById('propertyDetails').innerHTML = "<p>הדירה לא נמצאה.</p>";
-                }
-            })
-            .catch(error => {
-                console.error('שגיאה בשליפה:', error);
-                document.getElementById('propertyDetails').innerHTML = "<p>אירעה שגיאה, נסה שוב מאוחר יותר.</p>";
-            });
+        if (!propertyID) {
+            document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
+        } else {
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
+                    } else {
+                        const property = data[0]; // לוקחים את הנכס הראשון שמוחזר מהשיטס
+                        document.getElementById('propertyDetails').innerHTML = `
+                            <div class="info"><strong>🔹 עיר:</strong> ${property.city}</div>
+                            <div class="info"><strong>🔹 שכונה:</strong> ${property.neighborhoo}</div>
+                            <div class="info"><strong>🔹 רחוב:</strong> ${property.street}</div>
+                            <div class="info"><strong>🔹 קומה:</strong> ${property.floor}</div>
+                            <div class="info"><strong>🔹 שנת בנייה:</strong> ${property.yearBuilt}</div>
+                            <div class="info"><strong>🔹 ועד בית:</strong> ${property.vaadBayit} ₪</div>
+                            <div class="info"><strong>🔹 ארנונה:</strong> ${property.arnona} ₪</div>
+                            <div class="info"><strong>🔹 דירות בקומה:</strong> ${property.apartmentsPerFloor}</div>
+                            <div class="info"><strong>🔹 דירות בבניין:</strong> ${property.apartmentsInBuilding}</div>
+                            <div class="info"><strong>🔹 מחיר:</strong> ${property.price} ₪</div>
+                            <div class="info"><strong>🔹 טאבו:</strong> ${property.tabu}</div>
+                            <div class="info"><strong>🔹 מוכר רשום:</strong> ${property.sellerRegistered}</div>
+                            <div class="info"><strong>🔹 סוג נכס:</strong> ${property.propertyType}</div>
+                            <div class="info"><strong>🔹 מספר חדרים:</strong> ${property.rooms}</div>
+                            <div class="info"><strong>🔹 גודל:</strong> ${property.size} מ"ר</div>
+                            <div class="info"><strong>🔹 מרפסת:</strong> ${property.nameporch}</div>
+                            <div class="info"><strong>🔹 תיאור:</strong> ${property.description}</div>
+                            <div class="info"><strong>🔗 <a href="${property.link}" target="_blank">לינק לפרסום</a></strong></div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('⚠️ שגיאה:', error);
+                    document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> בטעינת הנתונים!';
+                });
         }
-
-        window.onload = getPropertyData;
     </script>
 </body>
 </html>
