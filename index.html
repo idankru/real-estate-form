@@ -67,44 +67,14 @@
             <label>קומה ודירה:</label>
             <input type="text" name="floor" required>
 
-            <label>שנת בניה:</label>
-            <input type="number" name="yearBuilt" required>
-
-            <label>תשלום ועד בית:</label>
-            <input type="number" name="vaadBayit" required>
-
-            <label>ארנונה לחודשיים:</label>
-            <input type="number" name="arnona" required>
-
-            <label>מספר דירות בקומה:</label>
-            <input type="number" name="apartmentsPerFloor" required>
-
-            <label>מספר דירות בבניין:</label>
-            <input type="number" name="apartmentsInBuilding" required>
-
-            <label>מחיר שיווק:</label>
+            <label>מחיר:</label>
             <input type="number" name="price" required>
-
-            <label>רשום בטאבו:</label>
-            <select name="tabu">
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
-
-            <label>רשום על שם המוכר:</label>
-            <select name="sellerRegistered">
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
-
-            <label>סוג הנכס:</label>
-            <input type="text" name="propertyType" required>
-
-            <label>מספר חדרים:</label>
-            <input type="number" name="rooms" required>
 
             <label>גודל הדירה:</label>
             <input type="number" name="size" required>
+
+            <label>מספר חדרים:</label>
+            <input type="number" name="rooms" required>
 
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
@@ -124,24 +94,21 @@
             var objectData = {};
             formData.forEach((value, key) => objectData[key] = value);
 
-            // שינוי URL ל-API אחר (JSONPlaceholder)
-            fetch('https://jsonplaceholder.typicode.com/posts', { 
+            var SHEETDB_API_URL = "https://sheetdb.io/api/v1/x66b7o2fa8f7k";
+
+            fetch(SHEETDB_API_URL, { 
                 method: 'POST',
-                body: JSON.stringify(objectData),
-                headers: { 
-                    'Content-Type': 'application/json' 
-                },
-                mode: 'cors' // מוודא שה-CORS אפשרי
+                body: JSON.stringify({ data: objectData }),
+                headers: { 'Content-Type': 'application/json' }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                alert('✅ הנתונים הוגשו בהצלחה!');
-                console.log(data); // מוודא שהנתונים התקבלו
+                if (data.created) {
+                    alert('✅ הנתונים הוגשו בהצלחה!');
+                    document.getElementById('realEstateForm').reset();
+                } else {
+                    alert('❌ שגיאה בשליחה');
+                }
             })
             .catch(error => {
                 console.error('שגיאה:', error);
