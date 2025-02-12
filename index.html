@@ -112,6 +112,10 @@
             <label>הוסף קישור:</label>
             <input type="url" name="link">
 
+            <!-- הוספת שדה ID ייחודי לכל דירה -->
+            <label>מזהה ייחודי לדירה (לצורך קישור ייחודי):</label>
+            <input type="text" name="id" required>
+
             <button type="submit">שלח</button>
         </form>
     </div>
@@ -126,17 +130,27 @@
 
             fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
                 method: 'POST',
-                body: JSON.stringify({ data: objectData }),  // הוספת `data`
+                body: JSON.stringify(objectData),
                 headers: { 'Content-Type': 'application/json' }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                console.log('✅ Success:', data);
-                alert('✅ הנתונים הוזנו בהצלחה!');
-                document.getElementById('realEstateForm').reset(); // איפוס הטופס אחרי שליחה
+                if (data.status === "success") {
+                    alert('✅ הנתונים הוגשו בהצלחה!');
+                    // הוספת הקישור לדירה שנשמרה
+                    const propertyLink = `https://idankru.github.io/property.html?id=${objectData.id}`;
+                    alert(`🔗 הקישור לדירה: ${propertyLink}`);
+                } else {
+                    alert('❌ שגיאה בשליחה: ' + data.message);
+                }
             })
             .catch(error => {
-                console.error('❌ שגיאה:', error);
+                console.error('שגיאה:', error);
                 alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
             });
         });
