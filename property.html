@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי הדירה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #8B4513;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        p {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>פרטי הדירה</h2>
+        <div id="propertyDetails">
+            <!-- הנתונים של הדירה יוכנסו כאן -->
+        </div>
+    </div>
+
+    <script>
+        // פונקציה לשליפת פרטי הדירה על פי מזהה
+        function getPropertyData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get('id');
+
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const property = data[0];
+                    const propertyDetails = document.getElementById('propertyDetails');
+                    propertyDetails.innerHTML = `
+                        <p><strong>עיר:</strong> ${property.city}</p>
+                        <p><strong>שכונה:</strong> ${property.neighborhood}</p>
+                        <p><strong>רחוב ומספר:</strong> ${property.street}</p>
+                        <p><strong>קומה ודירה:</strong> ${property.floor}</p>
+                        <p><strong>שנת בניה:</strong> ${property.yearBuilt}</p>
+                        <p><strong>תשלום ועד בית:</strong> ${property.vaadBayit}</p>
+                        <p><strong>ארנונה לחודשיים:</strong> ${property.arnona}</p>
+                        <p><strong>מספר דירות בקומה:</strong> ${property.apartmentsPerFloor}</p>
+                        <p><strong>מספר דירות בבניין:</strong> ${property.apartmentsInBuilding}</p>
+                        <p><strong>מחיר שיווק:</strong> ${property.price}</p>
+                        <p><strong>רשום בטאבו:</strong> ${property.tabu}</p>
+                        <p><strong>רשום על שם המוכר:</strong> ${property.sellerRegistered}</p>
+                        <p><strong>סוג הנכס:</strong> ${property.propertyType}</p>
+                        <p><strong>מספר חדרים:</strong> ${property.rooms}</p>
+                        <p><strong>גודל הדירה:</strong> ${property.size}</p>
+                        <p><strong>מפרט קצר:</strong> ${property.description}</p>
+                        <p><strong>קישור:</strong> <a href="${property.link}" target="_blank">לפרטים נוספים</a></p>
+                    `;
+                } else {
+                    document.getElementById('propertyDetails').innerHTML = "<p>הדירה לא נמצאה.</p>";
+                }
+            })
+            .catch(error => {
+                console.error('שגיאה בשליפה:', error);
+                document.getElementById('propertyDetails').innerHTML = "<p>אירעה שגיאה, נסה שוב מאוחר יותר.</p>";
+            });
+        }
+
+        window.onload = getPropertyData;
+    </script>
+</body>
+</html>
