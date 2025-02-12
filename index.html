@@ -124,14 +124,14 @@ document.getElementById('realEstateForm').addEventListener('submit', function(ev
     var objectData = {};
     formData.forEach((value, key) => objectData[key] = value);
 
-    // יצירת מזהה ייחודי אוטומטי
+    // יצירת מזהה ייחודי
     const uniqueID = "property_" + new Date().getTime();  
     const propertyLink = `https://idankru.github.io/property.html?id=${uniqueID}`; 
 
+    // הוספת ה-ID והלינק המלא לאובייקט הנתונים
     objectData["id"] = uniqueID;  
     objectData["full_link"] = propertyLink;  
 
-    // 🔹 הדפסת הנתונים לווידוא
     console.log('📌 נתונים שנשלחים:', JSON.stringify({ data: [objectData] }));
 
     fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
@@ -144,7 +144,7 @@ document.getElementById('realEstateForm').addEventListener('submit', function(ev
         console.log('✅ תשובת API:', data);  
         if (data.created) {
             alert('✅ הנתונים נשמרו בהצלחה!');
-            alert(`🔗 קישור לדירה נשמר: ${propertyLink}`);
+            alert(`🔗 קישור לדירה: ${propertyLink}`);
             window.location.href = propertyLink;
         } else {
             alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
