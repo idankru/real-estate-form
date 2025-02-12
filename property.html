@@ -48,6 +48,8 @@
             const urlParams = new URLSearchParams(window.location.search);
             const propertyId = urlParams.get('id');
 
+            console.log('מזהה הדירה שנשלח ב-URL:', propertyId); // הדפסת ה-ID שהתקבל
+
             fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyId}`)
             .then(response => response.json())
             .then(data => {
