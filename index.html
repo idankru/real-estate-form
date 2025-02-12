@@ -112,10 +112,6 @@
             <label>הוסף קישור:</label>
             <input type="url" name="link">
 
-            <!-- הוספת שדה ID ייחודי לכל דירה -->
-            <label>מזהה ייחודי לדירה (לצורך קישור ייחודי):</label>
-            <input type="text" name="id" required>
-
             <button type="submit">שלח</button>
         </form>
     </div>
@@ -127,6 +123,10 @@
             var formData = new FormData(this);
             var objectData = {};
             formData.forEach((value, key) => objectData[key] = value);
+
+            // יצירת מזהה ייחודי אוטומטי
+            const uniqueID = "property_" + new Date().getTime();
+            objectData.id = uniqueID;  // הוספת ה-ID החדש לאובייקט הנתונים
 
             fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
                 method: 'POST',
@@ -142,8 +142,8 @@
             .then(data => {
                 if (data.status === "success") {
                     alert('✅ הנתונים הוגשו בהצלחה!');
-                    // הוספת הקישור לדירה שנשמרה
-                    const propertyLink = `https://idankru.github.io/property.html?id=${objectData.id}`;
+                    // יצירת קישור אוטומטי לדירה
+                    const propertyLink = `https://idankru.github.io/property.html?id=${uniqueID}`;
                     alert(`🔗 הקישור לדירה: ${propertyLink}`);
                 } else {
                     alert('❌ שגיאה בשליחה: ' + data.message);
