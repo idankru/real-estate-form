@@ -87,17 +87,14 @@
                 <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
             </div>
 
-            <label>שנת בניה:</label>
-            <input type="number" name="yearBuilt" required>
-
-            <label>תשלום ועד בית:</label>
-            <input type="number" name="vaadBayit" required>
-
-            <label>ארנונה לחודשיים:</label>
-            <input type="number" name="arnona" required>
-
-            <label>מספר דירות בקומה:</label>
-            <input type="number" name="apartmentsPerFloor" required>
+            <!-- מידע כללי על הנכס -->
+            <label>מידע כללי על הנכס:</label>
+            <div class="input-group">
+                <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
+                <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+                <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+                <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
+            </div>
 
             <label>מספר קומות בבניין:</label>
             <input type="number" name="apartmentsInBuilding" required>
