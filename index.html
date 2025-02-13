@@ -116,6 +116,16 @@
     <!-- מחיר שיווק -->
     <input type="number" name="price" placeholder="מחיר שיווק" required>
 
+    <!-- מספר חדרים -->
+    <input type="number" name="rooms" placeholder="מספר חדרים" required>
+
+    <!-- גודל הדירה -->
+    <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
+
+    <!-- גודל מרפסת -->
+    <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
+</div>
+
 <!-- רשום בטאבו -->
 <label for="tabu">רשום בטאבו:</label>
 <select id="tabu" name="tabu" required>
@@ -130,24 +140,17 @@
     <option value="לא">לא</option>
 </select>
 
-    <!-- מספר חדרים -->
-    <input type="number" name="rooms" placeholder="מספר חדרים" required>
+<!-- סוג הנכס -->
+<label for="propertyType">סוג הנכס:</label>
+<select id="propertyType" name="propertyType" required>
+    <option value="דירה">דירה</option>
+    <option value="בית פרטי">בית פרטי</option>
+    <option value="פנטהאוז">פנטהאוז</option>
+    <option value="דירת גן">דירת גן</option>
+    <option value="מיני פנטהאוז">מיני פנטהאוז</option>
+    <option value="מסחרי">מסחרי</option>
+</select>
 
-    <!-- גודל הדירה -->
-    <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
-
-    <!-- גודל מרפסת -->
-    <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
-
-    <!-- סוג הנכס -->
-    <select name="propertyType" required>
-        <option value="דירה">דירה</option>
-        <option value="בית פרטי">בית פרטי</option>
-        <option value="פנטהאוז">פנטהאוז</option>
-        <option value="דירת גן">דירת גן</option>
-        <option value="מיני פנטהאוז">מיני פנטהאוז</option>
-        <option value="מסחרי">מסחרי</option>
-    </select>
 </div>
     <script>
         document.getElementById('realEstateForm').addEventListener('submit', function(event) {
