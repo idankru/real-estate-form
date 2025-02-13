@@ -31,15 +31,10 @@
             margin-top: 10px;
             display: block;
         }
-        /* עיצוב ל-inputs שיהיו בשורה */
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px; /* מרווח קטן בין התאים */
-        }
-        .input-group input {
-            width: 23%; /* כל תא ייקח 23% מהשורה */
+        input, select, textarea {
+            width: 100%;
             padding: 8px;
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -56,11 +51,16 @@
         button:hover {
             background-color: #5a3210;
         }
-        .form-image {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto 20px auto; /* ממקם את התמונה במרכז */
+
+        /* עיצוב למשבצות בשורה אחת */
+        .input-group {
+            display: flex;
+            gap: 10px; /* רווחים קטנים בין השדות */
+            flex-wrap: wrap; /* עוזר לא להיתקע על שורה אחת */
+        }
+
+        .input-group input {
+            width: 18%; /* רוחב יחסית אחיד לכל שדה */
         }
     </style>
 </head>
@@ -96,9 +96,6 @@
                 <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
                 <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
             </div>
-
-            <label>מספר קומות בבניין:</label>
-            <input type="number" name="apartmentsInBuilding" required>
 
             <label>מחיר שיווק:</label>
             <input type="number" name="price" required>
