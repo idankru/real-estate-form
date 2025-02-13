@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס הזנת דירה - נדלן עם שחר</title>
     <!-- הוספת תמונה כ-Favicon -->
@@ -51,10 +51,19 @@
         button:hover {
             background-color: #5a3210;
         }
+        .form-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 20px auto; /* ממקם את התמונה במרכז */
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- הוספת התמונה בראש הטופס -->
+        <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
+        
         <h2>טופס הזנת דירה</h2>
         <form id="realEstateForm">
             <label>עיר:</label>
