@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס הזנת דירה - נדלן עם שחר</title>
-    
-    <!-- הוספת תמונה כ-Favicon -->
     <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
-    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +39,7 @@
             margin-top: 10px;
             display: block;
         }
-        input, select, textarea {
+        input, select, textarea, button {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -55,7 +52,7 @@
             flex-wrap: wrap;
         }
         .input-group input, .input-group select {
-            flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
+            flex: 1 1 calc(50% - 10px);
         }
         button {
             background-color: #8B4513;
@@ -64,7 +61,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
             margin-top: 15px;
         }
         button:hover {
@@ -74,7 +70,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- הוספת תמונה ממורכזת בראש הטופס -->
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
         </div>
@@ -96,62 +91,46 @@
                 <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
             </div>
 
-<label>מידע כללי על הנכס:</label>
-<div class="input-group">
-    <!-- שנה בניה -->
-    <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
+            <label>מידע כללי על הנכס:</label>
+            <div class="input-group">
+                <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
+                <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+                <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+                <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
+                <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
+                <input type="number" name="price" placeholder="מחיר שיווק" required>
+            </div>
 
-    <!-- תשלום ועד בית -->
-    <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+            <label>רשום בטאבו:</label>
+            <select name="tabu" required>
+                <option value="כן">כן</option>
+                <option value="לא">לא</option>
+            </select>
 
-    <!-- ארנונה לחודשיים -->
-    <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+            <label>רשום על שם המוכר:</label>
+            <select name="sellerRegistered" required>
+                <option value="כן">כן</option>
+                <option value="לא">לא</option>
+            </select>
 
-    <!-- מספר דירות בקומה -->
-    <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
+            <input type="number" name="rooms" placeholder="מספר חדרים" required>
+            <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
+            <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
 
-    <!-- מספר קומות בבניין -->
-    <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
+            <label>סוג הנכס:</label>
+            <select name="propertyType" required>
+                <option value="דירה">דירה</option>
+                <option value="בית פרטי">בית פרטי</option>
+                <option value="פנטהאוז">פנטהאוז</option>
+                <option value="דירת גן">דירת גן</option>
+                <option value="מיני פנטהאוז">מיני פנטהאוז</option>
+                <option value="מסחרי">מסחרי</option>
+            </select>
 
-    <!-- מחיר שיווק -->
-    <input type="number" name="price" placeholder="מחיר שיווק" required>
+            <button type="submit">שלח</button>
+        </form>
+    </div>
 
-    <!-- מספר חדרים -->
-    <input type="number" name="rooms" placeholder="מספר חדרים" required>
-
-    <!-- גודל הדירה -->
-    <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
-
-    <!-- גודל מרפסת -->
-    <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
-</div>
-
-<!-- רשום בטאבו -->
-<label for="tabu">רשום בטאבו:</label>
-<select id="tabu" name="tabu" required>
-    <option value="כן">כן</option>
-    <option value="לא">לא</option>
-</select>
-
-<!-- רשום על שם המוכר -->
-<label for="sellerRegistered">רשום על שם המוכר:</label>
-<select id="sellerRegistered" name="sellerRegistered" required>
-    <option value="כן">כן</option>
-    <option value="לא">לא</option>
-</select>
-
-<!-- סוג הנכס -->
-<label for="propertyType">סוג הנכס:</label>
-<select id="propertyType" name="propertyType" required>
-    <option value="דירה">דירה</option>
-    <option value="בית פרטי">בית פרטי</option>
-    <option value="פנטהאוז">פנטהאוז</option>
-    <option value="דירת גן">דירת גן</option>
-    <option value="מיני פנטהאוז">מיני פנטהאוז</option>
-    <option value="מסחרי">מסחרי</option>
-</select>
-
-</div>
     <script>
         document.getElementById('realEstateForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -160,11 +139,9 @@
             var objectData = {};
             formData.forEach((value, key) => objectData[key] = value);
 
-            // יצירת מזהה ייחודי
             const uniqueID = "property_" + new Date().getTime();  
             const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
 
-            // הוספת ה-ID והלינק המלא לאובייקט הנתונים
             objectData["id"] = uniqueID;  
             objectData["full_link"] = propertyLink;  
 
@@ -177,14 +154,10 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log('✅ תשובת API:', data);  
-                if (data.created) {
-                    alert('✅ הנתונים נשמרו בהצלחה!');
-                    alert(`🔗 קישור לדירה: ${propertyLink}`);
-                    window.location.href = propertyLink;
-                } else {
-                    alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
-                }
+                console.log('✅ תשובת API:', data);
+                alert('✅ הנתונים נשמרו בהצלחה!');
+                alert(`🔗 קישור לדירה: ${propertyLink}`);
+                window.location.href = propertyLink;
             })
             .catch(error => {
                 console.error('⚠️ שגיאה:', error);
