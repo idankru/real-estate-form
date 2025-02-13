@@ -63,6 +63,15 @@ flex-wrap: wrap;
     flex: 1 1 25%;
     min-width: 80px;
 }
+.input-group.row-2 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+.input-group.row-2 input {
+    flex: 1 1 25%;
+    min-width: 80px;
+}
 .input-group input, .input-group select {
 flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
 }
@@ -105,7 +114,7 @@ background-color: #5a3210;
     <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
 </div>
 <label>מידע כללי על הנכס:</label>
-<div class="input-group">
+<div class="input-group row-4">
     <!-- שנה בניה -->
 <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
 
@@ -117,25 +126,26 @@ background-color: #5a3210;
 
     <!-- מספר דירות בקומה -->
 <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
-
+</div>
+<div class="input-group row-4">
     <!-- מספר קומות בבניין -->
 <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
 
     <!-- מחיר שיווק -->
 <input type="number" name="price" placeholder="מחיר שיווק" required>
 
-<!-- רשום בטאבו -->
-    <select name="tabu">
-    <select name="tabu" required>
-<option value="כן">כן</option>
-<option value="לא">לא</option>
+<label for="tabu">רשום בטאבו:</label>
+<select name="tabu" id="tabu" required>
+    <option value="" disabled selected>בחר...</option>
+    <option value="כן">כן</option>
+    <option value="לא">לא</option>
 </select>
 
-<!-- רשום על שם המוכר -->
-    <select name="sellerRegistered">
-    <select name="sellerRegistered" required>
-<option value="כן">כן</option>
-<option value="לא">לא</option>
+<label for="sellerRegistered">רשום על שם המוכר:</label>
+<select name="sellerRegistered" id="sellerRegistered" required>
+    <option value="" disabled selected>בחר...</option>
+    <option value="כן">כן</option>
+    <option value="לא">לא</option>
 </select>
 
 <!-- מספר חדרים -->
@@ -147,17 +157,17 @@ background-color: #5a3210;
 <!-- גודל מרפסת -->
 <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
 
-<!-- סוג הנכס -->
-    <select name="propertyType">
-    <select name="propertyType" required>
-<option value="דירה">דירה</option>
-<option value="בית פרטי">בית פרטי</option>
-<option value="פנטהאוז">פנטהאוז</option>
-<option value="דירת גן">דירת גן</option>
-<option value="מיני פנטהאוז">מיני פנטהאוז</option>
-<option value="מסחרי">מסחרי</option>
+<label for="propertyType">סוג הנכס:</label>
+<select name="propertyType" id="propertyType" required>
+    <option value="" disabled selected>בחר...</option>
+    <option value="דירה">דירה</option>
+    <option value="בית פרטי">בית פרטי</option>
+    <option value="פנטהאוז">פנטהאוז</option>
+    <option value="דירת גן">דירת גן</option>
+    <option value="מיני פנטהאוז">מיני פנטהאוז</option>
+    <option value="מסחרי">מסחרי</option>
 </select>
-</div>
+
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
 
