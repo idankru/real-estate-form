@@ -1,159 +1,205 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>טופס הזנת דירה - נדלן עם שחר</title>
-    
-    <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            direction: rtl;
-            text-align: right;
-            margin: 20px;
-        }
-        .container {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .logo-container {
-            text-align: center;
-        }
-        .form-image {
-            display: block;
-            margin: 0 auto;
-            max-width: 250px;
-            height: auto;
-        }
-        h2 {
-            text-align: center;
-            color: #8B4513;
-        }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        input, select, textarea, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .input-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .input-group input, .input-group select {
-            flex: 1 1 calc(50% - 10px);
-        }
-        button {
-            background-color: #8B4513;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-        }
-        button:hover {
-            background-color: #5a3210;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>טופס הזנת דירה - נדלן עם שחר</title>
+
+<!-- הוספת תמונה כ-Favicon -->
+<link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
+
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f5f5f5;
+direction: rtl;
+text-align: right;
+margin: 20px;
+}
+.container {
+max-width: 500px;
+margin: auto;
+background: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.logo-container {
+text-align: center;
+}
+.form-image {
+display: block;
+margin: 0 auto;
+max-width: 250px;
+height: auto;
+}
+h2 {
+text-align: center;
+color: #8B4513;
+}
+label {
+font-weight: bold;
+margin-top: 10px;
+display: block;
+}
+input, select, textarea {
+width: 100%;
+padding: 8px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+.input-group {
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+}
+.input-group input, .input-group select {
+flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
+}
+button {
+background-color: #8B4513;
+color: white;
+padding: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+width: 100%;
+margin-top: 15px;
+}
+button:hover {
+background-color: #5a3210;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
-        </div>
+<div class="container">
+<!-- הוספת תמונה ממורכזת בראש הטופס -->
+<div class="logo-container">
+<img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
+</div>
 
-        <h2>טופס הזנת דירה</h2>
+<h2>טופס הזנת דירה</h2>
 
-        <form id="realEstateForm">
-            <label>עיר:</label>
-            <input type="text" name="city" required>
-            
-            <label>שכונה:</label>
-            <input type="text" name="neighborhood" required>
-            
+<form id="realEstateForm">
+<label>עיר:</label>
+<input type="text" name="city" required>
+
+<label>שכונה:</label>
+<input type="text" name="neighborhood" required>
+
+<label>רחוב, מס' בית, קומה ומס' דירה:</label>
+<div class="input-group">
+<input type="text" name="street" placeholder="רחוב" required>
+<input type="text" name="houseNumber" placeholder="מס' בית" required>
+<input type="text" name="floor" placeholder="קומה" required>
+<input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
+</div>
+
             <label>מידע כללי על הנכס:</label>
-            <div class="input-group">
-                <input type="number" name="rooms" placeholder="מספר חדרים" required>
-                <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
-                <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
-                <select name="propertyType" required>
-                    <option value="דירה">דירה</option>
-                    <option value="בית פרטי">בית פרטי</option>
-                    <option value="פנטהאוז">פנטהאוז</option>
-                    <option value="דירת גן">דירת גן</option>
-                    <option value="מיני פנטהאוז">מיני פנטהאוז</option>
-                    <option value="מסחרי">מסחרי</option>
-                </select>
-            </div>
-            
-            <label for="tabu">רשום בטאבו:</label>
-            <select id="tabu" name="tabu" required>
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
+<label>מידע כללי על הנכס:</label>
+<div class="input-group">
+    <!-- שנה בניה -->
+<input type="number" name="yearBuilt" placeholder="שנת בניה" required>
 
-            <label for="sellerRegistered">רשום על שם המוכר:</label>
-            <select id="sellerRegistered" name="sellerRegistered" required>
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
-            
-            <button type="submit">שלח טופס</button>
+    <!-- תשלום ועד בית -->
+<input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+
+    <!-- ארנונה לחודשיים -->
+<input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+
+    <!-- מספר דירות בקומה -->
+<input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
+
+    <!-- מספר קומות בבניין -->
+<input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
+
+    <!-- מחיר שיווק -->
+<input type="number" name="price" placeholder="מחיר שיווק" required>
+
+<!-- רשום בטאבו -->
+    <select name="tabu">
+    <select name="tabu" required>
+<option value="כן">כן</option>
+<option value="לא">לא</option>
+</select>
+
+<!-- רשום על שם המוכר -->
+    <select name="sellerRegistered">
+    <select name="sellerRegistered" required>
+<option value="כן">כן</option>
+<option value="לא">לא</option>
+</select>
+
+<!-- מספר חדרים -->
+<input type="number" name="rooms" placeholder="מספר חדרים" required>
+
+<!-- גודל הדירה -->
+<input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
+
+<!-- גודל מרפסת -->
+<input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
+
+<!-- סוג הנכס -->
+    <select name="propertyType">
+    <select name="propertyType" required>
+<option value="דירה">דירה</option>
+<option value="בית פרטי">בית פרטי</option>
+<option value="פנטהאוז">פנטהאוז</option>
+<option value="דירת גן">דירת גן</option>
+<option value="מיני פנטהאוז">מיני פנטהאוז</option>
+<option value="מסחרי">מסחרי</option>
+</select>
+</div>
+            <label>מפרט קצר על הדירה:</label>
+            <textarea name="description"></textarea>
+
+            <label>הוסף קישור:</label>
+            <input type="url" name="link">
+
+            <button type="submit">שלח</button>
         </form>
     </div>
-    
-    <script>
-        document.getElementById('realEstateForm').addEventListener('submit', function(event) {
-            event.preventDefault();
 
-            var formData = new FormData(this);
-            var objectData = {};
-            formData.forEach((value, key) => objectData[key] = value);
+<script>
+document.getElementById('realEstateForm').addEventListener('submit', function(event) {
+event.preventDefault();
 
-            const uniqueID = "property_" + new Date().getTime();  
-            const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
+var formData = new FormData(this);
+var objectData = {};
+formData.forEach((value, key) => objectData[key] = value);
 
-            objectData["id"] = uniqueID;  
-            objectData["full_link"] = propertyLink;  
+// יצירת מזהה ייחודי
+const uniqueID = "property_" + new Date().getTime();  
+const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
 
-            console.log('📌 נתונים שנשלחים:', JSON.stringify({ data: [objectData] }));
+// הוספת ה-ID והלינק המלא לאובייקט הנתונים
+objectData["id"] = uniqueID;  
+objectData["full_link"] = propertyLink;  
 
-            fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
-                method: 'POST',
-                body: JSON.stringify({ data: [objectData] }),  
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('✅ תשובת API:', data);  
-                if (data.created) {
-                    alert('✅ הנתונים נשמרו בהצלחה!');
-                    alert(`🔗 קישור לדירה: ${propertyLink}`);
-                    window.location.href = propertyLink;
-                } else {
-                    alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
-                }
-            })
-            .catch(error => {
-                console.error('⚠️ שגיאה:', error);
-                alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
-            });
-        });
-    </script>
+console.log('📌 נתונים שנשלחים:', JSON.stringify({ data: [objectData] }));
+
+fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
+method: 'POST',
+body: JSON.stringify({ data: [objectData] }),  
+headers: { 'Content-Type': 'application/json' }
+})
+.then(response => response.json())
+.then(data => {
+console.log('✅ תשובת API:', data);  
+if (data.created) {
+alert('✅ הנתונים נשמרו בהצלחה!');
+alert(`🔗 קישור לדירה: ${propertyLink}`);
+window.location.href = propertyLink;
+} else {
+alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
+}
+})
+.catch(error => {
+console.error('⚠️ שגיאה:', error);
+alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
+});
+});
+</script>
 </body>
 </html>
