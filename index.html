@@ -73,11 +73,19 @@
             <label>שכונה:</label>
             <input type="text" name="neighborhood" required>
 
-            <label>רחוב ומספר:</label>
-            <input type="text" name="street" required>
+   <!-- השדות של רחוב ומס' דירה בקומבינה אחת -->
+            <label>רחוב ומס' בית:</label>
+            <div class="input-group">
+                <input type="text" name="street" placeholder="רחוב" required>
+                <input type="text" name="houseNumber" placeholder="מס' בית" required>
+            </div>
 
-            <label>קומה ודירה:</label>
-            <input type="text" name="floor" required>
+            <!-- השדות של קומה ומס' דירה בקומבינה אחת -->
+            <label>קומה ומס' דירה:</label>
+            <div class="input-group">
+                <input type="text" name="floor" placeholder="קומה" required>
+                <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
+            </div>
 
             <label>שנת בניה:</label>
             <input type="number" name="yearBuilt" required>
