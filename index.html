@@ -31,10 +31,15 @@
             margin-top: 10px;
             display: block;
         }
-        input, select, textarea {
-            width: 100%;
+        /* עיצוב ל-inputs שיהיו בשורה */
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* מרווח קטן בין התאים */
+        }
+        .input-group input {
+            width: 48%; /* כל תא ייקח חצי מהשורה */
             padding: 8px;
-            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -73,14 +78,14 @@
             <label>שכונה:</label>
             <input type="text" name="neighborhood" required>
 
-   <!-- השדות של רחוב ומס' דירה בקומבינה אחת -->
+            <!-- הרחוב ומס' בית בעיצוב חדש -->
             <label>רחוב ומס' בית:</label>
             <div class="input-group">
                 <input type="text" name="street" placeholder="רחוב" required>
                 <input type="text" name="houseNumber" placeholder="מס' בית" required>
             </div>
 
-            <!-- השדות של קומה ומס' דירה בקומבינה אחת -->
+            <!-- קומה ומס' דירה בעיצוב חדש -->
             <label>קומה ומס' דירה:</label>
             <div class="input-group">
                 <input type="text" name="floor" placeholder="קומה" required>
@@ -137,44 +142,44 @@
     </div>
 
     <script>
-document.getElementById('realEstateForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+        document.getElementById('realEstateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-    var formData = new FormData(this);
-    var objectData = {};
-    formData.forEach((value, key) => objectData[key] = value);
+            var formData = new FormData(this);
+            var objectData = {};
+            formData.forEach((value, key) => objectData[key] = value);
 
-    // יצירת מזהה ייחודי
-    const uniqueID = "property_" + new Date().getTime();  
-    const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
+            // יצירת מזהה ייחודי
+            const uniqueID = "property_" + new Date().getTime();  
+            const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
 
-    // הוספת ה-ID והלינק המלא לאובייקט הנתונים
-    objectData["id"] = uniqueID;  
-    objectData["full_link"] = propertyLink;  
+            // הוספת ה-ID והלינק המלא לאובייקט הנתונים
+            objectData["id"] = uniqueID;  
+            objectData["full_link"] = propertyLink;  
 
-    console.log('📌 נתונים שנשלחים:', JSON.stringify({ data: [objectData] }));
+            console.log('📌 נתונים שנשלחים:', JSON.stringify({ data: [objectData] }));
 
-    fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
-        method: 'POST',
-        body: JSON.stringify({ data: [objectData] }),  
-        headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('✅ תשובת API:', data);  
-        if (data.created) {
-            alert('✅ הנתונים נשמרו בהצלחה!');
-            alert(`🔗 קישור לדירה: ${propertyLink}`);
-            window.location.href = propertyLink;
-        } else {
-            alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
-        }
-    })
-    .catch(error => {
-        console.error('⚠️ שגיאה:', error);
-        alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
-    });
-});
+            fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', { 
+                method: 'POST',
+                body: JSON.stringify({ data: [objectData] }),  
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('✅ תשובת API:', data);  
+                if (data.created) {
+                    alert('✅ הנתונים נשמרו בהצלחה!');
+                    alert(`🔗 קישור לדירה: ${propertyLink}`);
+                    window.location.href = propertyLink;
+                } else {
+                    alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
+                }
+            })
+            .catch(error => {
+                console.error('⚠️ שגיאה:', error);
+                alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
+            });
+        });
     </script>
 </body>
 </html>
