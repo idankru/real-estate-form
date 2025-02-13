@@ -25,15 +25,13 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         .logo-container {
-    text-align: center;
-}
-
-.form-image {
-    display: block;
-    margin: 0 auto;
-    max-width: 250px; /* ניתן לשנות את הגודל */
-    height: auto;
-}
+            text-align: center;
+        }
+        .form-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 250px;
+            height: auto;
         }
         h2 {
             text-align: center;
@@ -50,6 +48,14 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .input-group input, .input-group select {
+            flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
         }
         button {
             background-color: #8B4513;
@@ -75,7 +81,6 @@
 
         <h2>טופס הזנת דירה</h2>
 
-        
         <form id="realEstateForm">
             <label>עיר:</label>
             <input type="text" name="city" required>
@@ -83,7 +88,6 @@
             <label>שכונה:</label>
             <input type="text" name="neighborhood" required>
 
-            <!-- הרחוב, מס' בית, קומה ומס' דירה בעיצוב חדש -->
             <label>רחוב, מס' בית, קומה ומס' דירה:</label>
             <div class="input-group">
                 <input type="text" name="street" placeholder="רחוב" required>
@@ -92,7 +96,6 @@
                 <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
             </div>
 
-            <!-- מידע כללי על הנכס -->
             <label>מידע כללי על הנכס:</label>
             <div class="input-group">
                 <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
@@ -100,31 +103,30 @@
                 <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
                 <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
                 <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
+                <input type="number" name="price" placeholder="מחיר שיווק" required>
+                <select name="tabu">
+                    <option value="כן">כן</option>
+                    <option value="לא">לא</option>
+                </select>
+                <select name="sellerRegistered">
+                    <option value="כן">כן</option>
+                    <option value="לא">לא</option>
+                </select>
+                <input type="number" name="rooms" placeholder="מספר חדרים" required>
+                <input type="number" name="size" placeholder="גודל הדירה" required>
             </div>
 
-            <label>מחיר שיווק:</label>
-            <input type="number" name="price" required>
-
-            <label>רשום בטאבו:</label>
-            <select name="tabu">
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
-
-            <label>רשום על שם המוכר:</label>
-            <select name="sellerRegistered">
-                <option value="כן">כן</option>
-                <option value="לא">לא</option>
-            </select>
+            <label>גודל מרפסת:</label>
+            <input type="number" name="balconySize" placeholder="גודל מרפסת" required>
 
             <label>סוג הנכס:</label>
-            <input type="text" name="propertyType" required>
-
-            <label>מספר חדרים:</label>
-            <input type="number" name="rooms" required>
-
-            <label>גודל הדירה:</label>
-            <input type="number" name="size" required>
+            <select name="propertyType">
+                <option value="דירה">דירה</option>
+                <option value="בית פרטי">בית פרטי</option>
+                <option value="פנטהאוז">פנטהאוז</option>
+                <option value="דירת גן">דירת גן</option>
+                <option value="מיני פנטהאוז">מיני פנטהאוז</option>
+            </select>
 
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
