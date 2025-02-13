@@ -54,6 +54,16 @@ display: flex;
 gap: 10px;
 flex-wrap: wrap;
 }
+.input-group.row-4 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.input-group.row-4 input {
+    flex: 1 1 25%;
+    min-width: 80px;
+}
 .input-group input, .input-group select {
 flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
 }
@@ -89,11 +99,11 @@ background-color: #5a3210;
 <input type="text" name="neighborhood" required>
 
 <label>רחוב, מס' בית, קומה ומס' דירה:</label>
-<div class="input-group">
-<input type="text" name="street" placeholder="רחוב" required>
-<input type="text" name="houseNumber" placeholder="מס' בית" required>
-<input type="text" name="floor" placeholder="קומה" required>
-<input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
+<div class="input-group row-4">
+    <input type="text" name="street" placeholder="רחוב" required>
+    <input type="text" name="houseNumber" placeholder="מס' בית" required>
+    <input type="text" name="floor" placeholder="קומה" required>
+    <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
 </div>
 
             <label>מידע כללי על הנכס:</label>
