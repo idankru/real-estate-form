@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס הזנת דירה - נדלן עם שחר</title>
+    
     <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,6 +63,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
             margin-top: 15px;
         }
         button:hover {
@@ -79,58 +82,41 @@
         <form id="realEstateForm">
             <label>עיר:</label>
             <input type="text" name="city" required>
-
+            
             <label>שכונה:</label>
             <input type="text" name="neighborhood" required>
-
-            <label>רחוב, מס' בית, קומה ומס' דירה:</label>
-            <div class="input-group">
-                <input type="text" name="street" placeholder="רחוב" required>
-                <input type="text" name="houseNumber" placeholder="מס' בית" required>
-                <input type="text" name="floor" placeholder="קומה" required>
-                <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
-            </div>
-
+            
             <label>מידע כללי על הנכס:</label>
             <div class="input-group">
-                <input type="number" name="yearBuilt" placeholder="שנת בניה" required>
-                <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
-                <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
-                <input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
-                <input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
-                <input type="number" name="price" placeholder="מחיר שיווק" required>
+                <input type="number" name="rooms" placeholder="מספר חדרים" required>
+                <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
+                <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
+                <select name="propertyType" required>
+                    <option value="דירה">דירה</option>
+                    <option value="בית פרטי">בית פרטי</option>
+                    <option value="פנטהאוז">פנטהאוז</option>
+                    <option value="דירת גן">דירת גן</option>
+                    <option value="מיני פנטהאוז">מיני פנטהאוז</option>
+                    <option value="מסחרי">מסחרי</option>
+                </select>
             </div>
-
-            <label>רשום בטאבו:</label>
-            <select name="tabu" required>
+            
+            <label for="tabu">רשום בטאבו:</label>
+            <select id="tabu" name="tabu" required>
                 <option value="כן">כן</option>
                 <option value="לא">לא</option>
             </select>
 
-            <label>רשום על שם המוכר:</label>
-            <select name="sellerRegistered" required>
+            <label for="sellerRegistered">רשום על שם המוכר:</label>
+            <select id="sellerRegistered" name="sellerRegistered" required>
                 <option value="כן">כן</option>
                 <option value="לא">לא</option>
             </select>
-
-            <input type="number" name="rooms" placeholder="מספר חדרים" required>
-            <input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
-            <input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
-
-            <label>סוג הנכס:</label>
-            <select name="propertyType" required>
-                <option value="דירה">דירה</option>
-                <option value="בית פרטי">בית פרטי</option>
-                <option value="פנטהאוז">פנטהאוז</option>
-                <option value="דירת גן">דירת גן</option>
-                <option value="מיני פנטהאוז">מיני פנטהאוז</option>
-                <option value="מסחרי">מסחרי</option>
-            </select>
-
-            <button type="submit">שלח</button>
+            
+            <button type="submit">שלח טופס</button>
         </form>
     </div>
-
+    
     <script>
         document.getElementById('realEstateForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -154,10 +140,14 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log('✅ תשובת API:', data);
-                alert('✅ הנתונים נשמרו בהצלחה!');
-                alert(`🔗 קישור לדירה: ${propertyLink}`);
-                window.location.href = propertyLink;
+                console.log('✅ תשובת API:', data);  
+                if (data.created) {
+                    alert('✅ הנתונים נשמרו בהצלחה!');
+                    alert(`🔗 קישור לדירה: ${propertyLink}`);
+                    window.location.href = propertyLink;
+                } else {
+                    alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
+                }
             })
             .catch(error => {
                 console.error('⚠️ שגיאה:', error);
