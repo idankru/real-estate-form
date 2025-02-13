@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>טופס הזנת דירה - נדלן עם שחר</title>
+    
     <!-- הוספת תמונה כ-Favicon -->
     <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,6 +23,16 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .form-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 150px; /* אפשר לשנות את הגודל */
+            height: auto;
         }
         h2 {
             text-align: center;
@@ -51,25 +63,17 @@
         button:hover {
             background-color: #5a3210;
         }
-
-        /* עיצוב למשבצות בשורה אחת */
-        .input-group {
-            display: flex;
-            gap: 10px; /* רווחים קטנים בין השדות */
-            flex-wrap: wrap; /* עוזר לא להיתקע על שורה אחת */
-        }
-
-        .input-group input {
-            width: 18%; /* רוחב יחסית אחיד לכל שדה */
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- הוספת התמונה בראש הטופס -->
-        <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
-        
+        <!-- הוספת תמונה ממורכזת בראש הטופס -->
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
+        </div>
+
         <h2>טופס הזנת דירה</h2>
+
         
         <form id="realEstateForm">
             <label>עיר:</label>
