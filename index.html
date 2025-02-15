@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>טופס הזנת דירה - נדלן עם שחר</title>
+<title>טופס הזנת דירה בלעדיות - נדלן עם שחר</title>
 
 <!-- הוספת תמונה כ-Favicon -->
 <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
@@ -72,6 +72,7 @@ flex-wrap: wrap;
     flex: 1 1 25%;
     min-width: 80px;
 }
+
 .input-group input, .input-group select {
 flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
 }
@@ -97,7 +98,7 @@ background-color: #5a3210;
 <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו נדלן עם שחר" class="form-image">
 </div>
 
-<h2>טופס הזנת דירה</h2>
+<h2>טופס הזנת דירה בלעדיות - נדלן עם שחר</h2>
 
 <form id="realEstateForm">
 <label>עיר:</label>
@@ -113,50 +114,6 @@ background-color: #5a3210;
     <input type="text" name="floor" placeholder="קומה" required>
     <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
 </div>
-<label>מידע כללי על הנכס:</label>
-<div class="input-group row-4">
-    <!-- שנה בניה -->
-<input type="number" name="yearBuilt" placeholder="שנת בניה" required>
-
-    <!-- תשלום ועד בית -->
-<input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
-
-    <!-- ארנונה לחודשיים -->
-<input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
-
-    <!-- מספר דירות בקומה -->
-<input type="number" name="apartmentsPerFloor" placeholder="מס' דירות בקומה" required>
-</div>
-<div class="input-group row-4">
-    <!-- מספר קומות בבניין -->
-<input type="number" name="apartmentsInBuilding" placeholder="מס' קומות בבניין" required>
-
-    <!-- מחיר שיווק -->
-<input type="number" name="price" placeholder="מחיר שיווק" required>
-
-<label for="tabu">רשום בטאבו:</label>
-<select name="tabu" id="tabu" required>
-    <option value="" disabled selected>בחר...</option>
-    <option value="כן">כן</option>
-    <option value="לא">לא</option>
-</select>
-
-<label for="sellerRegistered">רשום על שם המוכר:</label>
-<select name="sellerRegistered" id="sellerRegistered" required>
-    <option value="" disabled selected>בחר...</option>
-    <option value="כן">כן</option>
-    <option value="לא">לא</option>
-</select>
-
-<!-- מספר חדרים -->
-<input type="number" name="rooms" placeholder="מספר חדרים" required>
-
-<!-- גודל הדירה -->
-<input type="number" name="size" placeholder="גודל הדירה (במ"ר)" required>
-
-<!-- גודל מרפסת -->
-<input type="number" name="balconySize" placeholder="גודל מרפסת (במ"ר)" required>
-
 <label for="propertyType">סוג הנכס:</label>
 <select name="propertyType" id="propertyType" required>
     <option value="" disabled selected>בחר...</option>
@@ -167,6 +124,169 @@ background-color: #5a3210;
     <option value="מיני פנטהאוז">מיני פנטהאוז</option>
     <option value="מסחרי">מסחרי</option>
 </select>
+<div class="input-group row-2">
+<label for="tabu">הנכס רשום בטאבו:</label>
+<select name="tabu" id="tabu" required>
+    <option value="" disabled selected>בחר...</option>
+    <option value="כן">כן</option>
+    <option value="לא">לא</option>
+	<option value="אחר">אחר</option>
+</select>
+
+<label for="sellerRegistered">רשום על שם המוכר:</label>
+<select name="sellerRegistered" id="sellerRegistered" required>
+    <option value="" disabled selected>בחר...</option>
+    <option value="כן">כן</option>
+    <option value="לא">לא</option>
+	<option value="אחר">אחר</option>
+</select>
+</div>
+<label>מידע כללי על הנכס:</label>
+<div class="input-group row-4">
+    <!-- שנה בניה -->
+<input type="number" name="yearBuilt" placeholder="שנת בניה" required>
+
+    <!-- הקבלן -->
+<input type="number" name="contractor" placeholder=" מי הקבלן" required>
+
+    <!-- אחריות מבנה -->
+<input type="number" name="Structure warranty" placeholder="אחריות מבנה" required>
+
+    <!-- תשלום ועד בית -->
+<input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+</div>
+<div class="input-group row-4">
+    <!-- ארנונה לחודשיים -->
+<input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+
+    <!-- מספר דירות בקומה -->
+<input type="number" name="apartmentsPerFloor" placeholder="דירות בקומה" required>
+
+    <!-- מספר קומות בבניין -->
+<input type="number" name="apartmentsInBuilding" placeholder="קומות בבניין" required>
+
+    <!-- מספר חדרים -->
+<input type="number" name="rooms" placeholder="מספר חדרים" required>
+</div>
+    <!-- גודל הנכס-->
+<input type="number" name="size" placeholder="גודל הנכס" required>
+
+    <!-- גודל מרפסת -->
+<input type="number" name="balconySize" placeholder="גודל מרפסת" required>
+
+<!-- כיווני אוויר -->
+<label for="Airdirection">כיווני אוויר:</label>
+<div class="custom-select">
+    <div class="select-box" onclick="toggleDropdown('airDropdown')">
+        <span id="selectedAirOptions">בחר...</span>
+        <div class="arrow">&#9660;</div>
+    </div>
+    <div id="airDropdown" class="dropdown-content">
+        <label><input type="checkbox" value="צפון מערב"> צפון מערב</label>
+        <label><input type="checkbox" value="צפון מזרח"> צפון מזרח</label>
+        <label><input type="checkbox" value="דרום מערב"> דרום מערב</label>
+        <label><input type="checkbox" value="דרום מזרח"> דרום מזרח</label>
+    </div>
+</div>
+<input type="hidden" name="Airdirection" id="AirdirectionInput">
+
+<style>
+.custom-select {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+}
+.select-box {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrow {
+    font-size: 16px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.dropdown-content label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+.dropdown-content label:hover {
+    background: #f0f0f0;
+}
+</style>
+
+<script>
+function toggleDropdown(id) {
+    let dropdown = document.getElementById(id);
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+// סגירת הרשימה אם לוחצים מחוץ לתיבה
+document.addEventListener("click", function(event) {
+    let select = document.querySelector(".custom-select");
+    if (!select.contains(event.target)) {
+        document.getElementById("airDropdown").style.display = "none";
+    }
+});
+
+// פונקציה לעדכון הבחירות
+function updateSelection() {
+    let selected = [];
+    document.querySelectorAll("#airDropdown input:checked").forEach(checkedBox => {
+        selected.push(checkedBox.value);
+    });
+    document.getElementById("selectedAirOptions").innerText = selected.length ? selected.join(", ") : "בחר...";
+    document.getElementById("AirdirectionInput").value = selected.join(", ");
+}
+
+// אירועי שינוי לתיבות הסימון
+document.querySelectorAll("#airDropdown input").forEach(checkbox => {
+    checkbox.addEventListener("change", updateSelection);
+});
+</script>
+
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<label for="airConditioning">סוג מיזוג:</label>
+<select name="airConditioning[]" id="airConditioning" multiple required>
+    <option value="מרכזי">מרכזי</option>
+    <option value="מרכזי דמפרים">מרכזי דמפרים</option>
+    <option value="VRF">VRF</option>
+    <option value="עלי בחדרים">עלי בחדרים</option>
+    <option value="מיני מרכזי+עלי בחדרים">מיני מרכזי + עלי בחדרים</option>
+</select>
+
+<!-- הוספת jQuery + Select2 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $("#airConditioning").select2({
+        placeholder: "בחר סוג מיזוג", // טקסט מקדים
+        allowClear: true // אפשרות למחוק בחירות
+    });
+});
+</script>
+
+<label>מחיר שיווק:</label>
+    <!-- מחיר שיווק -->
+<input type="number" name="price" placeholder="מחיר שיווק" required>
 
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
