@@ -284,9 +284,18 @@ $(document).ready(function() {
 });
 </script>
 
+
 <label>מחיר שיווק:</label>
-    <!-- מחיר שיווק -->
-<input type="number" name="price" placeholder="מחיר שיווק" required inputmode="numeric" pattern="[0-9]*">
+<!-- מחיר שיווק -->
+<input type="text" name="price" id="price" placeholder="מחיר שיווק" required inputmode="numeric" pattern="[0-9]*">
+
+<script>
+    document.getElementById('price').addEventListener('input', function(event) {
+        let value = event.target.value.replace(/[^\d]/g, ''); // שים רק מספרים
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // הוסף פסיקים כל 3 ספרות
+        event.target.value = value;
+    });
+</script>
 
             <label>מפרט קצר על הדירה:</label>
             <textarea name="description"></textarea>
