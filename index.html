@@ -287,7 +287,7 @@ $(document).ready(function() {
 
 <label>מחיר שיווק:</label>
 <!-- מחיר שיווק -->
-<input type="text" name="price" id="price" placeholder="מחיר שיווק" required inputmode="numeric" pattern="[0-9]*">
+<input type="text" name="price" id="price" placeholder="מחיר שיווק" required inputmode="numeric" pattern="^[0-9,]+$">
 
 <script>
     document.getElementById('price').addEventListener('input', function(event) {
