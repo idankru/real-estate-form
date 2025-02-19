@@ -55,27 +55,29 @@
                     } else {
                         const property = data[0]; // לוקחים את הנכס הראשון שמוחזר מהשיטס
                         document.getElementById('propertyDetails').innerHTML = `
-    <div class="info"><strong>🔹 עיר:</strong> ${property.city}</div>
-    <div class="info"><strong>🔹 שכונה:</strong> ${property.neighborhood}</div>
-    <div class="info"><strong>🔹 רחוב:</strong> ${property.street}</div>
-    <div class="info"><strong>🔹 קומה:</strong> ${property.floor}</div>
-    <div class="info"><strong>🔹 שנת בנייה:</strong> ${property.yearBuilt}</div>
-    <div class="info"><strong>🔹 ועד בית:</strong> ${property.vaadBayit} ₪</div>
-    <div class="info"><strong>🔹 ארנונה:</strong> ${property.arnona} ₪</div>
-    <div class="info"><strong>🔹 דירות בקומה:</strong> ${property.apartmentsPerFloor}</div>
-    <div class="info"><strong>🔹 דירות בבניין:</strong> ${property.apartmentsInBuilding}</div>
-    <div class="info"><strong>🔹 מחיר:</strong> ${property.price} ₪</div>
-    <div class="info"><strong>🔹 טאבו:</strong> ${property.tabu}</div>
-    <div class="info"><strong>🔹 מוכר רשום:</strong> ${property.sellerRegistered}</div>
-    <div class="info"><strong>🔹 סוג נכס:</strong> ${property.propertyType}</div>
-    <div class="info"><strong>🔹 מספר חדרים:</strong> ${property.rooms}</div>
-    <div class="info"><strong>🔹 גודל:</strong> ${property.size} מ"ר</div>
-    <div class="info"><strong>🔹 גודל מרפסת:</strong> ${property.balconySize} מ"ר</div>
-    <div class="info"><strong>🔹 כיווני אוויר:</strong> ${property.Airdirection}</div>
-    <div class="info"><strong>🔹 מיזוג אוויר:</strong> ${property.airConditioning}</div>
-    <div class="info"><strong>🔹 תיאור:</strong> ${property.description}</div>
-    <div class="info"><strong>🔗 <a href="${property.link}" target="_blank">לינק לפרסום</a></strong></div>
-    <div class="info"><strong>🔗 <a href="${property.full_link}" target="_blank">לינק מלא</a></strong></div>
+<div class="info"><strong>📍 עיר:</strong> ${property.city}</div>
+<div class="info"><strong>🏡 שכונה:</strong> ${property.neighborhood}</div>
+<div class="info"><strong>🛣️ רחוב:</strong> ${property.street}</div>
+<div class="info"><strong>🏢 קומה:</strong> ${property.floor}</div>
+<div class="info"><strong>🛏️ מספר חדרים:</strong> ${property.rooms}</div>
+<div class="info"><strong>📏 גודל הדירה כ:</strong> ${property.size} מ"ר</div>
+<div class="info"><strong>🌞 גודל מרפסת כ:</strong> ${property.balconySize} מ"ר</div>
+<div class="info"><strong>📆 שנת בנייה:</strong> ${property.yearBuilt}</div>
+<div class="info"><strong>📆 הקבלן:</strong> ${property.contractor}</div>
+<div class="info"><strong>🏦 ועד בית:</strong> ${property.vaadBayit} ₪</div>
+<div class="info"><strong>💸 ארנונה:</strong> ${property.arnona} ₪</div>
+<div class="info"><strong>🏠 דירות בקומה:</strong> ${property.apartmentsPerFloor}</div>
+<div class="info"><strong>🏢 דירות בבניין:</strong> ${property.apartmentsInBuilding}</div>
+<div class="info"><strong>💰 מחיר:</strong> ${property.price} ₪</div>
+<div class="info"><strong>📜 טאבו:</strong> ${property.tabu}</div>
+<div class="info"><strong>👤 מוכר רשום:</strong> ${property.sellerRegistered}</div>
+<div class="info"><strong>🏠 סוג נכס:</strong> ${property.propertyType}</div>
+<div class="info"><strong>🌬️ כיווני אוויר:</strong> ${property.Airdirection}</div>
+<div class="info"><strong>❄️ מיזוג אוויר:</strong> ${property.airConditioning}</div>
+<div class="info"><strong>📝 תיאור:</strong> ${property.description}</div>
+<div class="info"><strong>🔗 <a href="${property.link}" target="_blank">לינק לפרסום</a></strong></div>
+<div class="info"><strong>🔗 <a href="${property.full_link}" target="_blank">לינק מלא</a></strong></div>
+
                         `;
                     }
                 })
