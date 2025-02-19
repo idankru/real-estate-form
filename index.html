@@ -7,6 +7,7 @@
 
 <!-- הוספת תמונה כ-Favicon -->
 <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
 <style>
 body {
@@ -72,6 +73,15 @@ flex-wrap: wrap;
     flex: 1 1 25%;
     min-width: 80px;
 }
+.input-group.row-3 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+.input-group.row-3 input {
+    flex: 1 1 25%;
+    min-width: 80px;
+}
 
 .input-group input, .input-group select {
 flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
@@ -88,6 +98,45 @@ margin-top: 15px;
 }
 button:hover {
 background-color: #5a3210;
+}
+.custom-select {
+position: relative;
+width: 100%;
+max-width: 250px;
+        }
+.select-box {
+border: 1px solid #ccc;
+padding: 8px;
+border-radius: 5px;
+cursor: pointer;
+background: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.arrow {
+    font-size: 16px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.dropdown-content label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+.dropdown-content label:hover {
+    background: #f0f0f0;
+}
+.hidden {
+    display: none;
 }
 </style>
 </head>
@@ -114,6 +163,8 @@ background-color: #5a3210;
     <input type="text" name="floor" placeholder="קומה" required>
     <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
 </div>
+
+<div class="input-group row-3">	
 <label for="propertyType">סוג הנכס:</label>
 <select name="propertyType" id="propertyType" required>
     <option value="" disabled selected>בחר...</option>
@@ -123,6 +174,14 @@ background-color: #5a3210;
     <option value="דירת גן">דירת גן</option>
     <option value="מיני פנטהאוז">מיני פנטהאוז</option>
     <option value="מסחרי">מסחרי</option>
+</select>	
+	<!-- גודל מרפסת -->
+<input type="number" name="size" placeholder="גודל הנכס" required>
+
+    <!-- גודל מרפסת -->
+<input type="number" name="balconySize" placeholder="גודל מרפסת" required>
+</div>
+
 </select>
 <div class="input-group row-2">
 <label for="tabu">הנכס רשום בטאבו:</label>
@@ -141,6 +200,7 @@ background-color: #5a3210;
 	<option value="אחר">אחר</option>
 </select>
 </div>
+
 <label>מידע כללי על הנכס:</label>
 <div class="input-group row-4">
     <!-- שנה בניה -->
@@ -155,6 +215,7 @@ background-color: #5a3210;
     <!-- תשלום ועד בית -->
 <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
 </div>
+
 <div class="input-group row-4">
     <!-- ארנונה לחודשיים -->
 <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
@@ -168,11 +229,6 @@ background-color: #5a3210;
     <!-- מספר חדרים -->
 <input type="number" name="rooms" placeholder="מספר חדרים" required>
 </div>
-    <!-- גודל הנכס-->
-<input type="number" name="size" placeholder="גודל הנכס" required>
-
-    <!-- גודל מרפסת -->
-<input type="number" name="balconySize" placeholder="גודל מרפסת" required>
 
 <!-- כיווני אוויר -->
 <label for="Airdirection">כיווני אוויר:</label>
@@ -278,6 +334,23 @@ document.querySelectorAll("#airDropdown input").forEach(checkbox => {
     </div>
 </div>
 <input type="hidden" name="airConditioning" id="airConditioningInput">
+
+<!-- חניה -->
+<label for="parking">חניה:</label>
+<input type="hidden" name="parking" id="parkingInput">
+<div class="custom-select">
+    <div class="select-box" onclick="toggleDropdown('parkingDropdown')">
+        <span id="selectedParkingOptions">בחר...</span>
+        <div class="arrow">&#9660;</div>
+    </div>
+    <div id="parkingDropdown" class="dropdown-content">
+        <label><input type="checkbox" value="חניה אחת" value="חניה אחת"> חניה אחת</label>
+        <label><input type="checkbox" value="שתי חניות" value="שתי חניות"> שתי חניות</label>
+        <label><input type="checkbox" value="מקורה בחניון" value="חניון מקורה"> חניון מקורה</label>
+		<label><input type="checkbox" value="מקורה בחניון" value="חניון בחוץ"> חניון בחוץ</label>
+    </div>
+</div>
+<input type="hidden" name="parking" id="parkingInput">
 
 <!-- מחיר שיווק -->
 <label>מחיר שיווק:</label>
