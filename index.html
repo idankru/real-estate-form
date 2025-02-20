@@ -170,9 +170,9 @@ align-items: center;
 <label>רחוב, מס' בית, קומה ומס' דירה:</label>
 <div class="input-group row-4">
     <input type="text" name="street" placeholder="רחוב" required>
-    <input type="text" name="houseNumber" placeholder="מס' בית" required>
-    <input type="text" name="floor" placeholder="קומה" required>
-    <input type="text" name="apartmentNumber" placeholder="מס' דירה" required>
+    <input type="text" name="houseNumber" placeholder="מס' בית" required required inputmode="numeric">
+    <input type="text" name="floor" placeholder="קומה" required required inputmode="numeric">
+    <input type="text" name="apartmentNumber" placeholder="מס' דירה" required required inputmode="numeric">
 </div>
 
 <div class="input-group row-3">	
@@ -187,10 +187,10 @@ align-items: center;
     <option value="מסחרי">מסחרי</option>
 </select>	
 	<!-- גודל מרפסת -->
-<input type="number" name="size" placeholder="גודל הנכס" required>
+<input type="number" name="size" placeholder="גודל הנכס" required required inputmode="numeric">
 
     <!-- גודל מרפסת -->
-<input type="number" name="balconySize" placeholder="גודל מרפסת" required>
+<input type="number" name="balconySize" placeholder="גודל מרפסת" required required inputmode="numeric">
 </div>
 
 </select>
@@ -215,7 +215,7 @@ align-items: center;
 <label>מידע כללי על הנכס:</label>
 <div class="input-group row-4">
     <!-- שנה בניה -->
-<input type="number" name="yearBuilt" placeholder="שנת בניה" required>
+<input type="number" name="yearBuilt" placeholder="שנת בניה" required required inputmode="numeric">
 
     <!-- הקבלן -->
 <input type="text" name="contractor" placeholder=" מי הקבלן" required>
@@ -224,21 +224,21 @@ align-items: center;
 <input type="number" name="Structurewarranty" placeholder="אחריות מבנה" required>
 
     <!-- תשלום ועד בית -->
-<input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required>
+<input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required required inputmode="numeric">
 </div>
 
 <div class="input-group row-4">
     <!-- ארנונה לחודשיים -->
-<input type="number" name="arnona" placeholder="ארנונה לחודשיים" required>
+<input type="number" name="arnona" placeholder="ארנונה לחודשיים" required required inputmode="numeric">
 
     <!-- מספר דירות בקומה -->
-<input type="number" name="apartmentsPerFloor" placeholder="דירות בקומה" required>
+<input type="number" name="apartmentsPerFloor" placeholder="דירות בקומה" required required inputmode="numeric">
 
     <!-- מספר קומות בבניין -->
-<input type="number" name="apartmentsInBuilding" placeholder="קומות בבניין" required>
+<input type="number" name="apartmentsInBuilding" placeholder="קומות בבניין" required required inputmode="numeric">
 
     <!-- מספר חדרים -->
-<input type="number" name="rooms" placeholder="מספר חדרים" required>
+<input type="number" name="rooms" placeholder="מספר חדרים" required required inputmode="numeric">
 </div>
 
 <div class="input-group row-4">	
