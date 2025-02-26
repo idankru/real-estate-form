@@ -234,10 +234,38 @@ align-items: center;
 </select>
 <!-- ממ"ד -->
 <label for="mamad">ממ"ד:</label>
-<div style="display: flex; gap: 10px;">
-    <label><input type="checkbox" name="mamad" value="כן"> כן</label>
-    <label><input type="checkbox" name="mamad" value="לא"> לא</label>
+<div class="mamad-container">
+    <label class="mamad-option">
+        <input type="checkbox" name="mamad" value="כן">
+        <span>כן</span>
+    </label>
+    <label class="mamad-option">
+        <input type="checkbox" name="mamad" value="לא">
+        <span>לא</span>
+    </label>
 </div>
+
+<style>
+    .mamad-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .mamad-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .mamad-option input {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+</style>
+</div>	
 </div>
 
 <label>מידע כללי על הנכס:</label>
