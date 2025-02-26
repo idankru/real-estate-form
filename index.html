@@ -93,6 +93,25 @@ flex-wrap: wrap;
     flex: 1 1 25%;
     min-width: 80px;
 }
+.input-group.row-4 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+.input-group.row-4 input {
+    flex: 1 1 25%;
+    min-width: 80px;
+{	
+}
+.input-group.row-6 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+.input-group.row-6 input {
+    flex: 1 1 25%;
+    min-width: 80px;
+{	
 
 .input-group input, .input-group select {
 flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
@@ -175,7 +194,7 @@ align-items: center;
     <input type="text" name="apartmentNumber" placeholder="מס' דירה" required required inputmode="numeric">
 </div>
 
-<div class="input-group row-3">	
+<div class="input-group row-4">	
 <label for="propertyType">סוג הנכס:</label>
 <select name="propertyType" id="propertyType" required>
     <option value="" disabled selected>בחר...</option>
@@ -191,6 +210,9 @@ align-items: center;
 
     <!-- גודל מרפסת -->
 <input type="number" name="balconySize" placeholder="גודל מרפסת" required required inputmode="numeric">
+
+    <!-- מספר חדרים -->
+<input type="number" name="rooms" placeholder="מספר חדרים" required required inputmode="numeric">
 </div>
 
 </select>
@@ -227,7 +249,7 @@ align-items: center;
 <input type="number" name="vaadBayit" placeholder="תשלום ועד בית" required required inputmode="numeric">
 </div>
 
-<div class="input-group row-4">
+<div class="input-group row-3">
     <!-- ארנונה לחודשיים -->
 <input type="number" name="arnona" placeholder="ארנונה לחודשיים" required required inputmode="numeric">
 
@@ -237,11 +259,9 @@ align-items: center;
     <!-- מספר קומות בבניין -->
 <input type="number" name="apartmentsInBuilding" placeholder="קומות בבניין" required required inputmode="numeric">
 
-    <!-- מספר חדרים -->
-<input type="number" name="rooms" placeholder="מספר חדרים" required required inputmode="numeric">
 </div>
 
-<div class="input-group row-4">	
+<div class="input-group row-6">	
 <!-- כיווני אוויר -->
 <label for="Airdirection">כיווני אוויר:</label>
 <div class="custom-select">
@@ -254,6 +274,11 @@ align-items: center;
         <label><input type="checkbox" value="צפון מזרח"> צפון מזרח</label>
         <label><input type="checkbox" value="דרום מערב"> דרום מערב</label>
         <label><input type="checkbox" value="דרום מזרח"> דרום מזרח</label>
+		<label><input type="checkbox" value="צפון"> צפון</label>
+		<label><input type="checkbox" value="דרום"> דרום</label>
+		<label><input type="checkbox" value="מזרח"> מזרח </label>
+		<label><input type="checkbox" value="מערב"> מערב</label>
+		
     </div>
 </div>
 <input type="hidden" name="Airdirection" id="AirdirectionInput">
@@ -358,11 +383,71 @@ document.querySelectorAll("#airDropdown input").forEach(checkbox => {
     <div id="parkingDropdown" class="dropdown-content">
         <label><input type="checkbox" value="חניה אחת" value="חניה אחת"> חניה אחת</label>
         <label><input type="checkbox" value="שתי חניות" value="שתי חניות"> שתי חניות</label>
+		<label><input type="checkbox" value="שתי חניות עוקבות" value="שתי חניות עוקבות"> שתי חניות עוקבות</label>
         <label><input type="checkbox" value="מקורה בחניון" value="חניון מקורה"> חניון מקורה</label>
 		<label><input type="checkbox" value="מקורה בחניון" value="חניון בחוץ"> חניון בחוץ</label>
+		<label><input type="checkbox" value="אין חניה" value="חניון בחוץ"> אין חניה</label>
     </div>
 </div>
 <input type="hidden" name="parking" id="parkingInput">
+
+<!-- מחסן -->
+<label for="storage">מחסן:</label>
+<input type="hidden" name="storage" id="storageInput">
+<div class="custom-select">
+    <div class="select-box" onclick="toggleDropdown('storageDropdown')">
+        <span id="selectedStorageOptions">בחר...</span>
+        <div class="arrow">&#9660;</div>
+    </div>
+    <div id="storageDropdown" class="dropdown-content">
+        <label><input type="checkbox" value="מחסן קטן"> מחסן קטן</label>
+        <label><input type="checkbox" value="מחסן גדול"> מחסן גדול</label>
+        <label><input type="checkbox" value="מחסן צמוד לדירה"> מחסן צמוד לדירה</label>
+        <label><input type="checkbox" value="קומת מחסנים"> קומת מחסנים</label>
+        <label><input type="checkbox" value="אין מחסן"> אין מחסן</label>
+    </div>
+</div>
+<input type="hidden" name="storage" id="storageInput">
+
+<!-- חימום מים בבית -->
+<label for="waterHeating">חימום מים בבית:</label>
+<input type="hidden" name="waterHeating" id="waterHeatingInput">
+<div class="custom-select">
+    <div class="select-box" onclick="toggleDropdown('waterHeatingDropdown')">
+        <span id="selectedWaterHeatingOptions">בחר...</span>
+        <div class="arrow">&#9660;</div>
+    </div>
+    <div id="waterHeatingDropdown" class="dropdown-content">
+        <label><input type="checkbox" value="דוד שמש"> דוד שמש</label>
+        <label><input type="checkbox" value="דוד חשמלי"> דוד חשמלי</label>
+        <label><input type="checkbox" value="חימום מים בגז"> חימום מים בגז</label>
+    </div>
+</div>
+<input type="hidden" name="waterHeating" id="waterHeatingInput">
+
+<!-- תוספות בניין -->
+<label for="buildingExtras">תוספות בניין:</label>
+<input type="hidden" name="buildingExtras" id="buildingExtrasInput">
+<div class="custom-select">
+    <div class="select-box" onclick="toggleDropdown('buildingExtrasDropdown')">
+        <span id="selectedBuildingExtrasOptions">בחר...</span>
+        <div class="arrow">&#9660;</div>
+    </div>
+    <div id="buildingExtrasDropdown" class="dropdown-content">
+        <label><input type="checkbox" value="חדר כושר"> חדר כושר</label>
+        <label><input type="checkbox" value="חדר גימבורי"> חדר גימבורי</label>
+        <label><input type="checkbox" value="חדר עגלות"> חדר עגלות</label>
+        <label><input type="checkbox" value="חדר דיירים"> חדר דיירים</label>
+    </div>
+</div>
+<input type="hidden" name="buildingExtras" id="buildingExtrasInput">
+
+<!-- ממ"ד -->
+<label for="mamad">ממ"ד:</label>
+<div>
+    <label><input type="checkbox" name="mamad" value="כן"> כן</label>
+    <label><input type="checkbox" name="mamad" value="לא"> לא</label>
+</div>
 </div>
 	
 <!-- מחיר שיווק -->
