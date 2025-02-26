@@ -216,7 +216,7 @@ align-items: center;
 </div>
 
 </select>
-<div class="input-group row-2">
+<div class="input-group row-3">
 <label for="tabu">הנכס רשום בטאבו:</label>
 <select name="tabu" id="tabu" required>
     <option value="" disabled selected>בחר...</option>
@@ -237,7 +237,7 @@ align-items: center;
 <div style="display: flex; gap: 10px;">
     <label><input type="checkbox" name="mamad" value="כן"> כן</label>
     <label><input type="checkbox" name="mamad" value="לא"> לא</label>
-</div>	
+</div>
 </div>
 
 <label>מידע כללי על הנכס:</label>
@@ -267,7 +267,7 @@ align-items: center;
 
 </div>
 
-<div class="input-group row-6">	
+<div class="input-group row-2">	
 <!-- כיווני אוויר -->
 <label for="Airdirection">כיווני אוויר:</label>
 <div class="custom-select">
@@ -377,7 +377,9 @@ document.querySelectorAll("#airDropdown input").forEach(checkbox => {
     </div>
 </div>
 <input type="hidden" name="airConditioning" id="airConditioningInput">
+</div>
 
+<div class="input-group row-2">	
 <!-- חניה -->
 <label for="parking">חניה:</label>
 <input type="hidden" name="parking" id="parkingInput">
@@ -414,7 +416,9 @@ document.querySelectorAll("#airDropdown input").forEach(checkbox => {
     </div>
 </div>
 <input type="hidden" name="storage" id="storageInput">
+</div>
 
+<div class="input-group row-2">
 <!-- חימום מים בבית -->
 <label for="waterHeating">חימום מים בבית:</label>
 <input type="hidden" name="waterHeating" id="waterHeatingInput">
@@ -447,6 +451,7 @@ document.querySelectorAll("#airDropdown input").forEach(checkbox => {
     </div>
 </div>
 <input type="hidden" name="buildingExtras" id="buildingExtrasInput">
+</div>
 </div>
 	
 <!-- מחיר שיווק -->
