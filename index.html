@@ -416,6 +416,24 @@ button:hover {
  </div>
  <input type="hidden" name="waterHeating" id="waterHeatingInput">
 </div>
+
+<div class="input-group row-2">
+    <!-- תוספות של הבניין -->
+    <label for="buildingExtras">תוספות של הבניין:</label>
+    <div class="custom-select">
+        <div class="select-box" onclick="toggleDropdown('buildingExtrasDropdown')">
+            <span id="selectedBuildingExtrasOptions">בחר...</span>
+            <div class="arrow">&#9660;</div>
+        </div>
+        <div id="buildingExtrasDropdown" class="dropdown-content">
+            <label><input type="checkbox" value="חדר כושר" onclick="updateSelection('buildingExtrasDropdown', 'selectedBuildingExtrasOptions', 'buildingExtrasInput')"> חדר כושר</label>
+            <label><input type="checkbox" value="חדר גימבורי" onclick="updateSelection('buildingExtrasDropdown', 'selectedBuildingExtrasOptions', 'buildingExtrasInput')"> חדר גימבורי</label>
+            <label><input type="checkbox" value="מועדון דיירים" onclick="updateSelection('buildingExtrasDropdown', 'selectedBuildingExtrasOptions', 'buildingExtrasInput')"> מועדון דיירים</label>
+            <label><input type="checkbox" value="מעלית שבת" onclick="updateSelection('buildingExtrasDropdown', 'selectedBuildingExtrasOptions', 'buildingExtrasInput')"> מעלית שבת</label>
+        </div>
+    </div>
+    <input type="hidden" name="buildingExtras" id="buildingExtrasInput">
+</div>	
 	
 <script>
 // פונקציה לפתיחת וסגירת הרשימה
