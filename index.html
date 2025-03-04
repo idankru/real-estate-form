@@ -8,23 +8,22 @@
 <!-- הוספת תמונה כ-Favicon -->
 <link rel="icon" href="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" type="image/jpeg">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-
 <style>
 body {
-font-family: Arial, sans-serif;
-background-color: #f5f5f5;
-direction: rtl;
-text-align: right;
-margin: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    direction: rtl;
+    text-align: right;
+    margin: 20px;
 }
 .container {
-    max-width: 100%; 
+    max-width: 100%;
     width: 90%; /* כך זה יתאים גם לנייד */
     margin: auto;
     padding: 15px;
 }
 .logo-container {
-text-align: center;
+    text-align: center;
 }
 .input-group {
     display: flex;
@@ -38,33 +37,44 @@ text-align: center;
     .input-group input, .input-group select {
         flex: 1 1 calc(50% - 10px); /* במסכים גדולים מ-600px, חצי רוחב */
     }
-}		
+}
 .form-image {
-display: block;
-margin: 0 auto;
-max-width: 250px;
-height: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: 250px;
+    height: auto;
 }
 h2 {
-text-align: center;
-color: #8B4513;
+    text-align: center;
+    color: #8B4513;
 }
 label {
-font-weight: bold;
-margin-top: 10px;
-display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+.form-container div {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
 }
 input, select, textarea {
-width: 100%;
-padding: 8px;
-margin-top: 5px;
-border: 1px solid #ccc;
-border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .input-group {
-display: flex;
-gap: 10px;
-flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 .input-group.row-4 {
     display: flex;
@@ -101,7 +111,6 @@ flex-wrap: wrap;
 .input-group.row-4 input {
     flex: 1 1 25%;
     min-width: 80px;
-{	
 }
 .input-group.row-6 {
     display: flex;
@@ -111,38 +120,37 @@ flex-wrap: wrap;
 .input-group.row-6 input {
     flex: 1 1 25%;
     min-width: 80px;
-{	
-
+}
 .input-group input, .input-group select {
-flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
+    flex: 1 1 calc(50% - 10px); /* מאפשר לשדות להיות בשורה אחת עם גמישות */
 }
 button {
-background-color: #8B4513;
-color: white;
-padding: 10px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-width: 100%;
-margin-top: 15px;
+    background-color: #8B4513;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
 }
 button:hover {
-background-color: #5a3210;
+    background-color: #5a3210;
 }
 .custom-select {
-position: relative;
-width: 100%;
-max-width: 250px;
-        }
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+}
 .select-box {
-border: 1px solid #ccc;
-padding: 8px;
-border-radius: 5px;
-cursor: pointer;
-background: white;
-display: flex;
-justify-content: space-between;
-align-items: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .arrow {
     font-size: 16px;
@@ -169,8 +177,7 @@ align-items: center;
     display: none;
 }
 </style>
-</head>
-<body>
+
 <div class="container">
 <!-- הוספת תמונה ממורכזת בראש הטופס -->
 <div class="logo-container">
@@ -236,12 +243,12 @@ align-items: center;
 <label for="mamad">ממ"ד:</label>
 <div class="mamad-container">
     <label class="mamad-option">
-        <input type="checkbox" name="mamad" value="כן">
+    <input type="checkbox" name="mamad" value="כן">
         <span>כן</span>
     </label>
     <label class="mamad-option">
-        <input type="checkbox" name="mamad" value="לא">
-        <span>לא</span>
+    <input type="checkbox" name="mamad" value="לא">
+    <span>לא</span>
     </label>
 </div>
 
@@ -265,7 +272,7 @@ align-items: center;
         cursor: pointer;
     }
 </style>
-</div>	
+</div>
 </div>
 
 <label>מידע כללי על הנכס:</label>
@@ -295,194 +302,170 @@ align-items: center;
 
 </div>
 
-<div class="input-group row-2">	
-<!-- כיווני אוויר -->
-<label for="Airdirection">כיווני אוויר:</label>
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('airDropdown')">
-        <span id="selectedAirOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
+<div class="input-group row-2">
+    <!-- כיווני אוויר -->
+    <label for="Airdirection">כיווני אוויר:</label>
+    <div class="custom-select">
+        <div class="select-box" onclick="toggleDropdown('airDropdown')">
+            <span id="selectedAirOptions">בחר...</span>
+            <div class="arrow">&#9660;</div>
+        </div>
+        <div id="airDropdown" class="dropdown-content">
+            <label><input type="checkbox" value="צפון מערב" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> צפון מערב</label>
+            <label><input type="checkbox" value="צפון מזרח" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> צפון מזרח</label>
+            <label><input type="checkbox" value="דרום מערב" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> דרום מערב</label>
+            <label><input type="checkbox" value="דרום מזרח" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> דרום מזרח</label>
+            <label><input type="checkbox" value="צפון" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> צפון</label>
+            <label><input type="checkbox" value="דרום" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> דרום</label>
+            <label><input type="checkbox" value="מזרח" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> מזרח</label>
+            <label><input type="checkbox" value="מערב" onclick="updateSelection('airDropdown', 'selectedAirOptions', 'AirdirectionInput')"> מערב</label>
+        </div>
     </div>
-    <div id="airDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="צפון מערב"> צפון מערב</label>
-        <label><input type="checkbox" value="צפון מזרח"> צפון מזרח</label>
-        <label><input type="checkbox" value="דרום מערב"> דרום מערב</label>
-        <label><input type="checkbox" value="דרום מזרח"> דרום מזרח</label>
-		<label><input type="checkbox" value="צפון"> צפון</label>
-		<label><input type="checkbox" value="דרום"> דרום</label>
-		<label><input type="checkbox" value="מזרח"> מזרח </label>
-		<label><input type="checkbox" value="מערב"> מערב</label>
-		
-    </div>
+    <input type="hidden" name="Airdirection" id="AirdirectionInput">
 </div>
-<input type="hidden" name="Airdirection" id="AirdirectionInput">
 
-<style>
-.custom-select {
-    position: relative;
-    width: 100%;
-    max-width: 250px;
-}
-.select-box {
-    border: 1px solid #ccc;
-    padding: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.arrow {
-    font-size: 16px;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    width: 100%;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-.dropdown-content label {
-    display: block;
-    padding: 8px;
-    cursor: pointer;
-}
-.dropdown-content label:hover {
-    background: #f0f0f0;
-}
-</style>
+<div class="input-group row-2">
+    <!-- סוג מיזוג -->
+    <label for="airConditioning">סוג מיזוג:</label>
+    <div class="custom-select">
+        <div class="select-box" onclick="toggleDropdown('airConditioningDropdown')">
+            <span id="selectedAirConditioningOptions">בחר...</span>
+            <div class="arrow">&#9660;</div>
+        </div>
+        <div id="airConditioningDropdown" class="dropdown-content">
+            <label><input type="checkbox" value="מרכזי" onclick="updateSelection('airConditioningDropdown', 'selectedAirConditioningOptions', 'airConditioningInput')"> מרכזי</label>
+            <label><input type="checkbox" value="מרכזי דמפרים" onclick="updateSelection('airConditioningDropdown', 'selectedAirConditioningOptions', 'airConditioningInput')"> מרכזי דמפרים</label>
+            <label><input type="checkbox" value="VRF" onclick="updateSelection('airConditioningDropdown', 'selectedAirConditioningOptions', 'airConditioningInput')"> VRF</label>
+            <label><input type="checkbox" value="עלי בחדרים" onclick="updateSelection('airConditioningDropdown', 'selectedAirConditioningOptions', 'airConditioningInput')"> עלי בחדרים</label>
+            <label><input type="checkbox" value="מיני מרכזי+עלי בחדרים" onclick="updateSelection('airConditioningDropdown', 'selectedAirConditioningOptions', 'airConditioningInput')"> מיני מרכזי + עלי בחדרים</label>
+        </div>
+    </div>
+    <input type="hidden" name="airConditioning" id="airConditioningInput">
+</div>
+
+<div class="input-group row-2">
+    <!-- חניה -->
+    <label for="parking">חניה:</label>
+    <div class="custom-select">
+        <div class="select-box" onclick="toggleDropdown('parkingDropdown')">
+            <span id="selectedParkingOptions">בחר...</span>
+            <div class="arrow">&#9660;</div>
+        </div>
+        <div id="parkingDropdown" class="dropdown-content">
+            <label><input type="checkbox" value="חניה אחת" onclick="updateSelection('parkingDropdown', 'selectedParkingOptions', 'parkingInput')"> חניה אחת</label>
+            <label><input type="checkbox" value="שתי חניות" onclick="updateSelection('parkingDropdown', 'selectedParkingOptions', 'parkingInput')"> שתי חניות</label>
+            <label><input type="checkbox" value="שתי חניות עוקבות" onclick="updateSelection('parkingDropdown', 'selectedParkingOptions', 'parkingInput')"> שתי חניות עוקבות</label>
+            <label><input type="checkbox" value="מקורה בחניון" onclick="updateSelection('parkingDropdown', 'selectedParkingOptions', 'parkingInput')"> חניון מקורה</label>
+            <label><input type="checkbox" value="אין חניה" onclick="updateSelection('parkingDropdown', 'selectedParkingOptions', 'parkingInput')"> אין חניה</label>
+        </div>
+    </div>
+    <input type="hidden" name="parking" id="parkingInput">
+</div>
+
+<div class="input-group row-2">
+    <!-- מחסן -->
+    <label for="storage">מחסן:</label>
+    <div class="custom-select">
+        <div class="select-box" onclick="toggleDropdown('storageDropdown')">
+            <span id="selectedStorageOptions">בחר...</span>
+            <div class="arrow">&#9660;</div>
+        </div>
+        <div id="storageDropdown" class="dropdown-content">
+            <label><input type="checkbox" value="מחסן קטן" onclick="updateSelection('storageDropdown', 'selectedStorageOptions', 'storageInput')"> מחסן קטן</label>
+            <label><input type="checkbox" value="מחסן גדול" onclick="updateSelection('storageDropdown', 'selectedStorageOptions', 'storageInput')"> מחסן גדול</label>
+            <label><input type="checkbox" value="מחסן צמוד לדירה" onclick="updateSelection('storageDropdown', 'selectedStorageOptions', 'storageInput')"> מחסן צמוד לדירה</label>
+            <label><input type="checkbox" value="קומת מחסנים" onclick="updateSelection('storageDropdown', 'selectedStorageOptions', 'storageInput')"> קומת מחסנים</label>
+            <label><input type="checkbox" value="אין מחסן" onclick="updateSelection('storageDropdown', 'selectedStorageOptions', 'storageInput')"> אין מחסן</label>
+        </div>
+    </div>
+    <input type="hidden" name="storage" id="storageInput">
+</div>
 
 <script>
+// פונקציה לפתיחת וסגירת הרשימה
 function toggleDropdown(id) {
     let dropdown = document.getElementById(id);
+    // סוגר את כל התפריטים הפתוחים
+    let allDropdowns = document.querySelectorAll(".dropdown-content");
+    allDropdowns.forEach(function(item) {
+        if (item !== dropdown) {
+            item.style.display = "none";
+        }
+    });
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
 // סגירת הרשימה אם לוחצים מחוץ לתיבה
 document.addEventListener("click", function(event) {
-    let select = document.querySelector(".custom-select");
-    if (!select.contains(event.target)) {
-        document.getElementById("airDropdown").style.display = "none";
+    let select = document.querySelectorAll(".custom-select");
+    let clickedOutside = true;
+    select.forEach(function(s) {
+        if (s.contains(event.target)) {
+            clickedOutside = false;
+        }
+    });
+    if (clickedOutside) {
+        let dropdowns = document.querySelectorAll(".dropdown-content");
+        dropdowns.forEach(function(dropdown) {
+            dropdown.style.display = "none";
+        });
     }
 });
 
-// פונקציה לעדכון הבחירות
-function updateSelection() {
+// פונקציה לעדכון הבחירות - עדכון כל הבחירות
+function updateSelection(dropdownId, selectedId, inputId) {
     let selected = [];
-    document.querySelectorAll("#airDropdown input:checked").forEach(checkedBox => {
+    document.querySelectorAll(`#${dropdownId} input:checked`).forEach(checkedBox => {
         selected.push(checkedBox.value);
     });
-    document.getElementById("selectedAirOptions").innerText = selected.length ? selected.join(", ") : "בחר...";
-    document.getElementById("AirdirectionInput").value = selected.join(", ");
+    document.getElementById(selectedId).innerText = selected.length ? selected.join(", ") : "בחר...";
+    document.getElementById(inputId).value = selected.join(", ");
 }
-
-// אירועי שינוי לתיבות הסימון
-document.querySelectorAll("#airDropdown input").forEach(checkbox => {
-    checkbox.addEventListener("change", updateSelection);
-});
 </script>
 
+<style>
+.custom-select {
+    position: relative;
+    display: inline-block;
+}
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+.select-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
 
-<!-- סוג מיזוג -->
-<label for="airConditioning">סוג מיזוג:</label>
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('airConditioningDropdown')">
-        <span id="selectedAirConditioningOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="airConditioningDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="מרכזי"> מרכזי</label>
-        <label><input type="checkbox" value="מרכזי דמפרים"> מרכזי דמפרים</label>
-        <label><input type="checkbox" value="VRF"> VRF</label>
-        <label><input type="checkbox" value="עלי בחדרים"> עלי בחדרים</label>
-        <label><input type="checkbox" value="מיני מרכזי+עלי בחדרים"> מיני מרכזי + עלי בחדרים</label>
-    </div>
-</div>
-<input type="hidden" name="airConditioning" id="airConditioningInput">
-</div>
+.arrow {
+    font-size: 18px;
+}
 
-<div class="input-group row-2">	
-<!-- חניה -->
-<label for="parking">חניה:</label>
-<input type="hidden" name="parking" id="parkingInput">
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('parkingDropdown')">
-        <span id="selectedParkingOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="parkingDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="חניה אחת" value="חניה אחת"> חניה אחת</label>
-        <label><input type="checkbox" value="שתי חניות" value="שתי חניות"> שתי חניות</label>
-	<label><input type="checkbox" value="שתי חניות עוקבות" value="שתי חניות עוקבות"> שתי חניות עוקבות</label>
-        <label><input type="checkbox" value="מקורה בחניון" value="חניון מקורה"> חניון מקורה</label>
-	<label><input type="checkbox" value="מקורה בחניון" value="חניון בחוץ"> חניון בחוץ</label>
-	<label><input type="checkbox" value="אין חניה" value="חניון בחוץ"> אין חניה</label>
-    </div>
-</div>
-<input type="hidden" name="parking" id="parkingInput">
-</div>
-	
-<!-- מחסן -->
-<label for="storage">מחסן:</label>
-<input type="hidden" name="storage" id="storageInput">
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('storageDropdown')">
-        <span id="selectedStorageOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="storageDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="מחסן קטן"> מחסן קטן</label>
-        <label><input type="checkbox" value="מחסן גדול"> מחסן גדול</label>
-        <label><input type="checkbox" value="מחסן צמוד לדירה"> מחסן צמוד לדירה</label>
-        <label><input type="checkbox" value="קומת מחסנים"> קומת מחסנים</label>
-        <label><input type="checkbox" value="אין מחסן"> אין מחסן</label>
-    </div>
-</div>
-<input type="hidden" name="storage" id="storageInput">
-</div>
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 
-<div class="input-group row-2">
-<!-- חימום מים בבית -->
-<label for="waterHeating">חימום מים בבית:</label>
-<input type="hidden" name="waterHeating" id="waterHeatingInput">
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('waterHeatingDropdown')">
-        <span id="selectedWaterHeatingOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="waterHeatingDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="דוד שמש"> דוד שמש</label>
-        <label><input type="checkbox" value="דוד חשמלי"> דוד חשמלי</label>
-        <label><input type="checkbox" value="חימום מים בגז"> חימום מים בגז</label>
-    </div>
-</div>
-<input type="hidden" name="waterHeating" id="waterHeatingInput">
-</div>
-	
-<!-- תוספות בניין -->
-<label for="buildingExtras">תוספות בניין:</label>
-<input type="hidden" name="buildingExtras" id="buildingExtrasInput">
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('buildingExtrasDropdown')">
-        <span id="selectedBuildingExtrasOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="buildingExtrasDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="חדר כושר"> חדר כושר</label>
-        <label><input type="checkbox" value="חדר גימבורי"> חדר גימבורי</label>
-        <label><input type="checkbox" value="חדר עגלות"> חדר עגלות</label>
-        <label><input type="checkbox" value="חדר דיירים"> חדר דיירים</label>
-    </div>
-</div>
-<input type="hidden" name="buildingExtras" id="buildingExtrasInput">
-</div>
-</div>
+.dropdown-content label {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dropdown-content input {
+    margin-right: 10px;
+}
+
+.dropdown-content label:hover {
+    background-color: #f1f1f1;
+}
+</style>
+
 	
 <!-- מחיר שיווק -->
 <label>מחיר שיווק:</label>
