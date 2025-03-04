@@ -381,23 +381,6 @@ button:hover {
     <input type="hidden" name="storage" id="storageInput">
 </div>
 
-<!-- מים חמים בבית -->
-<label for="waterHeating">מים חמים בבית:</label>
-<div class="custom-select">
-    <div class="select-box" onclick="toggleDropdown('waterHeatingDropdown')">
-        <span id="selectedWaterHeatingOptions">בחר...</span>
-        <div class="arrow">&#9660;</div>
-    </div>
-    <div id="waterHeatingDropdown" class="dropdown-content">
-        <label><input type="checkbox" value="דוד חשמלי" onclick="updateSelection('waterHeatingDropdown', 'selectedWaterHeatingOptions', 'waterHeatingInput')"> דוד חשמלי</label>
-        <label><input type="checkbox" value="דוד שמש" onclick="updateSelection('waterHeatingDropdown', 'selectedWaterHeatingOptions', 'waterHeatingInput')"> דוד שמש</label>
-        <label><input type="checkbox" value="דוד גז" onclick="updateSelection('waterHeatingDropdown', 'selectedWaterHeatingOptions', 'waterHeatingInput')"> דוד גז</label>
-        <label><input type="checkbox" value="מערכת סולארית" onclick="updateSelection('waterHeatingDropdown', 'selectedWaterHeatingOptions', 'waterHeatingInput')"> מערכת סולארית</label>
-        <label><input type="checkbox" value="אין מים חמים" onclick="updateSelection('waterHeatingDropdown', 'selectedWaterHeatingOptions', 'waterHeatingInput')"> אין מים חמים</label>
-    </div>
-</div>
-<input type="hidden" name="waterHeating" id="waterHeatingInput">
-
 <div class="input-group row-2">
 <!-- מים חמים בבית -->
 <label for="waterHeating">מים חמים בבית:</label>
