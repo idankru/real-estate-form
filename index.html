@@ -302,7 +302,7 @@ button:hover {
 
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
     <!-- כיווני אוויר -->
     <label for="Airdirection">כיווני אוויר:</label>
     <div class="custom-select">
@@ -324,7 +324,7 @@ button:hover {
     <input type="hidden" name="Airdirection" id="AirdirectionInput">
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
     <!-- סוג מיזוג -->
     <label for="airConditioning">סוג מיזוג:</label>
     <div class="custom-select">
@@ -343,7 +343,7 @@ button:hover {
     <input type="hidden" name="airConditioning" id="airConditioningInput">
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
     <!-- חניה -->
     <label for="parking">חניה:</label>
     <div class="custom-select">
@@ -362,7 +362,7 @@ button:hover {
     <input type="hidden" name="parking" id="parkingInput">
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
     <!-- מחסן -->
     <label for="storage">מחסן:</label>
     <div class="custom-select">
@@ -381,7 +381,7 @@ button:hover {
     <input type="hidden" name="storage" id="storageInput">
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
 <!-- מים חמים בבית -->
 <label for="waterHeating">מים חמים בבית:</label>
 <div class="custom-select">
@@ -400,7 +400,7 @@ button:hover {
  <input type="hidden" name="waterHeating" id="waterHeatingInput">
 </div>
 
-<div class="input-group row-2">
+<div class="form-group">
     <!-- תוספות של הבניין -->
     <label for="buildingExtras">תוספות של הבניין:</label>
     <div class="custom-select">
@@ -416,8 +416,8 @@ button:hover {
         </div>
     </div>
     <input type="hidden" name="buildingExtras" id="buildingExtrasInput">
-</div>	
-	
+</div>
+
 <script>
 // פונקציה לפתיחת וסגירת הרשימה
 function toggleDropdown(id) {
@@ -500,6 +500,20 @@ function updateSelection(dropdownId, selectedId, inputId) {
 
 .dropdown-content label:hover {
     background-color: #f1f1f1;
+}	
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* מרווח בין התווית לשדה */
+}
+
+.form-group label {
+    width: 150px; /* קביעת רוחב אחיד לכל התוויות */
+    text-align: left; /* מיושר לשמאל */
+}
+
+.form-group select {
+    flex: 1; /* ימלא את הרוחב הנותר */	
 }
 </style>
 
