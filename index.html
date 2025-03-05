@@ -176,6 +176,19 @@ button:hover {
 .hidden {
     display: none;
 }
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* מרווח בין התווית לשדה */
+}
+.form-group label {
+    width: 150px; /* קביעת רוחב אחיד לכל התוויות */
+    text-align: left; /* מיושר לשמאל */
+}
+
+.form-group select {
+    flex: 1; /* ימלא את הרוחב הנותר */	
+}
 </style>
 
 <div class="container">
@@ -201,7 +214,7 @@ button:hover {
     <input type="text" name="apartmentNumber" placeholder="מס' דירה" required required inputmode="numeric">
 </div>
 
-<div class="input-group row-4">	
+<div class="form-group">	
 <label for="propertyType">סוג הנכס:</label>
 <select name="propertyType" id="propertyType" required>
     <option value="" disabled selected>בחר...</option>
@@ -212,6 +225,7 @@ button:hover {
     <option value="מיני פנטהאוז">מיני פנטהאוז</option>
     <option value="מסחרי">מסחרי</option>
 </select>	
+</div>
 	<!-- גודל מרפסת -->
 <input type="number" name="size" placeholder="גודל הנכס" required required inputmode="numeric">
 
@@ -223,7 +237,7 @@ button:hover {
 </div>
 
 </select>
-<div class="input-group row-3">
+<div class="form-group">
 <label for="tabu">הנכס רשום בטאבו:</label>
 <select name="tabu" id="tabu" required>
     <option value="" disabled selected>בחר...</option>
@@ -231,7 +245,8 @@ button:hover {
     <option value="לא">לא</option>
 	<option value="אחר">אחר</option>
 </select>
-
+</div>
+<div class="form-group">
 <label for="sellerRegistered">רשום על שם המוכר:</label>
 <select name="sellerRegistered" id="sellerRegistered" required>
     <option value="" disabled selected>בחר...</option>
@@ -239,6 +254,7 @@ button:hover {
     <option value="לא">לא</option>
 	<option value="אחר">אחר</option>
 </select>
+</div>
 <!-- ממ"ד -->
 <label for="mamad">ממ"ד:</label>
 <div class="mamad-container">
