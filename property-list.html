@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רשימת נכסים</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; }
+        .property-list { max-width: 600px; margin: auto; padding: 10px; }
+        .property { border-bottom: 1px solid #ccc; padding: 10px; }
+        .property a { color: blue; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">📋 רשימת נכסים</h2>
+    <div class="property-list" id="propertyList">🔄 טוען נתונים...</div>
+
+    <script>
+        async function loadProperties() {
+            try {
+                const response = await fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k'); // קישור ל-Google Sheets API
+                const data = await response.json();
+                
+                let html = "";
+                data.forEach(property => {
+                    html += `
+                        <div class="property">
+                            <strong>🏠 ${property.street} ${property.houseNumber}</strong><br>
+                            📍 ${property.city} | 💰 ${property.price} ש"ח<br>
+                            <a href="${property.full_link}" target="_blank">🔗 קישור לדירה</a>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("propertyList").innerHTML = html;
+            } catch (error) {
+                console.error("⚠️ שגיאה בטעינת הנתונים:", error);
+                document.getElementById("propertyList").innerHTML = "❌ שגיאה בטעינת הנתונים.";
+            }
+        }
+
+        loadProperties(); // קריאה לפונקציה עם טעינת הדף
+    </script>
+
+</body>
+</html>
