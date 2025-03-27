@@ -13,7 +13,7 @@
             background-color: #f5f5f5;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -28,6 +28,13 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
+        .info input, .info textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
         strong {
             color: #333;
         }
@@ -35,30 +42,21 @@
             text-align: center;
             margin-top: 20px;
         }
-        .edit-button {
+        .edit-button, .save-button {
             padding: 10px 20px;
             font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-button {
             background-color: #8B4513;
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
         .save-button {
-            padding: 10px 20px;
-            font-size: 16px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -67,19 +65,14 @@
         <h2>פרטי דירה</h2>
         <div id="propertyDetails">🔄 טוען נתונים...</div>
 
-        <!-- כפתור שמירה -->
+        <!-- כפתור עריכה -->
         <div class="button-container">
-            <button class="save-button" onclick="saveProperty()">💾 שמור שינויים</button>
-        </div>
-
-        <!-- כפתור חזרה למסך עריכה -->
-        <div class="button-container">
-            <button class="edit-button" onclick="toggleEditMode()">✏️ ערוך פרטי דירה</button>
+            <button class="edit-button" onclick="enableEditing()">✏️ עריכת דירה</button>
+            <button class="save-button" style="display:none;" onclick="saveChanges()">💾 שמור שינויים</button>
         </div>
     </div>
 
     <script>
-        // קבלת ה-ID מה-URL
         const urlParams = new URLSearchParams(window.location.search);
         const propertyID = urlParams.get('id');
         let property = {};
@@ -94,7 +87,7 @@
                         document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
                     } else {
                         property = data[0];
-                        displayPropertyDetails(property); // מציג את הנתונים
+                        displayPropertyDetails(property); 
                     }
                 })
                 .catch(error => {
@@ -103,107 +96,111 @@
                 });
         }
 
-        // הצגת נתוני הדירה
         function displayPropertyDetails(property) {
-            document.getElementById('propertyDetails').innerHTML = `
-                <div class="info"><strong>📍 עיר:</strong> <span id="city">${property.city}</span></div>
-                <div class="info"><strong>🏡 שכונה:</strong> <span id="neighborhood">${property.neighborhood}</span></div>
-                <div class="info"><strong>🛣️ רחוב:</strong> <span id="street">${property.street}</span> <span><strong>מספר:</strong> <span id="houseNumber">${property.houseNumber}</span></span></div>
-                <div class="info"><strong>🏢 קומה:</strong> <span id="floor">${property.floor}</span> <span><strong>דירה:</strong> <span id="apartmentNumber">${property.apartmentNumber}</span></span></div>
-                <div class="info"><strong>🏠 סוג נכס:</strong> <span id="propertyType">${property.propertyType}</span></div>
-                <div class="info"><strong>🛏️ מספר חדרים:</strong> <span id="rooms">${property.rooms}</span></div>
-                <div class="info"><strong>🏠 דירות בקומה:</strong> <span id="apartmentsPerFloor">${property.apartmentsPerFloor}</span></div>
-                <div class="info"><strong>🏢 דירות בבניין:</strong> <span id="apartmentsInBuilding">${property.apartmentsInBuilding}</span></div>
-                <div class="info"><strong>📏 גודל הדירה כ:</strong> <span id="size">${property.size}</span> מ"ר</div>
-                <div class="info"><strong>🌞 גודל מרפסת כ:</strong> <span id="balconySize">${property.balconySize}</span> מ"ר</div>
-                <div class="info"><strong>🛡️ ממ"ד:</strong> <span id="mamad">${property.mamad}</span></div>
-                <div class="info"><strong>🅿️ חניה:</strong> <span id="parking">${property.parking}</span></div>
-                <div class="info"><strong>📦 מחסן:</strong> <span id="storage">${property.storage}</span></div>
-                <div class="info"><strong>📆 שנת בנייה:</strong> <span id="yearBuilt">${property.yearBuilt}</span></div>
-                <div class="info"><strong>📆 שם הקבלן:</strong> <span id="contractor">${property.contractor}</span></div>
-                <div class="info"><strong>📆 אחריות הקבלן:</strong> <span id="Structurewarranty">${property.Structurewarranty}</span></div>
-                <div class="info"><strong>🏦 ועד בית:</strong> <span id="vaadBayit">${property.vaadBayit}</span> ₪</div>
-                <div class="info"><strong>💸 ארנונה:</strong> <span id="arnona">${property.arnona}</span> ₪</div>
-                <div class="info"><strong>🌬️ כיווני אוויר:</strong> <span id="Airdirection">${property.Airdirection}</span></div>
-                <div class="info"><strong>❄️ מיזוג אוויר:</strong> <span id="airConditioning">${property.airConditioning}</span></div>
-                <div class="info"><strong>🏗️ תוספות לבניין:</strong> <span id="buildingExtras">${property.buildingExtras}</span></div>
-                <div class="info"><strong>🔥 חימום מים:</strong> <span id="waterHeating">${property.waterHeating}</span></div>
-                <div class="info"><strong>📜 טאבו:</strong> <span id="tabu">${property.tabu}</span></div>
-                <div class="info"><strong>👤 מוכר רשום:</strong> <span id="sellerRegistered">${property.sellerRegistered}</span></div>
-                <div class="info"><strong>💰 מחיר:</strong> <span id="price">${property.price}</span> ₪</div>
-                <div class="info"><strong>📝 תיאור:</strong> <span id="description">${property.description}</span></div>
-                <div class="info"><strong>🔗 <a href="${property.link}" target="_blank">לינק לפרסום</a></strong></div>
-                <div class="info"><strong>🔗 <a href="${property.full_link}" target="_blank">לינק מלא</a></strong></div>
+            const detailsContainer = document.getElementById('propertyDetails');
+            detailsContainer.innerHTML = `
+                <div class="info"><strong>📍 עיר:</strong> <input type="text" id="city" value="${property.city}"></div>
+                <div class="info"><strong>🏡 שכונה:</strong> <input type="text" id="neighborhood" value="${property.neighborhood}"></div>
+                <div class="info"><strong>🛣️ רחוב:</strong> <input type="text" id="street" value="${property.street}"></div>
+                <div class="info"><strong>📍 מספר:</strong> <input type="text" id="houseNumber" value="${property.houseNumber}"></div>
+                <div class="info"><strong>🏢 קומה:</strong> <input type="text" id="floor" value="${property.floor}"></div>
+                <div class="info"><strong>🛏️ מספר חדרים:</strong> <input type="text" id="rooms" value="${property.rooms}"></div>
+                <div class="info"><strong>🏠 סוג נכס:</strong> <input type="text" id="propertyType" value="${property.propertyType}"></div>
+                <div class="info"><strong>🏠 דירות בקומה:</strong> <input type="text" id="apartmentsPerFloor" value="${property.apartmentsPerFloor}"></div>
+                <div class="info"><strong>🏢 דירות בבניין:</strong> <input type="text" id="apartmentsInBuilding" value="${property.apartmentsInBuilding}"></div>
+                <div class="info"><strong>📏 גודל הדירה כ:</strong> <input type="text" id="size" value="${property.size}"></div>
+                <div class="info"><strong>🌞 גודל מרפסת כ:</strong> <input type="text" id="balconySize" value="${property.balconySize}"></div>
+                <div class="info"><strong>🛡️ ממ"ד:</strong> <input type="text" id="mamad" value="${property.mamad}"></div>
+                <div class="info"><strong>🅿️ חניה:</strong> <input type="text" id="parking" value="${property.parking}"></div>
+                <div class="info"><strong>📦 מחסן:</strong> <input type="text" id="storage" value="${property.storage}"></div>
+                <div class="info"><strong>📆 שנת בנייה:</strong> <input type="text" id="yearBuilt" value="${property.yearBuilt}"></div>
+                <div class="info"><strong>📆 שם הקבלן:</strong> <input type="text" id="contractor" value="${property.contractor}"></div>
+                <div class="info"><strong>📆 אחריות הקבלן:</strong> <input type="text" id="Structurewarranty" value="${property.Structurewarranty}"></div>
+                <div class="info"><strong>🏦 ועד בית:</strong> <input type="text" id="vaadBayit" value="${property.vaadBayit}"></div>
+                <div class="info"><strong>💸 ארנונה:</strong> <input type="text" id="arnona" value="${property.arnona}"></div>
+                <div class="info"><strong>🌬️ כיווני אוויר:</strong> <input type="text" id="Airdirection" value="${property.Airdirection}"></div>
+                <div class="info"><strong>❄️ מיזוג אוויר:</strong> <input type="text" id="airConditioning" value="${property.airConditioning}"></div>
+                <div class="info"><strong>🏗️ תוספות לבניין:</strong> <input type="text" id="buildingExtras" value="${property.buildingExtras}"></div>
+                <div class="info"><strong>🔥 חימום מים:</strong> <input type="text" id="waterHeating" value="${property.waterHeating}"></div>
+                <div class="info"><strong>📜 טאבו:</strong> <input type="text" id="tabu" value="${property.tabu}"></div>
+                <div class="info"><strong>👤 מוכר רשום:</strong> <input type="text" id="sellerRegistered" value="${property.sellerRegistered}"></div>
+                <div class="info"><strong>💰 מחיר:</strong> <input type="text" id="price" value="${property.price}"></div>
+                <div class="info"><strong>📝 תיאור:</strong> <textarea id="description">${property.description}</textarea></div>
+                <div class="info"><strong>🔗 לינק לפרסום:</strong> <input type="text" id="link" value="${property.link}"></div>
+                <div class="info"><strong>🔗 לינק מלא:</strong> <input type="text" id="full_link" value="${property.full_link}"></div>
             `;
+            document.querySelector('.edit-button').style.display = 'none';
+            document.querySelector('.save-button').style.display = 'inline-block';
         }
 
-        // מצב עריכה
-        function toggleEditMode() {
-            let isEditable = document.querySelectorAll('#propertyDetails span').length > 0 &&
-                             document.querySelectorAll('#propertyDetails span')[0].contentEditable === "true";
-
-            if (!isEditable) {
-                // הופך את כל שדות הטקסט לעריכה
-                document.querySelectorAll('#propertyDetails span').forEach(span => {
-                    span.contentEditable = true;
-                    span.style.border = "1px solid #ccc";
-                });
-            } else {
-                // הופך אותם חזרה לסטטי
-                document.querySelectorAll('#propertyDetails span').forEach(span => {
-                    span.contentEditable = false;
-                    span.style.border = "none";
-                });
-            }
+        function enableEditing() {
+            // מאפשר עריכה
+            document.getElementById('city').disabled = false;
+            document.getElementById('neighborhood').disabled = false;
+            document.getElementById('street').disabled = false;
+            document.getElementById('houseNumber').disabled = false;
+            document.getElementById('floor').disabled = false;
+            document.getElementById('rooms').disabled = false;
+            document.getElementById('propertyType').disabled = false;
+            document.getElementById('apartmentsPerFloor').disabled = false;
+            document.getElementById('apartmentsInBuilding').disabled = false;
+            document.getElementById('size').disabled = false;
+            document.getElementById('balconySize').disabled = false;
+            document.getElementById('mamad').disabled = false;
+            document.getElementById('parking').disabled = false;
+            document.getElementById('storage').disabled = false;
+            document.getElementById('yearBuilt').disabled = false;
+            document.getElementById('contractor').disabled = false;
+            document.getElementById('Structurewarranty').disabled = false;
+            document.getElementById('vaadBayit').disabled = false;
+            document.getElementById('arnona').disabled = false;
+            document.getElementById('Airdirection').disabled = false;
+            document.getElementById('airConditioning').disabled = false;
+            document.getElementById('buildingExtras').disabled = false;
+            document.getElementById('waterHeating').disabled = false;
+            document.getElementById('tabu').disabled = false;
+            document.getElementById('sellerRegistered').disabled = false;
+            document.getElementById('price').disabled = false;
+            document.getElementById('description').disabled = false;
+            document.getElementById('link').disabled = false;
+            document.getElementById('full_link').disabled = false;
         }
 
-        // שמירת הנתונים
-        function saveProperty() {
+        function saveChanges() {
             const updatedProperty = {
-                city: document.getElementById('city').innerText,
-                neighborhood: document.getElementById('neighborhood').innerText,
-                street: document.getElementById('street').innerText,
-                houseNumber: document.getElementById('houseNumber').innerText,
-                floor: document.getElementById('floor').innerText,
-                apartmentNumber: document.getElementById('apartmentNumber').innerText,
-                propertyType: document.getElementById('propertyType').innerText,
-                rooms: document.getElementById('rooms').innerText,
-                apartmentsPerFloor: document.getElementById('apartmentsPerFloor').innerText,
-                apartmentsInBuilding: document.getElementById('apartmentsInBuilding').innerText,
-                size: document.getElementById('size').innerText,
-                balconySize: document.getElementById('balconySize').innerText,
-                mamad: document.getElementById('mamad').innerText,
-                parking: document.getElementById('parking').innerText,
-                storage: document.getElementById('storage').innerText,
-                yearBuilt: document.getElementById('yearBuilt').innerText,
-                contractor: document.getElementById('contractor').innerText,
-                Structurewarranty: document.getElementById('Structurewarranty').innerText,
-                vaadBayit: document.getElementById('vaadBayit').innerText,
-                arnona: document.getElementById('arnona').innerText,
-                Airdirection: document.getElementById('Airdirection').innerText,
-                airConditioning: document.getElementById('airConditioning').innerText,
-                buildingExtras: document.getElementById('buildingExtras').innerText,
-                waterHeating: document.getElementById('waterHeating').innerText,
-                tabu: document.getElementById('tabu').innerText,
-                sellerRegistered: document.getElementById('sellerRegistered').innerText,
-                price: document.getElementById('price').innerText,
-                description: document.getElementById('description').innerText,
+                city: document.getElementById('city').value,
+                neighborhood: document.getElementById('neighborhood').value,
+                street: document.getElementById('street').value,
+                houseNumber: document.getElementById('houseNumber').value,
+                floor: document.getElementById('floor').value,
+                rooms: document.getElementById('rooms').value,
+                propertyType: document.getElementById('propertyType').value,
+                apartmentsPerFloor: document.getElementById('apartmentsPerFloor').value,
+                apartmentsInBuilding: document.getElementById('apartmentsInBuilding').value,
+                size: document.getElementById('size').value,
+                balconySize: document.getElementById('balconySize').value,
+                mamad: document.getElementById('mamad').value,
+                parking: document.getElementById('parking').value,
+                storage: document.getElementById('storage').value,
+                yearBuilt: document.getElementById('yearBuilt').value,
+                contractor: document.getElementById('contractor').value,
+                Structurewarranty: document.getElementById('Structurewarranty').value,
+                vaadBayit: document.getElementById('vaadBayit').value,
+                arnona: document.getElementById('arnona').value,
+                Airdirection: document.getElementById('Airdirection').value,
+                airConditioning: document.getElementById('airConditioning').value,
+                buildingExtras: document.getElementById('buildingExtras').value,
+                waterHeating: document.getElementById('waterHeating').value,
+                tabu: document.getElementById('tabu').value,
+                sellerRegistered: document.getElementById('sellerRegistered').value,
+                price: document.getElementById('price').value,
+                description: document.getElementById('description').value,
+                link: document.getElementById('link').value,
+                full_link: document.getElementById('full_link').value
             };
 
-            // עדכון הנתונים ב-API
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyID}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedProperty)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('הנתונים עודכנו בהצלחה!');
-            })
-            .catch(error => {
-                console.error('⚠️ שגיאה:', error);
-                alert('שגיאה בעדכון הנתונים!');
-            });
+            // כאן ניתן להוסיף בקשה לשליחה למערכת אחרת או לגיבוי
+            console.log(updatedProperty); // דוגמה לשליחה
         }
     </script>
 </body>
