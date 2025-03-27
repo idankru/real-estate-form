@@ -75,7 +75,7 @@
         if (!propertyID) {
             document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
         } else {
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=property_1740324605568`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.length === 0) {
@@ -121,9 +121,9 @@
         }
 
         function goToEditPage() {
-            // מעביר לדף העריכה עם כל הנתונים
+            // מעביר לדף יצירת דירה עם כל הנתונים
             const queryString = Object.keys(property).map(key => `${key}=${encodeURIComponent(property[key])}`).join('&');
-            window.location.href = `edit.html?${queryString}`;
+            window.location.href = `https://idankru.github.io/real-estate-form/main1?${queryString}`;
         }
     </script>
 </body>
