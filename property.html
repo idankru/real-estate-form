@@ -57,7 +57,7 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            display: none; /* ההסתרה של כפתור שמירה */
+            display: none; /* הסתרה של כפתור שמירה עד שהעריכה נבחרה */
         }
     </style>
 </head>
@@ -178,8 +178,21 @@
                 full_link: document.getElementById('full_link').value
             };
 
-            // כאן ניתן להוסיף בקשה לשליחה למערכת אחרת או לגיבוי
-            console.log(updatedProperty); // דוגמה לשליחה
+            //שליחה של הנתונים לעדכון ב-API
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedProperty)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('הנתונים עודכנו בהצלחה!');
+                location.reload(); // טוען מחדש את הדף
+            })
+            .catch(error => {
+                console.error('⚠️ שגיאה בשמירה:', error);
+                alert('❌ לא הצלחנו לשמור את הנתונים.');
+            });
         }
     </script>
 </body>
