@@ -156,24 +156,24 @@
                 yearBuilt: document.getElementById('editYearBuilt').value,
                 contractor: document.getElementById('editContractor').value,
                 price: document.getElementById('editPrice').value,
-                description: document.getElementById('editDescription').value
+                description: document.getElementById('editDescription').value,
             };
 
-            fetch('https://sheetdb.io/api/v1/x66b7o2fa8f7k', {
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyID}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify([updatedProperty])
+                body: JSON.stringify(updatedProperty),
             })
             .then(response => response.json())
             .then(data => {
-                alert('הנתונים עודכנו בהצלחה!');
-                location.reload();
+                alert("הדירה עודכנה בהצלחה!");
+                location.reload(); // טעינת הדף מחדש כדי להציג את הנתונים המעודכנים
             })
             .catch(error => {
-                console.error('⚠️ שגיאה בעדכון הנתונים:', error);
-                alert('❌ הייתה שגיאה בשמירת הנתונים.');
+                console.error('⚠️ שגיאה בשמירת הנתונים:', error);
+                alert("❌ הייתה שגיאה בשמירת הנתונים!");
             });
         }
     </script>
