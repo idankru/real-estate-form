@@ -51,9 +51,9 @@
         <h2>פרטי דירה</h2>
         <div id="propertyDetails">🔄 טוען נתונים...</div>
 
-        <!-- כפתור חזרה למסך עריכה -->
+        <!-- כפתור עריכה בעמוד הנוכחי -->
         <div class="button-container">
-            <button class="edit-button" onclick="goToEditPage()">✏️ עריכת דירה</button>
+            <button class="edit-button" onclick="editProperty()">✏️ עריכת דירה</button>
         </div>
     </div>
 
@@ -111,9 +111,10 @@
                 });
         }
 
-        function goToEditPage() {
+        function editProperty() {
+            // שליחה של כל הנתונים באמצעות ה-URL לעמוד הנוכחי כדי לערוך אותם
             const queryString = Object.keys(property).map(key => `${key}=${encodeURIComponent(property[key])}`).join('&');
-            window.location.href = `edit.html?${queryString}`;
+            window.location.href = `https://idankru.github.io/real-estate-form/main1?id=${propertyID}&edit=true&${queryString}`;
         }
     </script>
 </body>
