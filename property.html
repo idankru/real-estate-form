@@ -28,15 +28,12 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
-        .info input, .info textarea {
+        .info input {
             width: 100%;
             padding: 8px;
             margin: 5px 0;
             border-radius: 5px;
             border: 1px solid #ddd;
-        }
-        strong {
-            color: #333;
         }
         .button-container {
             text-align: center;
@@ -57,7 +54,16 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            display: none; /* הסתרה של כפתור שמירה עד שהעריכה נבחרה */
+            display: none;
+        }
+        .link-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -65,8 +71,6 @@
     <div class="container">
         <h2>פרטי דירה</h2>
         <div id="propertyDetails">🔄 טוען נתונים...</div>
-
-        <!-- כפתור עריכה -->
         <div class="button-container">
             <button class="edit-button" onclick="enableEditing()">✏️ עריכת דירה</button>
             <button class="save-button" onclick="saveChanges()">💾 שמור שינויים</button>
@@ -98,8 +102,7 @@
         }
 
         function displayPropertyDetails(property) {
-            const detailsContainer = document.getElementById('propertyDetails');
-            detailsContainer.innerHTML = `
+            document.getElementById('propertyDetails').innerHTML = `
                 <div class="info"><strong>📍 עיר:</strong> <span id="city">${property.city}</span></div>
                 <div class="info"><strong>🏡 שכונה:</strong> <span id="neighborhood">${property.neighborhood}</span></div>
                 <div class="info"><strong>🛣️ רחוב:</strong> <span id="street">${property.street}</span></div>
@@ -127,59 +130,36 @@
                 <div class="info"><strong>👤 מוכר רשום:</strong> <span id="sellerRegistered">${property.sellerRegistered}</span></div>
                 <div class="info"><strong>💰 מחיר:</strong> <span id="price">${property.price}</span></div>
                 <div class="info"><strong>📝 תיאור:</strong> <span id="description">${property.description}</span></div>
-                <div class="info"><strong>🔗 לינק לפרסום:</strong> <span id="link">${property.link}</span></div>
-                <div class="info"><strong>🔗 לינק מלא:</strong> <span id="full_link">${property.full_link}</span></div>
+                <div class="info"><strong>🔗 לינק לפרסום:</strong> <button class="link-button" onclick="window.open('${property.link}', '_blank')">🔗 פתח</button></div>
+                <div class="info"><strong>🔗 לינק מלא:</strong> <button class="link-button" onclick="window.open('${property.full_link}', '_blank')">🔗 פתח</button></div>
             `;
         }
 
         function enableEditing() {
-            // מאפשר עריכה
-            document.querySelectorAll('.info span').forEach(span => {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = span.innerText;
-                span.innerHTML = '';
-                span.appendChild(input);
+            document.querySelectorAll('.info').forEach(div => {
+                let span = div.querySelector('span');
+                if (span) {
+                    let input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = span.innerText;
+                    span.innerHTML = '';
+                    span.appendChild(input);
+                }
             });
             document.querySelector('.edit-button').style.display = 'none';
             document.querySelector('.save-button').style.display = 'inline-block';
         }
 
         function saveChanges() {
-            const updatedProperty = {
-                city: document.getElementById('city').value,
-                neighborhood: document.getElementById('neighborhood').value,
-                street: document.getElementById('street').value,
-                houseNumber: document.getElementById('houseNumber').value,
-                floor: document.getElementById('floor').value,
-                rooms: document.getElementById('rooms').value,
-                propertyType: document.getElementById('propertyType').value,
-                apartmentsPerFloor: document.getElementById('apartmentsPerFloor').value,
-                apartmentsInBuilding: document.getElementById('apartmentsInBuilding').value,
-                size: document.getElementById('size').value,
-                balconySize: document.getElementById('balconySize').value,
-                mamad: document.getElementById('mamad').value,
-                parking: document.getElementById('parking').value,
-                storage: document.getElementById('storage').value,
-                yearBuilt: document.getElementById('yearBuilt').value,
-                contractor: document.getElementById('contractor').value,
-                Structurewarranty: document.getElementById('Structurewarranty').value,
-                vaadBayit: document.getElementById('vaadBayit').value,
-                arnona: document.getElementById('arnona').value,
-                Airdirection: document.getElementById('Airdirection').value,
-                airConditioning: document.getElementById('airConditioning').value,
-                buildingExtras: document.getElementById('buildingExtras').value,
-                waterHeating: document.getElementById('waterHeating').value,
-                tabu: document.getElementById('tabu').value,
-                sellerRegistered: document.getElementById('sellerRegistered').value,
-                price: document.getElementById('price').value,
-                description: document.getElementById('description').value,
-                link: document.getElementById('link').value,
-                full_link: document.getElementById('full_link').value
-            };
+            let updatedProperty = {};
+            document.querySelectorAll('.info').forEach(div => {
+                let span = div.querySelector('span');
+                if (span && span.querySelector('input')) {
+                    updatedProperty[span.id] = span.querySelector('input').value;
+                }
+            });
 
-            //שליחה של הנתונים לעדכון ב-API
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/${propertyID}`, {
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/id/${propertyID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedProperty)
@@ -187,7 +167,7 @@
             .then(response => response.json())
             .then(data => {
                 alert('הנתונים עודכנו בהצלחה!');
-                location.reload(); // טוען מחדש את הדף
+                location.reload();
             })
             .catch(error => {
                 console.error('⚠️ שגיאה בשמירה:', error);
