@@ -46,9 +46,19 @@
             color: #333;
         }
 
-        .detail-box i {
-            margin-left: 10px;
-            font-size: 18px;
+        .detail-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #f1e7de;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+        }
+
+        .detail-icon i {
+            font-size: 16px;
             color: #8b5e3c;
         }
 
@@ -135,38 +145,42 @@
 
         function displayPropertyDetails(property) {
             const fields = [
-                ['city', 'עיר', 'fa-solid fa-city'],
-                ['neighborhood', 'שכונה', 'fa-solid fa-location-dot'],
-                ['street', 'רחוב', 'fa-solid fa-road'],
-                ['houseNumber', 'מספר בית', 'fa-solid fa-hashtag'],
-                ['floor', 'קומה', 'fa-solid fa-layer-group'],
-                ['rooms', 'מספר חדרים', 'fa-solid fa-bed'],
-                ['propertyType', 'סוג נכס', 'fa-solid fa-building'],
-                ['Airdirection', 'כיווני אוויר', 'fa-solid fa-compass'],
-                ['airConditioning', 'מיזוג אוויר', 'fa-solid fa-wind'],
-                ['waterHeating', 'חימום מים', 'fa-solid fa-fire'],
-                ['mamad', 'ממ"ד', 'fa-solid fa-shield-halved'],
-                ['parking', 'חניה', 'fa-solid fa-square-parking'],
-                ['storage', 'מחסן', 'fa-solid fa-box-archive'],
-                ['buildingExtras', 'תוספות לבניין', 'fa-solid fa-building-circle-check'],
-                ['yearBuilt', 'שנת בנייה', 'fa-solid fa-calendar-days'],
-                ['contractor', 'שם הקבלן', 'fa-solid fa-user-hard-hat'],
-                ['Structurewarranty', 'אחריות קבלן', 'fa-solid fa-file-contract'],
-                ['vaadBayit', 'ועד בית', 'fa-solid fa-people-roof'],
-                ['arnona', 'ארנונה', 'fa-solid fa-sack-dollar'],
-                ['tabu', 'טאבו', 'fa-solid fa-scroll'],
-                ['sellerRegistered', 'מוכר רשום', 'fa-solid fa-user'],
-                ['price', 'מחיר', 'fa-solid fa-money-bill-wave'],
-                ['description', 'תיאור', 'fa-solid fa-align-right'],
-                ['link', 'לינק לפרסום', 'fa-solid fa-link'],
-                ['full_link', 'לינק מלא', 'fa-solid fa-up-right-from-square']
+                ['city', 'עיר', 'fa-city'],
+                ['neighborhood', 'שכונה', 'fa-location-dot'],
+                ['street', 'רחוב', 'fa-road'],
+                ['houseNumber', 'מספר בית', 'fa-hashtag'],
+                ['floor', 'קומה', 'fa-layer-group'],
+                ['rooms', 'מספר חדרים', 'fa-bed'],
+                ['propertyType', 'סוג נכס', 'fa-building'],
+                ['apartmentsPerFloor', 'דירות בקומה', 'fa-building-user'],
+                ['apartmentsInBuilding', 'דירות בבניין', 'fa-building-columns'],
+                ['size', 'גודל הדירה כ', 'fa-ruler-combined'],
+                ['balconySize', 'גודל מרפסת כ', 'fa-up-right-and-down-left-from-center'],
+                ['mamad', 'ממ"ד', 'fa-shield-halved'],
+                ['parking', 'חניה', 'fa-square-parking'],
+                ['storage', 'מחסן', 'fa-box-archive'],
+                ['yearBuilt', 'שנת בנייה', 'fa-calendar-days'],
+                ['contractor', 'שם הקבלן', 'fa-user-hard-hat'],
+                ['Structurewarranty', 'אחריות קבלן', 'fa-file-contract'],
+                ['vaadBayit', 'ועד בית', 'fa-people-roof'],
+                ['arnona', 'ארנונה', 'fa-sack-dollar'],
+                ['Airdirection', 'כיווני אוויר', 'fa-compass'],
+                ['airConditioning', 'מיזוג אוויר', 'fa-wind'],
+                ['buildingExtras', 'תוספות לבניין', 'fa-building-circle-check'],
+                ['waterHeating', 'חימום מים', 'fa-fire'],
+                ['tabu', 'טאבו', 'fa-scroll'],
+                ['sellerRegistered', 'מוכר רשום', 'fa-user'],
+                ['price', 'מחיר', 'fa-money-bill-wave'],
+                ['description', 'תיאור', 'fa-align-right'],
+                ['link', 'לינק לפרסום', 'fa-link'],
+                ['full_link', 'לינק מלא', 'fa-up-right-from-square']
             ];
 
             const container = document.getElementById('propertyDetails');
             container.innerHTML = '';
 
             fields.forEach(([key, label, icon]) => {
-                const value = property[key];
+                const value = property[key] || '';
                 let html = '';
 
                 if (key === 'link' || key === 'full_link') {
@@ -177,7 +191,7 @@
 
                 container.innerHTML += `
                     <div class="detail-box">
-                        <i class="${icon}"></i>
+                        <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
                         <strong>${label}:</strong>&nbsp; ${html}
                     </div>`;
             });
