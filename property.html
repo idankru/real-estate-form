@@ -3,81 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פרטי דירה</title>
+    <title>פרטי נכס</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
             direction: rtl;
-            text-align: right;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f7f5;
             margin: 0;
             padding: 0;
         }
+
         .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
             overflow: hidden;
+            padding: 40px 30px;
         }
+
         h2 {
             text-align: center;
-            color: #8B4513;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: bold;
+            font-size: 28px;
+            color: #5d3a00;
+            margin-bottom: 40px;
         }
-        .info {
-            margin-bottom: 15px;
-            font-size: 18px;
+
+        .details-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+
+        .detail-box {
+            background-color: #faf7f4;
+            border-radius: 12px;
+            padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-        .info strong {
-            color: #8B4513;
-            font-size: 18px;
-        }
-        .info span {
             font-size: 16px;
-            color: #555;
+            color: #333;
         }
-        .info input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #f5f5f5;
+
+        .detail-box i {
+            margin-left: 10px;
+            font-size: 18px;
+            color: #8b5e3c;
         }
+
         .button-container {
             text-align: center;
             margin-top: 30px;
         }
+
         .edit-button, .save-button {
-            padding: 12px 30px;
+            padding: 12px 24px;
             font-size: 16px;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border: none;
+            transition: all 0.3s ease;
         }
+
         .edit-button {
-            background-color: #8B4513;
+            background-color: #8b5e3c;
             color: white;
-            border: none;
-            margin-right: 10px;
+            margin-left: 10px;
         }
+
         .save-button {
-            background-color: #4CAF50;
+            background-color: #4caf50;
             color: white;
-            border: none;
             display: none;
         }
+
         .edit-button:hover, .save-button:hover {
             opacity: 0.9;
         }
+
         .link-button {
             background-color: #007BFF;
             color: white;
@@ -88,24 +92,20 @@
             border-radius: 8px;
             transition: background-color 0.3s;
         }
+
         .link-button:hover {
             background-color: #0056b3;
         }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #888;
-            font-size: 14px;
-        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-sVGNkz1+TGBIQ0e3ql+xGMiNZX7Ll5nAUMyFuN7i3EcOH7KmYZcpd58qjHzrmdzZkTki7gr++cBKoXTykd1cWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
-        <h2>פרטי דירה</h2>
-        <div id="propertyDetails">🔄 טוען נתונים...</div>
+        <h2>פרטי נכס</h2>
+        <div id="propertyDetails" class="details-section">🔄 טוען נתונים...</div>
         <div class="button-container">
-            <button class="edit-button" onclick="enableEditing()">✏️ עריכת דירה</button>
-            <button class="save-button" onclick="saveChanges()">💾 שמור שינויים</button>
+            <button class="edit-button" onclick="enableEditing()">✏️ עריכה</button>
+            <button class="save-button" onclick="saveChanges()">💾 שמור</button>
         </div>
     </div>
 
@@ -124,7 +124,7 @@
                         document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
                     } else {
                         property = data[0];
-                        displayPropertyDetails(property); 
+                        displayPropertyDetails(property);
                     }
                 })
                 .catch(error => {
@@ -134,49 +134,64 @@
         }
 
         function displayPropertyDetails(property) {
-            document.getElementById('propertyDetails').innerHTML = `
-                <div class="info"><strong>📍 עיר:</strong> <span id="city">${property.city}</span></div>
-                <div class="info"><strong>🏡 שכונה:</strong> <span id="neighborhood">${property.neighborhood}</span></div>
-                <div class="info"><strong>🛣️ רחוב:</strong> <span id="street">${property.street}</span></div>
-                <div class="info"><strong>📍 מספר:</strong> <span id="houseNumber">${property.houseNumber}</span></div>
-                <div class="info"><strong>🏢 קומה:</strong> <span id="floor">${property.floor}</span></div>
-                <div class="info"><strong>🛏️ מספר חדרים:</strong> <span id="rooms">${property.rooms}</span></div>
-                <div class="info"><strong>🏠 סוג נכס:</strong> <span id="propertyType">${property.propertyType}</span></div>
-                <div class="info"><strong>🏠 דירות בקומה:</strong> <span id="apartmentsPerFloor">${property.apartmentsPerFloor}</span></div>
-                <div class="info"><strong>🏢 דירות בבניין:</strong> <span id="apartmentsInBuilding">${property.apartmentsInBuilding}</span></div>
-                <div class="info"><strong>📏 גודל הדירה כ:</strong> <span id="size">${property.size}</span></div>
-                <div class="info"><strong>🌞 גודל מרפסת כ:</strong> <span id="balconySize">${property.balconySize}</span></div>
-                <div class="info"><strong>🛡️ ממ"ד:</strong> <span id="mamad">${property.mamad}</span></div>
-                <div class="info"><strong>🅿️ חניה:</strong> <span id="parking">${property.parking}</span></div>
-                <div class="info"><strong>📦 מחסן:</strong> <span id="storage">${property.storage}</span></div>
-                <div class="info"><strong>📆 שנת בנייה:</strong> <span id="yearBuilt">${property.yearBuilt}</span></div>
-                <div class="info"><strong>📆 שם הקבלן:</strong> <span id="contractor">${property.contractor}</span></div>
-                <div class="info"><strong>📆 אחריות הקבלן:</strong> <span id="Structurewarranty">${property.Structurewarranty}</span></div>
-                <div class="info"><strong>🏦 ועד בית:</strong> <span id="vaadBayit">${property.vaadBayit}</span></div>
-                <div class="info"><strong>💸 ארנונה:</strong> <span id="arnona">${property.arnona}</span></div>
-                <div class="info"><strong>🌬️ כיווני אוויר:</strong> <span id="Airdirection">${property.Airdirection}</span></div>
-                <div class="info"><strong>❄️ מיזוג אוויר:</strong> <span id="airConditioning">${property.airConditioning}</span></div>
-                <div class="info"><strong>🏗️ תוספות לבניין:</strong> <span id="buildingExtras">${property.buildingExtras}</span></div>
-                <div class="info"><strong>🔥 חימום מים:</strong> <span id="waterHeating">${property.waterHeating}</span></div>
-                <div class="info"><strong>📜 טאבו:</strong> <span id="tabu">${property.tabu}</span></div>
-                <div class="info"><strong>👤 מוכר רשום:</strong> <span id="sellerRegistered">${property.sellerRegistered}</span></div>
-                <div class="info"><strong>💰 מחיר:</strong> <span id="price">${property.price}</span></div>
-                <div class="info"><strong>📝 תיאור:</strong> <span id="description">${property.description}</span></div>
-                <div class="info"><strong>🔗 לינק לפרסום:</strong> <button class="link-button" onclick="window.open('${property.link}', '_blank')">🔗 פתח</button></div>
-                <div class="info"><strong>🔗 לינק מלא:</strong> <button class="link-button" onclick="window.open('${property.full_link}', '_blank')">🔗 פתח</button></div>
-            `;
+            const fields = [
+                ['city', 'עיר', 'fa-solid fa-city'],
+                ['neighborhood', 'שכונה', 'fa-solid fa-location-dot'],
+                ['street', 'רחוב', 'fa-solid fa-road'],
+                ['houseNumber', 'מספר בית', 'fa-solid fa-hashtag'],
+                ['floor', 'קומה', 'fa-solid fa-layer-group'],
+                ['rooms', 'מספר חדרים', 'fa-solid fa-bed'],
+                ['propertyType', 'סוג נכס', 'fa-solid fa-building'],
+                ['Airdirection', 'כיווני אוויר', 'fa-solid fa-compass'],
+                ['airConditioning', 'מיזוג אוויר', 'fa-solid fa-wind'],
+                ['waterHeating', 'חימום מים', 'fa-solid fa-fire'],
+                ['mamad', 'ממ"ד', 'fa-solid fa-shield-halved'],
+                ['parking', 'חניה', 'fa-solid fa-square-parking'],
+                ['storage', 'מחסן', 'fa-solid fa-box-archive'],
+                ['buildingExtras', 'תוספות לבניין', 'fa-solid fa-building-circle-check'],
+                ['yearBuilt', 'שנת בנייה', 'fa-solid fa-calendar-days'],
+                ['contractor', 'שם הקבלן', 'fa-solid fa-user-hard-hat'],
+                ['Structurewarranty', 'אחריות קבלן', 'fa-solid fa-file-contract'],
+                ['vaadBayit', 'ועד בית', 'fa-solid fa-people-roof'],
+                ['arnona', 'ארנונה', 'fa-solid fa-sack-dollar'],
+                ['tabu', 'טאבו', 'fa-solid fa-scroll'],
+                ['sellerRegistered', 'מוכר רשום', 'fa-solid fa-user'],
+                ['price', 'מחיר', 'fa-solid fa-money-bill-wave'],
+                ['description', 'תיאור', 'fa-solid fa-align-right'],
+                ['link', 'לינק לפרסום', 'fa-solid fa-link'],
+                ['full_link', 'לינק מלא', 'fa-solid fa-up-right-from-square']
+            ];
+
+            const container = document.getElementById('propertyDetails');
+            container.innerHTML = '';
+
+            fields.forEach(([key, label, icon]) => {
+                const value = property[key];
+                let html = '';
+
+                if (key === 'link' || key === 'full_link') {
+                    html = `<button class="link-button" onclick="window.open('${value}', '_blank')">🔗 ${label}</button>`;
+                } else {
+                    html = `<span id="${key}">${value}</span>`;
+                }
+
+                container.innerHTML += `
+                    <div class="detail-box">
+                        <i class="${icon}"></i>
+                        <strong>${label}:</strong>&nbsp; ${html}
+                    </div>`;
+            });
         }
 
         function enableEditing() {
-            document.querySelectorAll('.info').forEach(div => {
-                let span = div.querySelector('span');
-                if (span) {
-                    let input = document.createElement('input');
-                    input.type = 'text';
-                    input.value = span.innerText;
-                    span.innerHTML = '';
-                    span.appendChild(input);
-                }
+            document.querySelectorAll('.detail-box span').forEach(span => {
+                const value = span.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = value;
+                input.style.width = '100%';
+                span.innerHTML = '';
+                span.appendChild(input);
             });
             document.querySelector('.edit-button').style.display = 'none';
             document.querySelector('.save-button').style.display = 'inline-block';
@@ -184,9 +199,8 @@
 
         function saveChanges() {
             let updatedProperty = {};
-            document.querySelectorAll('.info').forEach(div => {
-                let span = div.querySelector('span');
-                if (span && span.querySelector('input')) {
+            document.querySelectorAll('.detail-box span').forEach(span => {
+                if (span.querySelector('input')) {
                     updatedProperty[span.id] = span.querySelector('input').value;
                 }
             });
