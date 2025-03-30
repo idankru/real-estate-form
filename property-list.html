@@ -110,14 +110,7 @@
         }
 
         .card a {
-            margin-top: 10px;
             text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        .card a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -132,6 +125,12 @@
 
     <script>
         let allProperties = [];
+
+        function cleanPrice(value) {
+            if (!value) return '';
+            const number = Number(String(value).replace(/[^\d.\-]+/g, ''));
+            return isNaN(number) ? '' : number.toLocaleString();
+        }
 
         async function loadProperties() {
             try {
@@ -169,8 +168,12 @@
                         <div class="badge">קומה ${property.floor}</div>
                         <div class="badge">${property.size} מ"ר</div>
                     </div>
-                    <div class="price">₪${Number(property.price).toLocaleString()}</div>
-                    <a href="property.html?id=${property.id}">🔍 לצפייה בפרטים</a>
+                    <div class="price">₪${cleanPrice(property.price)}</div>
+                    <a href="property.html?id=${property.id}">
+                        <span style="background-color:#f5f1ed; color:#8B4513; padding:6px 12px; border-radius:20px; font-size:14px; display:inline-block; margin-top:10px;">
+                            <i class="fas fa-eye"></i> לצפייה בפרטים
+                        </span>
+                    </a>
                 `;
                 container.appendChild(card);
             });
