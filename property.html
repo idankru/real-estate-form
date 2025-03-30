@@ -24,11 +24,19 @@
             padding: 40px 30px;
         }
 
-        h2 {
+        h2, h3 {
             text-align: center;
-            font-size: 28px;
             color: #5d3a00;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-top: 40px;
         }
 
         .details-section {
@@ -112,9 +120,25 @@
 </head>
 <body>
     <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; opacity: 0.8;">
+            <img src="logo.png" alt="לוגו החברה" style="height: 80px; filter: brightness(0) saturate(100%) sepia(30%) hue-rotate(10deg);">
+        </div>
         <h2>פרטי נכס</h2>
-        <div id="propertyDetails" class="details-section">🔄 טוען נתונים...</div>
+
+        <h3>🧾 מידע כללי</h3>
+        <div id="section-general" class="details-section"></div>
+
+        <h3>🏠 פרטים על הנכס</h3>
+        <div id="section-details" class="details-section"></div>
+
+        <h3>📄 פרטים משפטיים וכלליים</h3>
+        <div id="section-legal" class="details-section"></div>
+
+        <h3>🔗 קישורים</h3>
+        <div id="section-links" class="details-section"></div>
+
         <div class="button-container">
+            <a href="index.html" class="link-button" style="margin-bottom: 20px; display: inline-block; background-color: #6c757d;">🔙 חזרה לרשימת נכסים</a><br>
             <button class="edit-button" onclick="enableEditing()">✏️ עריכה</button>
             <button class="save-button" onclick="saveChanges()">💾 שמור</button>
         </div>
@@ -125,34 +149,24 @@
         const propertyID = urlParams.get('id');
         let property = {};
 
-        if (!propertyID) {
-            document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
-        } else {
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length === 0) {
-                        document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
-                    } else {
-                        property = data[0];
-                        displayPropertyDetails(property);
-                    }
-                })
-                .catch(error => {
-                    console.error('⚠️ שגיאה:', error);
-                    document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> בטעינת הנתונים!';
-                });
-        }
+        const sections = {
+            general: document.getElementById('section-general'),
+            details: document.getElementById('section-details'),
+            legal: document.getElementById('section-legal'),
+            links: document.getElementById('section-links')
+        };
 
-        function displayPropertyDetails(property) {
-            const fields = [
+        const fieldGroups = {
+            general: [
                 ['city', 'עיר', 'fa-city'],
                 ['neighborhood', 'שכונה', 'fa-location-dot'],
                 ['street', 'רחוב', 'fa-road'],
                 ['houseNumber', 'מספר בית', 'fa-hashtag'],
                 ['floor', 'קומה', 'fa-layer-group'],
                 ['rooms', 'מספר חדרים', 'fa-bed'],
-                ['propertyType', 'סוג נכס', 'fa-building'],
+                ['propertyType', 'סוג נכס', 'fa-building']
+            ],
+            details: [
                 ['apartmentsPerFloor', 'דירות בקומה', 'fa-building-user'],
                 ['apartmentsInBuilding', 'דירות בבניין', 'fa-building-columns'],
                 ['size', 'גודל הדירה כ', 'fa-ruler-combined'],
@@ -160,41 +174,67 @@
                 ['mamad', 'ממ"ד', 'fa-shield-halved'],
                 ['parking', 'חניה', 'fa-square-parking'],
                 ['storage', 'מחסן', 'fa-box-archive'],
+                ['Airdirection', 'כיווני אוויר', 'fa-compass'],
+                ['airConditioning', 'מיזוג אוויר', 'fa-wind'],
+                ['buildingExtras', 'תוספות לבניין', 'fa-building-circle-check'],
+                ['waterHeating', 'חימום מים', 'fa-fire']
+            ],
+            legal: [
                 ['yearBuilt', 'שנת בנייה', 'fa-calendar-days'],
                 ['contractor', 'שם הקבלן', 'fa-user-hard-hat'],
                 ['Structurewarranty', 'אחריות קבלן', 'fa-file-contract'],
                 ['vaadBayit', 'ועד בית', 'fa-people-roof'],
                 ['arnona', 'ארנונה', 'fa-sack-dollar'],
-                ['Airdirection', 'כיווני אוויר', 'fa-compass'],
-                ['airConditioning', 'מיזוג אוויר', 'fa-wind'],
-                ['buildingExtras', 'תוספות לבניין', 'fa-building-circle-check'],
-                ['waterHeating', 'חימום מים', 'fa-fire'],
                 ['tabu', 'טאבו', 'fa-scroll'],
                 ['sellerRegistered', 'מוכר רשום', 'fa-user'],
                 ['price', 'מחיר', 'fa-money-bill-wave'],
-                ['description', 'תיאור', 'fa-align-right'],
+                ['description', 'תיאור', 'fa-align-right']
+            ],
+            links: [
                 ['link', 'לינק לפרסום', 'fa-link'],
                 ['full_link', 'לינק מלא', 'fa-up-right-from-square']
-            ];
+            ]
+        };
 
-            const container = document.getElementById('propertyDetails');
-            container.innerHTML = '';
+        if (!propertyID) {
+            sections.general.innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
+        } else {
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        sections.general.innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
+                    } else {
+                        property = data[0];
+                        renderSections();
+                    }
+                })
+                .catch(error => {
+                    console.error('⚠️ שגיאה:', error);
+                    sections.general.innerHTML = '<strong>❌ שגיאה:</strong> בטעינת הנתונים!';
+                });
+        }
 
-            fields.forEach(([key, label, icon]) => {
-                const value = property[key] || '';
-                let html = '';
+        function renderSections() {
+            Object.entries(fieldGroups).forEach(([groupName, fields]) => {
+                const section = sections[groupName];
+                section.innerHTML = '';
+                fields.forEach(([key, label, icon]) => {
+                    const value = property[key] || '';
+                    let html = '';
 
-                if (key === 'link' || key === 'full_link') {
-                    html = `<button class="link-button" onclick="window.open('${value}', '_blank')">🔗 ${label}</button>`;
-                } else {
-                    html = `<span id="${key}">${value}</span>`;
-                }
+                    if (key === 'link' || key === 'full_link') {
+                        html = `<button class="link-button" onclick="window.open('${value}', '_blank')">🔗 ${label}</button>`;
+                    } else {
+                        html = `<span id="${key}">${value}</span>`;
+                    }
 
-                container.innerHTML += `
-                    <div class="detail-box">
-                        <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
-                        <strong>${label}:</strong>&nbsp; ${html}
-                    </div>`;
+                    section.innerHTML += `
+                        <div class="detail-box">
+                            <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
+                            <strong>${label}:</strong>&nbsp; ${html}
+                        </div>`;
+                });
             });
         }
 
