@@ -111,6 +111,130 @@
     </style>
 </head>
 <body>
-    <!-- התוכן שלך כאן -->
+    <div class="container">
+        <h2>פרטי נכס</h2>
+        <div id="propertyDetails" class="details-section">🔄 טוען נתונים...</div>
+        <div class="button-container">
+            <button class="edit-button" onclick="enableEditing()">✏️ עריכה</button>
+            <button class="save-button" onclick="saveChanges()">💾 שמור</button>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const propertyID = urlParams.get('id');
+        let property = {};
+
+        if (!propertyID) {
+            document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
+        } else {
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
+                    } else {
+                        property = data[0];
+                        displayPropertyDetails(property);
+                    }
+                })
+                .catch(error => {
+                    console.error('⚠️ שגיאה:', error);
+                    document.getElementById('propertyDetails').innerHTML = '<strong>❌ שגיאה:</strong> בטעינת הנתונים!';
+                });
+        }
+
+        function displayPropertyDetails(property) {
+            const fields = [
+                ['city', 'עיר', 'fa-city'],
+                ['neighborhood', 'שכונה', 'fa-location-dot'],
+                ['street', 'רחוב', 'fa-road'],
+                ['houseNumber', 'מספר בית', 'fa-hashtag'],
+                ['floor', 'קומה', 'fa-layer-group'],
+                ['rooms', 'מספר חדרים', 'fa-bed'],
+                ['propertyType', 'סוג נכס', 'fa-building'],
+                ['apartmentsPerFloor', 'דירות בקומה', 'fa-building-user'],
+                ['apartmentsInBuilding', 'דירות בבניין', 'fa-building-columns'],
+                ['size', 'גודל הדירה כ', 'fa-ruler-combined'],
+                ['balconySize', 'גודל מרפסת כ', 'fa-up-right-and-down-left-from-center'],
+                ['mamad', 'ממ"ד', 'fa-shield-halved'],
+                ['parking', 'חניה', 'fa-square-parking'],
+                ['storage', 'מחסן', 'fa-box-archive'],
+                ['yearBuilt', 'שנת בנייה', 'fa-calendar-days'],
+                ['contractor', 'שם הקבלן', 'fa-user-hard-hat'],
+                ['Structurewarranty', 'אחריות קבלן', 'fa-file-contract'],
+                ['vaadBayit', 'ועד בית', 'fa-people-roof'],
+                ['arnona', 'ארנונה', 'fa-sack-dollar'],
+                ['Airdirection', 'כיווני אוויר', 'fa-compass'],
+                ['airConditioning', 'מיזוג אוויר', 'fa-wind'],
+                ['buildingExtras', 'תוספות לבניין', 'fa-building-circle-check'],
+                ['waterHeating', 'חימום מים', 'fa-fire'],
+                ['tabu', 'טאבו', 'fa-scroll'],
+                ['sellerRegistered', 'מוכר רשום', 'fa-user'],
+                ['price', 'מחיר', 'fa-money-bill-wave'],
+                ['description', 'תיאור', 'fa-align-right'],
+                ['link', 'לינק לפרסום', 'fa-link'],
+                ['full_link', 'לינק מלא', 'fa-up-right-from-square']
+            ];
+
+            const container = document.getElementById('propertyDetails');
+            container.innerHTML = '';
+
+            fields.forEach(([key, label, icon]) => {
+                const value = property[key] || '';
+                let html = '';
+
+                if (key === 'link' || key === 'full_link') {
+                    html = `<button class="link-button" onclick="window.open('${value}', '_blank')">🔗 ${label}</button>`;
+                } else {
+                    html = `<span id="${key}">${value}</span>`;
+                }
+
+                container.innerHTML += `
+                    <div class="detail-box">
+                        <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
+                        <strong>${label}:</strong>&nbsp; ${html}
+                    </div>`;
+            });
+        }
+
+        function enableEditing() {
+            document.querySelectorAll('.detail-box span').forEach(span => {
+                const value = span.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = value;
+                input.style.width = '100%';
+                span.innerHTML = '';
+                span.appendChild(input);
+            });
+            document.querySelector('.edit-button').style.display = 'none';
+            document.querySelector('.save-button').style.display = 'inline-block';
+        }
+
+        function saveChanges() {
+            let updatedProperty = {};
+            document.querySelectorAll('.detail-box span').forEach(span => {
+                if (span.querySelector('input')) {
+                    updatedProperty[span.id] = span.querySelector('input').value;
+                }
+            });
+
+            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/id/${propertyID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedProperty)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('הנתונים עודכנו בהצלחה!');
+                location.reload();
+            })
+            .catch(error => {
+                console.error('⚠️ שגיאה בשמירה:', error);
+                alert('❌ לא הצלחנו לשמור את הנתונים.');
+            });
+        }
+    </script>
 </body>
 </html>
