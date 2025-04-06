@@ -1,188 +1,158 @@
-<script>
-window.addEventListener('DOMContentLoaded', function () {
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const propertyID = urlParams.get('id');
-    let property = {};
-
-    const sections = {
-        general: document.getElementById('section-general'),
-        details: document.getElementById('section-details'),
-        legal: document.getElementById('section-legal'),
-        links: document.getElementById('section-links')
-    };
-
-    const fieldGroups = {
-        general: [
-            ['city', 'עיר', 'fa-city'],
-            ['neighborhood', 'שכונה', 'fa-location-dot'],
-            ['street', 'רחוב', 'fa-road'],
-            ['houseNumber', 'מספר בית', 'fa-hashtag'],
-            ['floor', 'קומה', 'fa-layer-group'],
-            ['rooms', 'מספר חדרים', 'fa-bed'],
-            ['propertyType', 'סוג נכס', 'fa-building']
-        ],
-        details: [
-            ['apartmentsPerFloor', 'דירות בקומה', 'fa-building-user'],
-            ['apartmentsInBuilding', 'דירות בבניין', 'fa-building-columns'],
-            ['size', 'גודל הדירה כ', 'fa-ruler-combined'],
-            ['balconySize', 'גודל מרפסת כ', 'fa-up-right-and-down-left-from-center'],
-            ['mamad', 'ממ"ד', 'fa-shield-halved'],
-            ['parking', 'חניה', 'fa-square-parking'],
-            ['storage', 'מחסן', 'fa-box-archive'],
-            ['Airdirection', 'כיווני אוויר', 'fa-compass'],
-            ['airConditioning', 'מיזוג אוויר', 'fa-wind'],
-            ['buildingExtras', 'תוספות לבניין', 'fa-building-circle-check'],
-            ['waterHeating', 'חימום מים', 'fa-fire']
-        ],
-        legal: [
-            ['yearBuilt', 'שנת בנייה', 'fa-calendar-days'],
-            ['contractor', 'שם הקבלן', 'fa-user-hard-hat'],
-            ['Structurewarranty', 'אחריות קבלן', 'fa-file-contract'],
-            ['vaadBayit', 'ועד בית', 'fa-people-roof'],
-            ['arnona', 'ארנונה', 'fa-sack-dollar'],
-            ['tabu', 'טאבו', 'fa-scroll'],
-            ['sellerRegistered', 'מוכר רשום', 'fa-user'],
-            ['price', 'מחיר', 'fa-money-bill-wave'],
-            ['description', 'תיאור', 'fa-align-right']
-        ],
-        links: [
-            ['link', 'לינק לפרסום', 'fa-link'],
-            ['full_link', 'לינק מלא', 'fa-up-right-from-square']
-        ]
-    };
-
-    if (!propertyID) {
-        sections.general.innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
-    } else {
-        fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length === 0) {
-                    sections.general.innerHTML = '<strong>❌ שגיאה:</strong> הדירה לא נמצאה!';
-                } else {
-                    property = data[0];
-                    renderSections();
-                }
-            })
-            .catch(error => {
-                console.error('⚠️ שגיאה:', error);
-                sections.general.innerHTML = '<strong>❌ שגיאה:</strong> בטעינת הנתונים!';
-            });
-    }
-
-    function renderSections() {
-        Object.entries(fieldGroups).forEach(([groupName, fields]) => {
-            const section = sections[groupName];
-            section.innerHTML = '';
-            fields.forEach(([key, label, icon]) => {
-                const value = property[key] || '';
-                let html = '';
-
-                if (key === 'link' || key === 'full_link') {
-                    html = `<button class="link-button" onclick="window.open('${value}', '_blank')">🔗 ${label}</button>`;
-                } else {
-                    html = `<span id="${key}">${value}</span>`;
-                }
-
-                section.innerHTML += `
-                    <div class="detail-box">
-                        <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
-                        <strong>${label}:</strong>&nbsp; ${html}
-                    </div>`;
-            });
-        });
-    }
-
-    window.enableEditing = function () {
-        document.querySelectorAll('.detail-box span').forEach(span => {
-            const value = span.textContent;
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = value;
-            input.style.width = '100%';
-            span.innerHTML = '';
-            span.appendChild(input);
-        });
-        document.querySelector('.edit-button').style.display = 'none';
-        document.querySelector('.save-button').style.display = 'inline-block';
-    };
-
-    window.saveChanges = function () {
-        let updatedProperty = {};
-        document.querySelectorAll('.detail-box span').forEach(span => {
-            if (span.querySelector('input')) {
-                updatedProperty[span.id] = span.querySelector('input').value;
-            }
-        });
-
-        fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/id/${propertyID}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedProperty)
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('הנתונים עודכנו בהצלחה!');
-            location.reload();
-        })
-        .catch(error => {
-            console.error('⚠️ שגיאה בשמירה:', error);
-            alert('❌ לא הצלחנו לשמור את הנתונים.');
-        });
-    };
-
-    window.exportToWord = function () {
-        const sectionsData = {
-            "🧾 מידע כללי": document.getElementById("section-general"),
-            "🏠 פרטים על הנכס": document.getElementById("section-details"),
-            "📄 פרטים משפטיים וכלליים": document.getElementById("section-legal"),
-            "🔗 קישורים": document.getElementById("section-links")
-        };
-
-        let wordContent = `
-            <html xmlns:o='urn:schemas-microsoft-com:office:office' 
-                  xmlns:w='urn:schemas-microsoft-com:office:word' 
-                  xmlns='http://www.w3.org/TR/REC-html40'>
-            <head><meta charset='utf-8'>
-                <style>
-                    body { direction: rtl; font-family: Arial, sans-serif; }
-                    h2 { color: #5d3a00; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-                    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: right; }
-                    th { background-color: #f0f0f0; color: #333; }
-                </style>
-            </head><body>
-            <h1 style="text-align:center;">פרטי נכס</h1>
-            <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו" style="height:80px; display:block; margin:0 auto 30px;"/>
-        `;
-
-        for (const [sectionTitle, sectionElement] of Object.entries(sectionsData)) {
-            wordContent += `<h2>${sectionTitle}</h2><table><tbody>`;
-            const boxes = sectionElement.querySelectorAll(".detail-box");
-            boxes.forEach(box => {
-                const label = box.querySelector("strong")?.textContent?.replace(":", "") || "";
-                const valueEl = box.querySelector("span") || box.querySelector("button");
-                const value = valueEl?.innerText || "";
-                wordContent += `<tr><th>${label}</th><td>${value}</td></tr>`;
-            });
-            wordContent += `</tbody></table>`;
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פרטי נכס</title>
+    <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+    <style>
+        body {
+            direction: rtl;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f7f5;
+            margin: 0;
+            padding: 0;
         }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 40px 30px;
+        }
+        h2, h3 {
+            text-align: center;
+            color: #5d3a00;
+            margin-bottom: 20px;
+        }
+        h2 { font-size: 28px; }
+        h3 { font-size: 22px; margin-top: 40px; }
+        .details-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+        .detail-box {
+            background-color: #faf7f4;
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+        .detail-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #f1e7de;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+        .detail-icon i {
+            font-size: 18px;
+            color: #8b5e3c;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .edit-button, .save-button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .edit-button {
+            background-color: #8b5e3c;
+            color: white;
+            margin-left: 10px;
+        }
+        .save-button {
+            background-color: #4caf50;
+            color: white;
+            display: none;
+        }
+        .edit-button:hover, .save-button:hover {
+            opacity: 0.9;
+        }
+        .link-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .details-section { grid-template-columns: 1fr; }
+            .container { padding: 20px 15px; margin: 20px 10px; }
+            h2 { font-size: 22px; }
+            h3 { font-size: 18px; }
+            .detail-box {
+                font-size: 15px;
+                padding: 12px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .detail-icon {
+                width: 32px;
+                height: 32px;
+                margin-left: 0;
+                margin-bottom: 8px;
+            }
+            .detail-icon i { font-size: 16px; }
+            .edit-button, .save-button, .link-button {
+                font-size: 15px;
+                padding: 10px 18px;
+            }
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 30px; opacity: 0.8;">
+            <img src="https://raw.githubusercontent.com/idankru/real-estate-form/main/%D7%A9%D7%9C%D7%95%D7%92%D7%95%20%D7%97%D7%91%D7%A8%D7%94%20.jpg" alt="לוגו החברה" style="height: 80px; filter: brightness(0.9) saturate(120%) sepia(20%) hue-rotate(10deg); border-radius: 12px;">
+        </div>
+        <h2>פרטי נכס</h2>
 
-        wordContent += `</body></html>`;
+        <h3>🧾 מידע כללי</h3>
+        <div id="section-general" class="details-section"></div>
 
-        const blob = new Blob(['\ufeff', wordContent], {
-            type: 'application/msword'
-        });
+        <h3>🏠 פרטים על הנכס</h3>
+        <div id="section-details" class="details-section"></div>
 
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `פרטי_נכס_${propertyID || "חדש"}.doc`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
+        <h3>📄 פרטים משפטיים וכלליים</h3>
+        <div id="section-legal" class="details-section"></div>
 
-});
-</script>
+        <h3>🔗 קישורים</h3>
+        <div id="section-links" class="details-section"></div>
+
+        <div class="button-container">
+            <a href="index.html" class="link-button" style="margin-bottom: 20px; display: inline-block; background: linear-gradient(135deg, #6c757d, #4a4e52); font-size: 17px; font-weight: bold; padding: 12px 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">🔙 חזרה לרשימת הנכסים</a><br>
+            <button class="edit-button" onclick="enableEditing()">✏️ עריכה</button>
+            <button class="save-button" onclick="saveChanges()">💾 שמור</button>
+            <button class="link-button" onclick="exportToWord()">📄 שמור כ-Word</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/idankru/real-estate-form/exportToWord.js"></script>
+</body>
+</html>
