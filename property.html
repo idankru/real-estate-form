@@ -247,7 +247,7 @@
         if (!propertyID) {
             sections.general.innerHTML = '<strong>❌ שגיאה:</strong> לא נמצא ID של הדירה!';
         } else {
-            fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+            fetch(`https://script.google.com/macros/s/AKfycbyZQdutaaxvMUk7P2CkGH2G5J5aGOfhOu6Ss8nN9JTaELmmoNrX36vIks7_onzGMQtjlA/exec/search?id=${propertyID}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.length === 0) {
