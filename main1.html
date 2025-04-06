@@ -625,6 +625,8 @@ document.getElementById('price').addEventListener('input', function(event) {
 
 <button type="submit" class="submit-btn">שלח</button>
 
+<iframe name="postTarget" style="display: none;"></iframe>
+	
 <style>
     .submit-btn {
         background-color: #8B5E3C; /* חום */
@@ -670,7 +672,7 @@ objectData["full_link"] = propertyLink;
 console.log('📌 שולח ל-post.html:', objectData);
 
 // פתיחת חלון ל-post.html שיבצע שליחה ל-Google Apps Script
-const postWindow = window.open("post.html", "postTarget");
+const postWindow = window.open("submit.html", "postTarget");
 
 // המתנה קצרה כדי שהדף ייטען ואז שליחת הנתונים
 setTimeout(() => {
