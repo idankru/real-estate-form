@@ -655,45 +655,39 @@ document.getElementById('price').addEventListener('input', function(event) {
 
 <script>
 document.getElementById('realEstateForm').addEventListener('submit', function(event) {
-event.preventDefault();
+  event.preventDefault();
 
-var formData = new FormData(this);
-var objectData = {};
-formData.forEach((value, key) => objectData[key] = value);
+  var formData = new FormData(this);
+  var objectData = {};
+  formData.forEach((value, key) => objectData[key] = value);
 
-// יצירת מזהה ייחודי
-const uniqueID = "property_" + new Date().getTime();  
-const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
+  // יצירת מזהה ייחודי
+  const uniqueID = "property_" + new Date().getTime();  
+  const propertyLink = `https://idankru.github.io/real-estate-form/property.html?id=${uniqueID}`;
 
-// הוספת ה-ID והלינק המלא לאובייקט הנתונים
-objectData["id"] = uniqueID;  
-objectData["full_link"] = propertyLink;  
+  // הוספת ה-ID והלינק המלא לאובייקט הנתונים
+  objectData["id"] = uniqueID;  
+  objectData["full_link"] = propertyLink;  
 
-console.log('📌 שולח ל-submit.html:', objectData);
+  console.log('📌 שולח ל-submit.html:', objectData);
 
-// פתיחת חלון ל-post.html שיבצע שליחה ל-Google Apps Script
-const postWindow = window.open("submit.html", "postTarget");
+  // פתיחת חלון ל-submit.html שיבצע שליחה ל-Google Apps Script
+  const postWindow = window.open("submit.html", "postTarget");
 
-// המתנה קצרה כדי שהדף ייטען ואז שליחת הנתונים
-setTimeout(() => {
+  // המתנה קצרה כדי שהדף ייטען ואז שליחת הנתונים
+  setTimeout(() => {
     postWindow.postMessage(objectData, "*");
-}, 300);
+  }, 300);
 
-// הודעת הצלחה + הפניה לעמוד הדירה החדש
-setTimeout(() => {
+  // הודעת הצלחה + הפניה לעמוד הדירה החדש
+  setTimeout(() => {
     alert('✅ הנתונים נשלחו בהצלחה!');
     alert(`🔗 קישור לדירה: ${propertyLink}`);
     window.location.href = propertyLink;
-}, 1000);
-
-alert('❌ שגיאה בשליחה: ' + JSON.stringify(data));
-}
-})
-.catch(error => {
-console.error('⚠️ שגיאה:', error);
-alert('⚠️ אירעה שגיאה, נסה שוב מאוחר יותר');
-});
+  }, 1000);
 });
 </script>
-</body>
-</html>
+
+	</script>
+	</body>
+	</html>
