@@ -1,4 +1,6 @@
 <script>
+window.addEventListener('DOMContentLoaded', function () {
+
     const urlParams = new URLSearchParams(window.location.search);
     const propertyID = urlParams.get('id');
     let property = {};
@@ -92,7 +94,7 @@
         });
     }
 
-    function enableEditing() {
+    window.enableEditing = function () {
         document.querySelectorAll('.detail-box span').forEach(span => {
             const value = span.textContent;
             const input = document.createElement('input');
@@ -104,9 +106,9 @@
         });
         document.querySelector('.edit-button').style.display = 'none';
         document.querySelector('.save-button').style.display = 'inline-block';
-    }
+    };
 
-    function saveChanges() {
+    window.saveChanges = function () {
         let updatedProperty = {};
         document.querySelectorAll('.detail-box span').forEach(span => {
             if (span.querySelector('input')) {
@@ -128,9 +130,9 @@
             console.error('⚠️ שגיאה בשמירה:', error);
             alert('❌ לא הצלחנו לשמור את הנתונים.');
         });
-    }
+    };
 
-    function exportToWord() {
+    window.exportToWord = function () {
         const sectionsData = {
             "🧾 מידע כללי": document.getElementById("section-general"),
             "🏠 פרטים על הנכס": document.getElementById("section-details"),
@@ -180,5 +182,7 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    }
+    };
+
+});
 </script>
