@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>שליחת טופס</title>
+</head>
+<body>
+  <form id="hiddenForm" method="POST" target="_self" action="https://script.google.com/macros/s/AKfycbyZQdutaaxvMUk7P2CkGH2G5J5aGOfhOu6Ss8nN9JTaELmmoNrX36vIks7_onzGMQtjlA/exec">
+  </form>
+
+  <script>
+    window.addEventListener("message", function(event) {
+      if (event.data && typeof event.data === "object") {
+        const form = document.getElementById("hiddenForm");
+        form.innerHTML = ''; // ננקה קודם
+
+        for (const key in event.data) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = event.data[key];
+          form.appendChild(input);
+        }
+
+        form.submit();
+      }
+    }, false);
+  </script>
+</body>
+</html>
