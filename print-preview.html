@@ -95,99 +95,80 @@
   </div>
 
   <script>
-    const propertyData = {
-      city: "באר יעקב",
-      neighborhood: "הדרים",
-      street: "הראשונים",
-      houseNumber: "17",
-      floor: "4",
-      rooms: "5",
-      propertyType: "פנטהאוז",
-      apartmentsPerFloor: "2",
-      apartmentsInBuilding: "8",
-      size: "120",
-      balconySize: "20",
-      mamad: "כן",
-      parking: "חניה אחת",
-      storage: "מחסן גדול",
-      Airdirection: "דרום, מערב",
-      airConditioning: "מרכזי",
-      buildingExtras: "חדר כושר",
-      waterHeating: "דוד שמש",
-      yearBuilt: "2012",
-      contractor: "קבוצת רום",
-      Structurewarranty: "10",
-      vaadBayit: "120",
-      arnona: "600",
-      tabu: "כן",
-      sellerRegistered: "כן",
-      price: "2,300,000",
-      description: "פנטהאוז מרהיב עם נוף פתוח",
-      link: "https://example.com",
-      full_link: "https://idankru.github.io/real-estate-form/property.html?id=property_123456"
-    };
+    const urlParams = new URLSearchParams(window.location.search);
+    const propertyID = urlParams.get('id');
 
-    const fieldGroups = {
-      general: [
-        ["city", "עיר"],
-        ["neighborhood", "שכונה"],
-        ["street", "רחוב"],
-        ["houseNumber", "מס' בית"],
-        ["floor", "קומה"],
-        ["rooms", "מספר חדרים"],
-        ["propertyType", "סוג נכס"]
-      ],
-      details: [
-        ["apartmentsPerFloor", "דירות בקומה"],
-        ["apartmentsInBuilding", "דירות בבניין"],
-        ["size", "גודל הדירה כ"],
-        ["balconySize", "גודל מרפסת כ"],
-        ["mamad", "ממ"ד"],
-        ["parking", "חניה"],
-        ["storage", "מחסן"],
-        ["Airdirection", "כיווני אוויר"],
-        ["airConditioning", "מיזוג אוויר"],
-        ["buildingExtras", "תוספות לבניין"],
-        ["waterHeating", "חימום מים"]
-      ],
-      legal: [
-        ["yearBuilt", "שנת בנייה"],
-        ["contractor", "שם הקבלן"],
-        ["Structurewarranty", "אחריות קבלן"],
-        ["vaadBayit", "ועד בית"],
-        ["arnona", "ארנונה"],
-        ["tabu", "טאבו"],
-        ["sellerRegistered", "מוכר רשום"],
-        ["price", "מחיר"],
-        ["description", "תיאור"]
-      ],
-      links: [
-        ["link", "לינק לפרסום"],
-        ["full_link", "לינק מלא"]
-      ]
-    };
+    fetch(`https://sheetdb.io/api/v1/x66b7o2fa8f7k/search?id=${propertyID}`)
+      .then(response => response.json())
+      .then(data => {
+        if (!data || !data.length) return;
+        const propertyData = data[0];
 
-    window.onload = () => {
-      for (const group in fieldGroups) {
-        const container = document.getElementById(`${group}-fields`);
-        fieldGroups[group].forEach(([key, label]) => {
-          const value = propertyData[key] || "";
-          const wrapper = document.createElement("label");
-          wrapper.innerHTML = `
-            <span><input type="checkbox" name="fields" value="${key}" checked> ${label}</span>
-            <span class="value-preview">${value}</span>
-          `;
-          container.appendChild(wrapper);
-        });
-      }
-    };
+        const fieldGroups = {
+          general: [
+            ["city", "עיר"],
+            ["neighborhood", "שכונה"],
+            ["street", "רחוב"],
+            ["houseNumber", "מס' בית"],
+            ["floor", "קומה"],
+            ["rooms", "מספר חדרים"],
+            ["propertyType", "סוג נכס"]
+          ],
+          details: [
+            ["apartmentsPerFloor", "דירות בקומה"],
+            ["apartmentsInBuilding", "דירות בבניין"],
+            ["size", "גודל הדירה כ"],
+            ["balconySize", "גודל מרפסת כ"],
+            ["mamad", "ממ"ד"],
+            ["parking", "חניה"],
+            ["storage", "מחסן"],
+            ["Airdirection", "כיווני אוויר"],
+            ["airConditioning", "מיזוג אוויר"],
+            ["buildingExtras", "תוספות לבניין"],
+            ["waterHeating", "חימום מים"]
+          ],
+          legal: [
+            ["yearBuilt", "שנת בנייה"],
+            ["contractor", "שם הקבלן"],
+            ["Structurewarranty", "אחריות קבלן"],
+            ["vaadBayit", "ועד בית"],
+            ["arnona", "ארנונה"],
+            ["tabu", "טאבו"],
+            ["sellerRegistered", "מוכר רשום"],
+            ["price", "מחיר"],
+            ["description", "תיאור"]
+          ],
+          links: [
+            ["link", "לינק לפרסום"],
+            ["full_link", "לינק מלא"]
+          ]
+        };
 
-    function generatePDF() {
-      const selected = [...document.querySelectorAll('input[name="fields"]:checked')].map(input => input.value);
-      localStorage.setItem('printFields', JSON.stringify(selected));
-      localStorage.setItem('propertyData', JSON.stringify(propertyData));
-      window.location.href = 'print-preview.html';
-    }
+        for (const group in fieldGroups) {
+          const container = document.getElementById(`${group}-fields`);
+          fieldGroups[group].forEach(([key, label]) => {
+            const value = propertyData[key] || "";
+            const wrapper = document.createElement("label");
+            wrapper.innerHTML = `
+              <span><input type="checkbox" name="fields" value="${key}" checked> ${label}</span>
+              <span class="value-preview">${value}</span>
+            `;
+            container.appendChild(wrapper);
+          });
+        }
+
+        // שמירה ל-localStorage כשנלחץ על הפקה
+        window.generatePDF = function() {
+          const selected = [...document.querySelectorAll('input[name="fields"]:checked')].map(input => input.value);
+          localStorage.setItem('printFields', JSON.stringify(selected));
+          localStorage.setItem('propertyData', JSON.stringify(propertyData));
+          window.location.href = 'print-preview.html';
+        }
+      })
+      .catch(error => {
+        document.body.innerHTML = `<div style="text-align:center;color:red;">שגיאה בטעינת נתוני הדירה</div>`;
+        console.error('שגיאה:', error);
+      });
   </script>
 </body>
 </html>
