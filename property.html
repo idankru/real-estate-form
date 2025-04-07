@@ -187,10 +187,6 @@
 
         <div class="button-container">
             <a href="index.html" class="link-button" style="margin-bottom: 20px; display: inline-block; background: linear-gradient(135deg, #6c757d, #4a4e52); font-size: 17px; font-weight: bold; padding: 12px 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">🔙 חזרה לרשימת הנכסים</a><br>
-             <!-- 💡 כאן כפתור ההדפסה החדש -->
-  <a href="print-settings.html?id=${propertyID}" class="link-button" style="background: #6b3e26; font-weight: bold;">
-    🖨️ הדפסה מותאמת
-  </a>
             <button class="edit-button" onclick="enableEditing()">✏️ עריכה</button>
             <button class="save-button" onclick="saveChanges()">💾 שמור</button>
         </div>
@@ -289,6 +285,19 @@
             });
         });
     }
+          // ✅ כפתור הדפסה מותאמת
+    const printButton = document.createElement('a');
+    printButton.href = `print-settings.html?id=${propertyID}`;
+    printButton.className = 'link-button';
+    printButton.style.background = '#6b3e26';
+    printButton.style.fontWeight = 'bold';
+    printButton.style.marginTop = '10px';
+    printButton.style.display = 'inline-block';
+    printButton.style.padding = '10px 20px';
+    printButton.textContent = '🖨️ הדפסה מותאמת';
+
+    document.querySelector('.button-container').prepend(printButton);
+}
 
     function enableEditing() {
         document.querySelectorAll('.detail-box span').forEach(span => {
