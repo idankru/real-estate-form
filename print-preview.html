@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>תצוגת הדפסה - נדלן עם שחר</title>
+  <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm;
+    }
+    @media print {
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://raw.githubusercontent.com/idankru/real-estate-form/main/letter-head.jpg') no-repeat center top;
+        background-size: cover;
+        z-index: -1;
+      }
+      .no-print {
+        display: none;
+      }
+    }
+    body {
+      direction: rtl;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      padding: 40px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #5d3a00;
+      margin-bottom: 40px;
+    }
+    .details-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 40px;
+    }
+    .detail-box {
+      background-color: #faf7f4;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #333;
+    }
+    .detail-icon {
+      width: 36px;
+      height: 36px;
+      background-color: #f1e7de;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+    .detail-icon i {
+      font-size: 18px;
+      color: #8b5e3c;
+    }
+    .no-print {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .no-print button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #8b5e3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>סיכום נכס</h2>
+  <div class="details-section" id="print-content"></div>
+  <div class="no-print">
+    <button onclick="window.print()">🖨️ הדפס</button>
+  </div>
+
+  <script>
+    const selectedFields = JSON.parse(localStorage.getItem('printFields') || '[]');
+    const propertyData = JSON.parse(localStorage.getItem('propertyData') || '{}');
+
+    const fieldLabels = {
+      city: "עיר",
+      neighborhood: "שכונה",
+      street: "רחוב",
+      houseNumber: "מס' בית",
+      floor: "קומה",
+      rooms: "מספר חדרים",
+      propertyType: "סוג נכס",
+      apartmentsPerFloor: "דירות בקומה",
+      apartmentsInBuilding: "דירות בבניין",
+      size: "גודל הדירה כ",
+      balconySize: "גודל מרפסת כ",
+      mamad: "ממ" + String.fromCharCode(39) + "ד",
+      parking: "חניה",
+      storage: "מחסן",
+      Airdirection: "כיווני אוויר",
+      airConditioning: "מיזוג אוויר",
+      buildingExtras: "תוספות לבניין",
+      waterHeating: "חימום מים",
+      yearBuilt: "שנת בנייה",
+      contractor: "שם הקבלן",
+      Structurewarranty: "אחריות קבלן",
+      vaadBayit: "ועד בית",
+      arnona: "ארנונה",
+      tabu: "טאבו",
+      sellerRegistered: "מוכר רשום",
+      price: "מחיר",
+      description: "תיאור",
+      link: "לינק לפרסום",
+      full_link: "לינק מלא"
+    };
+
+    const fieldIcons = {
+      city: "fa-city",
+      neighborhood: "fa-location-dot",
+      street: "fa-road",
+      houseNumber: "fa-hashtag",
+      floor: "fa-layer-group",
+      rooms: "fa-bed",
+      propertyType: "fa-building",
+      apartmentsPerFloor: "fa-building-user",
+      apartmentsInBuilding: "fa-building-columns",
+      size: "fa-ruler-combined",
+      balconySize: "fa-up-right-and-down-left-from-center",
+      mamad: "fa-shield-halved",
+      parking: "fa-square-parking",
+      storage: "fa-box-archive",
+      Airdirection: "fa-compass",
+      airConditioning: "fa-wind",
+      buildingExtras: "fa-building-circle-check",
+      waterHeating: "fa-fire",
+      yearBuilt: "fa-calendar-days",
+      contractor: "fa-user-hard-hat",
+      Structurewarranty: "fa-file-contract",
+      vaadBayit: "fa-people-roof",
+      arnona: "fa-sack-dollar",
+      tabu: "fa-scroll",
+      sellerRegistered: "fa-user",
+      price: "fa-money-bill-wave",
+      description: "fa-align-right",
+      link: "fa-link",
+      full_link: "fa-up-right-from-square"
+    };
+
+    const container = document.getElementById('print-content');
+    selectedFields.forEach(key => {
+      const label = fieldLabels[key] || key;
+      const value = propertyData[key] || '-';
+      const icon = fieldIcons[key] || 'fa-circle';
+
+      const box = document.createElement('div');
+      box.className = 'detail-box';
+      box.innerHTML = `
+        <div class="detail-icon"><i class="fa-solid ${icon}"></i></div>
+        <strong>${label}:</strong>&nbsp; <span>${key === 'link' || key === 'full_link' ? `<a href="${value}" target="_blank">${value}</a>` : value}</span>
+      `;
+
+      container.appendChild(box);
+    });
+  </script>
+</body>
+</html>
