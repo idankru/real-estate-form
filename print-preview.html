@@ -41,6 +41,10 @@
       padding: 40px;
       color: #333;
     }
+    .details-wrapper {
+      display: flex;
+      justify-content: center;
+    }
     .details-section {
       display: flex;
       flex-wrap: wrap;
@@ -48,7 +52,7 @@
       column-gap: 60px;
       row-gap: 14px;
       margin-top: 0;
-      padding-top: 40px;
+      padding-top: 100px;
     }
     .detail-box {
       width: 280px;
@@ -86,7 +90,9 @@
   </style>
 </head>
 <body>
-  <div class="details-section" id="print-content"></div>
+  <div class="details-wrapper">
+    <div class="details-section" id="print-content"></div>
+  </div>
   <div class="no-print">
     <button onclick="window.print()">🖨️ הדפס</button>
   </div>
