@@ -46,16 +46,14 @@
       justify-content: center;
     }
     .details-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      column-gap: 100px;
-      row-gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 120px;
+      row-gap: 22px;
       margin-top: 0;
       padding-top: 100px;
     }
     .detail-box {
-      width: 260px;
       display: flex;
       align-items: center;
       font-size: 16px;
@@ -113,7 +111,7 @@
       apartmentsInBuilding: "דירות בבניין",
       size: "גודל הדירה כ",
       balconySize: "גודל מרפסת כ",
-      mamad: "ממ" + String.fromCharCode(39) + "ד",
+      mamad: "מ" + String.fromCharCode(39) + "ד",
       parking: "חניה",
       storage: "מחסן",
       Airdirection: "כיווני אוויר",
