@@ -11,19 +11,27 @@
       margin: 2cm;
     }
     @media print {
-      body::before {
+      html::before {
         content: "";
         position: fixed;
         top: 0;
+        right: 0;
+        bottom: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('https://raw.githubusercontent.com/idankru/real-estate-form/main/letter-head.jpg') no-repeat center top;
-        background-size: cover;
         z-index: -1;
+        background-image: url('https://raw.githubusercontent.com/idankru/real-estate-form/main/letter-head.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        opacity: 1;
       }
       .no-print {
         display: none;
+      }
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        page-break-before: avoid;
       }
     }
     body {
