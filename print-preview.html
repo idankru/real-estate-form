@@ -86,12 +86,22 @@
       border-radius: 6px;
       cursor: pointer;
     }
+    .qr-section {
+      margin-top: 50px;
+      text-align: center;
+    }
+    .qr-section img {
+      margin-top: 10px;
+      width: 160px;
+      height: 160px;
+    }
   </style>
 </head>
 <body>
   <div class="details-wrapper">
     <div class="details-section" id="print-content"></div>
   </div>
+  <div class="qr-section" id="qr-section"></div>
   <div class="no-print">
     <button onclick="window.print()">🖨️ הדפס</button>
   </div>
@@ -179,6 +189,15 @@
 
       container.appendChild(box);
     });
+
+    // הוספת QR
+    if (propertyData.full_link) {
+      const qrSection = document.getElementById("qr-section");
+      qrSection.innerHTML = `
+        <p style="font-weight: bold;">סרוק לצפייה בדף הדירה:</p>
+        <img src="https://chart.googleapis.com/chart?chs=160x160&cht=qr&chl=${encodeURIComponent(propertyData.full_link)}" alt="QR Code">
+      `;
+    }
   </script>
 </body>
 </html>
