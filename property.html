@@ -284,7 +284,7 @@
                     </div>`;
             });
         });
-    }
+    
           // ✅ כפתור הדפסה מותאמת
     const printButton = document.createElement('a');
     printButton.href = `print-settings.html?id=${propertyID}`;
@@ -297,8 +297,7 @@
     printButton.textContent = '🖨️ הדפסה מותאמת';
 
     document.querySelector('.button-container').prepend(printButton);
-}
-
+    }
     function enableEditing() {
         document.querySelectorAll('.detail-box span').forEach(span => {
             const value = span.textContent;
