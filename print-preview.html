@@ -92,12 +92,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 20px;
       font-size: 16px;
     }
     #qr-code canvas {
-      width: 100px !important;
-      height: 100px !important;
+      width: 120px !important;
+      height: 120px !important;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
@@ -204,8 +204,8 @@
       `;
 
       const qrCode = new QRCodeStyling({
-        width: 100,
-        height: 100,
+        width: 140,
+        height: 140,
         data: propertyData.link,
         dotsOptions: {
           color: "#8b5e3c",
@@ -217,7 +217,8 @@
         image: "https://raw.githubusercontent.com/idankru/real-estate-form/main/logo-mini.png",
         imageOptions: {
           crossOrigin: "anonymous",
-          margin: 5
+          margin: 6,
+          imageSize: 0.25
         }
       });
 
