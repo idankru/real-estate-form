@@ -226,37 +226,6 @@
 
       qrCode.append(document.getElementById("qr-code"));
     }
-
-    function downloadAndSendToDrive() {
-      const element = document.body;
-      const opt = {
-        margin:       0,
-        filename:     `נכס_${propertyData.city || 'נדלן'}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).outputPdf('datauristring').then(function (pdfBase64) {
-        const base64 = pdfBase64.split(',')[1];
-
-        fetch("https://script.google.com/macros/s/AKfycbwC4APitJDjWxzLo8OXLlZSy_-JblM8yEtqajxBxTllJDi0e2iweOGcftbEzWPMZUj3KQ/exec", {
-          method: 'POST',
-          body: base64
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            alert("✅ נשמר גם בדרייב: " + data.url);
-            window.open(data.url, '_blank');
-          } else {
-            alert("⚠️ שגיאה בדרייב: " + data.error);
-          }
-        });
-
-        html2pdf().set(opt).from(element).save();
-      });
-    }
   </script>
 </body>
 </html>
