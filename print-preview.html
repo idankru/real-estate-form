@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>תצוגת הדפסה - נדלן עם שחר</title>
   <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
   <style>
     @page {
       size: A4;
@@ -91,7 +92,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
+      font-size: 16px;
     }
     #qr-code canvas {
       width: 120px !important;
@@ -100,7 +102,6 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <div class="details-wrapper">
@@ -198,18 +199,29 @@
     if (propertyData.link) {
       const qrSection = document.getElementById("qr-section");
       qrSection.innerHTML = `
-        <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בתמונות:</span>
+        <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בפרסום:</span>
         <div id="qr-code"></div>
       `;
 
-      new QRCode(document.getElementById("qr-code"), {
-        text: propertyData.link,
+      const qrCode = new QRCodeStyling({
         width: 120,
         height: 120,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
+        data: propertyData.link,
+        dotsOptions: {
+          color: "#8b5e3c",
+          type: "rounded"
+        },
+        backgroundOptions: {
+          color: "#ffffff"
+        },
+        image: "https://raw.githubusercontent.com/idankru/real-estate-form/main/logo-mini.png",
+        imageOptions: {
+          crossOrigin: "anonymous",
+          margin: 5
+        }
       });
+
+      qrCode.append(document.getElementById("qr-code"));
     }
   </script>
 </body>
