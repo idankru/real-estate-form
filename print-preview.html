@@ -88,7 +88,10 @@
     }
     .qr-section {
       margin-top: 30px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
     }
     #qr-code canvas {
       width: 120px !important;
@@ -195,8 +198,8 @@
     if (propertyData.link) {
       const qrSection = document.getElementById("qr-section");
       qrSection.innerHTML = `
-        <p style="font-weight: bold; margin-bottom: 6px; font-size: 16px;">סרוק לצפייה בפרסום:</p>
-        <div id="qr-code" style="margin: 0 auto;"></div>
+        <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בפרסום:</span>
+        <div id="qr-code"></div>
       `;
 
       new QRCode(document.getElementById("qr-code"), {
