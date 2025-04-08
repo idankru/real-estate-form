@@ -49,14 +49,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 180px;
-      row-gap: 40px;
+      row-gap: 30px;
       margin-top: 0;
       padding-top: 100px;
     }
     .detail-box {
       display: flex;
       align-items: center;
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1.6;
       color: #333;
     }
@@ -195,14 +195,14 @@
     if (propertyData.link) {
       const qrSection = document.getElementById("qr-section");
       qrSection.innerHTML = `
-        <p style="font-weight: bold; margin-bottom: 6px;">סרוק לצפייה בפרסום:</p>
+        <p style="font-weight: bold; margin-bottom: 4px; font-size: 14px;">סרוק לצפייה בפרסום:</p>
         <div id="qr-code" style="margin: 0 auto;"></div>
       `;
 
       new QRCode(document.getElementById("qr-code"), {
         text: propertyData.link,
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         colorDark: "#000000",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
