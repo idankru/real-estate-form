@@ -96,6 +96,7 @@
       height: 160px;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <div class="details-wrapper">
@@ -119,7 +120,7 @@
       rooms: "מספר חדרים",
       propertyType: "סוג נכס",
       apartmentsPerFloor: "דירות בקומה",
-      apartmentsInBuilding: "קומות בבניין",
+      apartmentsInBuilding: "דירות בבניין",
       size: "גודל הדירה כ",
       balconySize: "גודל מרפסת כ",
       mamad: "מ" + String.fromCharCode(39) + "ד",
@@ -190,13 +191,22 @@
       container.appendChild(box);
     });
 
-    // הוספת QR
+    // הוספת QR שמוביל לקישור הפרסום (link)
     if (propertyData.link) {
       const qrSection = document.getElementById("qr-section");
       qrSection.innerHTML = `
-        <p style="font-weight: bold;">סרוק לצפייה בדף הדירה:</p>
-        <img src="https://chart.googleapis.com/chart?chs=160x160&cht=qr&chl=${encodeURIComponent(propertyData.link)}" alt="QR Code">
+        <p style="font-weight: bold;">סרוק לצפייה בפרסום:</p>
+        <div id="qr-code"></div>
       `;
+
+      new QRCode(document.getElementById("qr-code"), {
+        text: propertyData.link,
+        width: 160,
+        height: 160,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
     }
   </script>
 </body>
