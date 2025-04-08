@@ -191,11 +191,11 @@
     });
 
     // הוספת QR
-    if (propertyData.full_link) {
+    if (propertyData.link) {
       const qrSection = document.getElementById("qr-section");
       qrSection.innerHTML = `
         <p style="font-weight: bold;">סרוק לצפייה בדף הדירה:</p>
-        <img src="https://chart.googleapis.com/chart?chs=160x160&cht=qr&chl=${encodeURIComponent(propertyData.full_link)}" alt="QR Code">
+        <img src="https://chart.googleapis.com/chart?chs=160x160&cht=qr&chl=${encodeURIComponent(propertyData.link)}" alt="QR Code">
       `;
     }
   </script>
