@@ -6,6 +6,7 @@
   <title>תצוגת הדפסה - נדלן עם שחר</title>
   <link href="https://use.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     @page {
       size: A4;
@@ -110,6 +111,7 @@
   <div class="qr-section" id="qr-section"></div>
   <div class="no-print">
     <button onclick="window.print()">🖨️ הדפס</button>
+    <button onclick="downloadAndSendToDrive()">📥 שמור PDF + Drive</button>
   </div>
 
   <script>
@@ -223,6 +225,20 @@
       });
 
       qrCode.append(document.getElementById("qr-code"));
+    }
+
+    function downloadAndSendToDrive() {
+      const element = document.body;
+      const opt = {
+        margin:       0,
+        filename:     `נכס_${propertyData.city || 'נדלן'}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+      alert("✔️ שמירה מקומית בוצעה! לשמירה ל-Drive נצטרך לחבר את Google Apps Script בשלב הבא.");
     }
   </script>
 </body>
