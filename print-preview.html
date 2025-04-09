@@ -89,7 +89,7 @@
       cursor: pointer;
     }
     .qr-section {
-      margin-top: 30px;
+      margin-top: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -108,7 +108,7 @@
   <div class="details-wrapper">
     <div class="details-section" id="print-content"></div>
   </div>
-  <div class="qr-section" id="qr-section"></div>
+  <div id="qr-after-price"></div>
   <div class="no-print">
     <button onclick="window.print()">🖨️ הדפס</button>
   </div>
@@ -195,36 +195,39 @@
       `;
 
       container.appendChild(box);
+
+      if (key === 'price' && propertyData.link) {
+        const qrWrapper = document.getElementById("qr-after-price");
+        const qrContainer = document.createElement('div');
+        qrContainer.className = 'qr-section';
+        qrContainer.innerHTML = `
+          <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בפרסום:</span>
+          <div id="qr-code"></div>
+        `;
+        qrWrapper.appendChild(qrContainer);
+
+        const qrCode = new QRCodeStyling({
+          width: 140,
+          height: 140,
+          data: propertyData.link,
+          dotsOptions: {
+            color: "#8b5e3c",
+            type: "rounded"
+          },
+          backgroundOptions: {
+            color: "#ffffff"
+          },
+          image: "https://raw.githubusercontent.com/idankru/real-estate-form/main/logo-mini.png",
+          imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 2,
+            imageSize: 0.7
+          }
+        });
+
+        qrCode.append(document.getElementById("qr-code"));
+      }
     });
-
-    if (propertyData.link) {
-      const qrSection = document.getElementById("qr-section");
-      qrSection.innerHTML = `
-        <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בפרסום:</span>
-        <div id="qr-code"></div>
-      `;
-
-      const qrCode = new QRCodeStyling({
-        width: 140,
-        height: 140,
-        data: propertyData.link,
-        dotsOptions: {
-          color: "#8b5e3c",
-          type: "rounded"
-        },
-        backgroundOptions: {
-          color: "#ffffff"
-        },
-        image: "https://raw.githubusercontent.com/idankru/real-estate-form/main/logo-mini.png",
-        imageOptions: {
-          crossOrigin: "anonymous",
-          margin: 2,
-          imageSize: 0.7
-        }
-      });
-
-      qrCode.append(document.getElementById("qr-code"));
-    }
   </script>
 </body>
 </html>
