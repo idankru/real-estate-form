@@ -91,7 +91,7 @@
     .qr-section {
       margin-top: 20px;
       display: flex;
-      justify-content: center;
+      justify-content: right;
       align-items: center;
       gap: 20px;
       font-size: 16px;
@@ -205,7 +205,7 @@
           <span style="font-weight: bold; font-size: 16px;">סרוק לצפייה בפרסום:</span>
           <div id="qr-code"></div>
         `;
-        qrWrapper.appendChild(qrContainer);
+        container.appendChild(qrContainer);
 
         const qrCode = new QRCodeStyling({
           width: 140,
